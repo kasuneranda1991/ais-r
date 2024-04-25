@@ -1,0 +1,10 @@
+.heading1{
+    -fx-font-size: 25px;
+    -fx-color: white;
+    /*-fx-background-color: #022c56;*/
+}
+
+.card{
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+}

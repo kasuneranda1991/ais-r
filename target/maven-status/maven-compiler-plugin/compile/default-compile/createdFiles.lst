@@ -1,4 +1,9 @@
-com/cqu/aisr/SecondaryController.class
-com/cqu/aisr/PrimaryController.class
-module-info.class
+Services/Validation.class
+Enum/Regex.class
 com/cqu/aisr/App.class
+Enum/Errors.class
+module-info.class
+Models/Staff.class
+Services/UserRegistrationService.class
+Helpers/UIHelper.class
+com/cqu/aisr/RegistrationController.class

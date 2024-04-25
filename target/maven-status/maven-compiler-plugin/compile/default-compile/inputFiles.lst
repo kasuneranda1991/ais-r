@@ -1,4 +1,9 @@
-/home/kasun/NetBeansProjects/new/ais-r/src/main/java/com/cqu/aisr/SecondaryController.java
-/home/kasun/NetBeansProjects/new/ais-r/src/main/java/com/cqu/aisr/App.java
-/home/kasun/NetBeansProjects/new/ais-r/src/main/java/module-info.java
-/home/kasun/NetBeansProjects/new/ais-r/src/main/java/com/cqu/aisr/PrimaryController.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Helpers/UIHelper.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/com/cqu/aisr/RegistrationController.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Services/Validation.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Enum/Regex.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/com/cqu/aisr/App.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Enum/Errors.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/module-info.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Models/Staff.java
+/home/kasun/NetBeansProjects/Git/ais-r/src/main/java/Services/UserRegistrationService.java
