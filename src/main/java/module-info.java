@@ -5,4 +5,5 @@ module com.cqu.aisr {
 
     opens com.cqu.aisr to javafx.fxml;
     exports com.cqu.aisr;
+    // requires lombok;
 }

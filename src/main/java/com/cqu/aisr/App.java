@@ -1,12 +1,14 @@
 package com.cqu.aisr;
 
+import java.io.IOException;
+
+import Enum.Config;
+import Helpers.CSV;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * JavaFX App
@@ -20,6 +22,12 @@ public class App extends Application {
         scene = new Scene(loadFXML("Registration"), 1280, 700);
         stage.setScene(scene);
         stage.show();
+
+        if (!CSV.isFileExists("staff.csv")) {
+            CSV.createFile("staff.csv");
+            CSV.setHeading("staff.csv", Config.STAFF_CSV_HEADING.getValue());
+        }
+
     }
 
     static void setRoot(String fxml) throws IOException {

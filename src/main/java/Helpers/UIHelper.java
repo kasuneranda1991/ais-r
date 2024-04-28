@@ -4,6 +4,7 @@
  */
 package Helpers;
 
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
@@ -21,6 +22,9 @@ public class UIHelper {
                 el.setVisible(isVisible);
             } else if (obj instanceof ImageView) {
                 ImageView el = (ImageView) obj;
+                el.setVisible(isVisible);
+            } else if (obj instanceof ChoiceBox) {
+                ChoiceBox el = (ChoiceBox) obj;
                 el.setVisible(isVisible);
             }
         }
