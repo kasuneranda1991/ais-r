@@ -4,6 +4,9 @@ module com.cqu.aisr {
     requires java.base;
 
     opens com.cqu.aisr to javafx.fxml;
+
     exports com.cqu.aisr;
+
     // requires lombok;
+    requires de.siegmar.fastcsv;
 }

@@ -23,7 +23,22 @@ public class Staff extends Model implements Csv {
     private String password;
     private String role;
 
-    // Staff model constructor
+    /**
+     * Default constructor
+     */
+    public Staff(){}
+    
+    /**
+     * Parameterized constructor
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @param phone
+     * @param email
+     * @param username
+     * @param password
+     * @param role
+     */
     public Staff(
             String firstName,
             String lastName,

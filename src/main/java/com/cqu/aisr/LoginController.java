@@ -1,0 +1,95 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
+package com.cqu.aisr;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import Enum.Errors;
+import Enum.Roles;
+import Helpers.Helper;
+import Helpers.UIHelper;
+import Services.AuthenticateService;
+import Services.RouteService;
+import Services.Validation;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+
+/**
+ * FXML Controller class
+ *
+ * @author kasun
+ */
+public class LoginController implements Initializable {
+
+    @FXML
+    private Button submitBtn;
+    @FXML
+    private TextField username;
+    private ImageView usernameOK;
+    private ImageView passwordOK;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private Button registerAsAdmin;
+    @FXML
+    private Button registerMngmtBtn;
+    @FXML
+    private Label validationUserName;
+    @FXML
+    private Label validationPassword;
+    @FXML
+    private Label authFailedLbl;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        UIHelper.setElementsVisible(
+                Boolean.FALSE,
+                validationPassword,
+                validationUserName,
+                usernameOK,
+                passwordOK,
+                authFailedLbl);
+    }
+
+    @FXML
+    private void submitForm(ActionEvent event) 
+    {
+        if (AuthenticateService.authenticate(Helper.getText(username), Helper.getText(password))) {
+            UIHelper.setElementsVisible(Boolean.FALSE, authFailedLbl);
+            RouteService.redirectTo("Dashboard");
+        } else {
+            UIHelper.setElementsVisible(Boolean.TRUE, authFailedLbl);
+            Validation.setInvalidLabel(authFailedLbl, Errors.AUTH_FAILD.getMessage());
+        }
+    }
+
+    @FXML
+    private void registerAsAdmin(ActionEvent event) throws IOException {
+        App.setRegistrationMode(Roles.ADMIN);
+        RouteService.redirectTo("Registration");
+    }
+
+    @FXML
+    private void registerAsManagemement(ActionEvent event) throws IOException {
+        App.setRegistrationMode(Roles.MANAGEMENT);
+        RouteService.redirectTo("Registration");
+    }
+
+    @FXML
+    private void resetForm(ActionEvent event) {
+    }
+
+}

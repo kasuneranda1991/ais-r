@@ -11,6 +11,7 @@ public enum Errors {
     IS_EMAIL("Please enter a valid email address"),
     IS_PHONE("Please enter a valid phone number"),
     PASSWORD("Please enter a valid password min length 8 characters"),
+    AUTH_FAILD("The credentials you entered did not match with our records. Please try again."),
     PASSWORD_CONFIRMATION("Passwords does not match");
 
     private final String error;

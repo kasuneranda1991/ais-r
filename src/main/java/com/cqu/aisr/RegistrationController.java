@@ -1,5 +1,6 @@
 package com.cqu.aisr;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,15 +8,16 @@ import Enum.Branch;
 import Enum.EmploymentType;
 import Enum.ManagementLevel;
 import Enum.Roles;
-import Helpers.CSV;
 import Helpers.Helper;
 import Helpers.UIHelper;
+import Models.Administration;
 import Models.Management;
+import Models.Staff;
+import Services.PersistsService;
 import Services.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -36,8 +38,6 @@ public class RegistrationController implements Initializable {
     private TextField phone;
     @FXML
     private TextField email;
-    @FXML
-    private Button submitBtn;
     @FXML
     private Label fNameLbl;
     @FXML
@@ -91,7 +91,11 @@ public class RegistrationController implements Initializable {
     @FXML
     private Label LblForInputBrnch;
 
-    private String registrationType = Roles.MANAGEMENT.getValue();
+    private Roles registrationType = App.getRegistrationMode();
+
+    private Staff user;
+    @FXML
+    private Label Title;
 
     /**
      * Initializes the controller class.
@@ -108,16 +112,18 @@ public class RegistrationController implements Initializable {
         branch.setItems(Branch.getValues());
         branch.setValue(Branch.MEL.getValue());
 
-        if (registrationType == Roles.ADMIN.getValue()) {
+        if (registrationType == Roles.ADMIN) {
+            Title.setText("Adminstration staff registration");
             UIHelper.setElementsVisible(
                     Boolean.FALSE,
                     LblForInputBrnch,
                     LblForInputMgmtLvl,
                     branch,
                     mgmt_lvl);
-        } else if (registrationType == Roles.MANAGEMENT.getValue()) {
+        } else if (registrationType == Roles.MANAGEMENT) {
+                        Title.setText("Management staff registration");
             UIHelper.setElementsVisible(
-                    Roles.ADMIN.getValue() == registrationType,
+                    Roles.ADMIN == registrationType,
                     LblForInputEmType,
                     employment_type);
         }
@@ -163,35 +169,38 @@ public class RegistrationController implements Initializable {
         isFormValid &= validation.validate(confirm, "PasswordConfirm", confirmLbl, passwordConfOK, password);
 
         if (isFormValid) {
-            Management mgmt = new Management(
-                    Helper.getText(fName),
-                    Helper.getText(lName),
-                    Helper.getText(address),
-                    Helper.getInt(phone),
-                    Helper.getText(email),
-                    Helper.getText(username),
-                    Helper.getText(password),
-                    "mgmt_lvl",
-                    "Branch");
-            // Administration admin = new Administration(
-            // Helper.getText(fName),
-            // Helper.getText(lName),
-            // Helper.getText(address),
-            // Helper.getInt(phone),
-            // Helper.getText(email),
-            // Helper.getText(username),
-            // Helper.getText(password),
-            // employment_type.getValue());
 
-            try {
-
-                CSV.store("staff.csv", mgmt.getCSV());
-            } catch (Exception e) {
-                System.out.println(e);
+            if (registrationType == Roles.ADMIN) {
+                user = new Administration(
+                        Helper.getText(fName),
+                        Helper.getText(lName),
+                        Helper.getText(address),
+                        Helper.getInt(phone),
+                        Helper.getText(email),
+                        Helper.getText(username),
+                        Helper.getText(password),
+                        employment_type.getValue());
+            } else if (registrationType == Roles.MANAGEMENT) {
+                user = new Management(
+                        Helper.getText(fName),
+                        Helper.getText(lName),
+                        Helper.getText(address),
+                        Helper.getInt(phone),
+                        Helper.getText(email),
+                        Helper.getText(username),
+                        Helper.getText(password),
+                        mgmt_lvl.getValue(),
+                        branch.getValue());
             }
-            System.out.println(mgmt.getCSV());
+            PersistsService.get().addStaff(user);
+            System.out.println(PersistsService.get().staffData().size());
         }
 
+    }
+
+    @FXML
+    private void redirectBack(ActionEvent event) throws IOException {
+        App.setRoot("Login");
     }
 
 }

@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * This class responsible for the all the form related validations
+ * 
  * @author kasun eranda - 12216898
  */
 public class Validation {
@@ -48,10 +49,10 @@ public class Validation {
                     this.setErrorMessage(Errors.PASSWORD.getMessage());
                     break;
                 case "PasswordConfirm":
-                if (inputs.length > 0) {
-                    isValid = isPasswordConfirmed(input,inputs[0]); 
-                    this.setErrorMessage(Errors.PASSWORD_CONFIRMATION.getMessage());
-                } 
+                    if (inputs.length > 0) {
+                        isValid = isPasswordConfirmed(input, inputs[0]);
+                        this.setErrorMessage(Errors.PASSWORD_CONFIRMATION.getMessage());
+                    }
                     break;
                 default:
                     break;
@@ -81,7 +82,7 @@ public class Validation {
     public Boolean isValidPassword(TextField input) {
         return input.getText().matches(Regex.PASSWORD_MIN_LENGTH_8.getVal());
     }
-    
+
     public Boolean isPasswordConfirmed(TextField confirm, TextField password) {
         return confirm.getText().equals(password.getText());
     }
@@ -96,8 +97,7 @@ public class Validation {
 
         UIHelper.setElementsVisible(Boolean.TRUE, lbl);
         UIHelper.setElementsVisible(Boolean.FALSE, success);
-        lbl.setText(this.getValidationMessage());
-        lbl.setStyle("-fx-text-fill: " + INVALID_INPUT + ";");
+        setInvalidLabel(lbl, this.getValidationMessage());
 
     }
 
@@ -106,6 +106,11 @@ public class Validation {
                 + " -fx-border-width: 2px ;  ");
         UIHelper.setElementsVisible(Boolean.FALSE, lbl);
         UIHelper.setElementsVisible(Boolean.TRUE, success);
+    }
+
+    public static void setInvalidLabel(Label lbl, String error) {
+        lbl.setText(error);
+        lbl.setStyle("-fx-text-fill: " + INVALID_INPUT + ";");
     }
 
     private void setErrorMessage(String message) {

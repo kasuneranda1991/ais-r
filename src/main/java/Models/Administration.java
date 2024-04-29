@@ -17,6 +17,12 @@ public class Administration extends Staff implements Csv {
 
     private String employment_type;
 
+    public Administration(String employment_type) {
+        this.employment_type = employment_type;
+    }
+
+    
+    
     public Administration(
             String firstName,
             String lastName,

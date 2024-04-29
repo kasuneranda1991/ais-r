@@ -13,9 +13,16 @@ public class Management extends Staff implements Csv {
     private String management_lvl;
     private String branch;
 
+    public Management(String management_lvl, String branch) {
+        this.management_lvl = management_lvl;
+        this.branch = branch;
+    }
+
+    
+    
     /**
      * Management model constructor
-     * 
+     *
      * @param firstName
      * @param lastName
      * @param address
@@ -52,7 +59,7 @@ public class Management extends Staff implements Csv {
 
     @Override
     public String getCSV() {
-        return super.getCSV() + ", , " + getBranch() + ", " + getManagement_lvl();
+        return super.getCSV() + ", ," + getBranch() + ", " + getManagement_lvl();
     }
 
     public String getManagement_lvl() {

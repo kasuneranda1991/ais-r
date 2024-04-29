@@ -79,6 +79,7 @@
                                  </HBox.margin>
                               </Button>
                               <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Reset" />
+                              <Button mnemonicParsing="false" onAction="#redirectBack" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back" />
                            </children>
                            <padding>
                               <Insets right="15.0" />
@@ -173,6 +174,8 @@
                         <Label fx:id="LblForInputBrnch" text="Branch" GridPane.rowIndex="15" />
                         <ChoiceBox fx:id="mgmt_lvl" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                         <ChoiceBox fx:id="branch" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                        <PasswordField fx:id="confirm" GridPane.columnIndex="1" GridPane.rowIndex="21" />
                      </children>
                   </GridPane>
                </children></VBox>
@@ -186,7 +189,7 @@
          <top>
             <VBox alignment="CENTER" prefHeight="51.0" prefWidth="1280.0" style="-fx-background-color: #022c56;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" styleClass="heading1" stylesheets="@../../../styles/registration.css" text="Staff Registration" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="Title" alignment="CENTER" styleClass="heading1" stylesheets="@../../../styles/registration.css" text="Staff Registration" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
