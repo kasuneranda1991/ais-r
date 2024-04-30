@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
  *
  * @author kasun
  */
-public class ReportController extends MenuController implements Initializable {
+public class ReportController extends BaseController implements Initializable {
 
 
     @FXML
@@ -41,6 +41,7 @@ public class ReportController extends MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateUser(loggedInUserlbl);
         mapMenuRoute(homeSideMenu, Route.DASHBOARD);
         mapMenuRoute(applicationsSideMenu, Route.APPLICATION);
         mapMenuRoute(vacanciesSideMenu, Route.VACANCIES);

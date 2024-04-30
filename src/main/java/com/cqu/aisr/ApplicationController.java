@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
  *
  * @author kasun
  */
-public class ApplicationController extends MenuController implements Initializable {
+public class ApplicationController extends BaseController implements Initializable {
 
     @FXML
     private Label loggedInUserlbl;
@@ -42,6 +42,7 @@ public class ApplicationController extends MenuController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateUser(loggedInUserlbl);
         mapMenuRoute(homeSideMenu, Route.DASHBOARD);
         mapMenuRoute(applicationsSideMenu, Route.APPLICATION);
         mapMenuRoute(vacanciesSideMenu, Route.VACANCIES);

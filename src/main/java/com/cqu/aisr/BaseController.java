@@ -1,10 +1,16 @@
 package com.cqu.aisr;
 
 import Enum.Route;
+import Services.AuthService;
 import Services.RouteService;
 import javafx.scene.control.Label;
 
-public class MenuController {
+public class BaseController {
+
+    public void updateUser(Label userLbl) {
+        userLbl.setText(AuthService.get().user().getFirstName());
+    }
+
     public void mapMenuRoute(Label lbl, Route route) {
         lbl.setOnMouseClicked(event -> {
             switch (route) {

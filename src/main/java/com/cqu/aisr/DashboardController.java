@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
  *
  * @author kasun
  */
-public class DashboardController extends MenuController implements Initializable {
+public class DashboardController extends BaseController implements Initializable {
 
     @FXML
     private Label loggedInUserlbl;
@@ -37,6 +37,7 @@ public class DashboardController extends MenuController implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        updateUser(loggedInUserlbl);
         mapMenuRoute(applicationMenuItem, Route.APPLICATION);
         mapMenuRoute(vacanciesMenuItem, Route.VACANCIES);
         mapMenuRoute(staffMenuItem, Route.STAFF);
