@@ -1,7 +1,0 @@
-/*
- * Empty Stylesheet file.
- */
-@import "colors.css";
-.sideNav {
-    -fx-background-color: var(--primary);
-}
