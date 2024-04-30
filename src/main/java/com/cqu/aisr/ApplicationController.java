@@ -11,38 +11,43 @@ import Enum.Route;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author kasun
  */
-public class DashboardController extends MenuController implements Initializable {
+public class ApplicationController extends MenuController implements Initializable {
 
     @FXML
     private Label loggedInUserlbl;
     @FXML
+    private Label homeSideMenu;
+    @FXML
+    private Label applicationsSideMenu;
+    @FXML
+    private VBox applicationSubNav;
+    @FXML
+    private Label vacanciesSideMenu;
+    @FXML
+    private Label staffSideMenu;
+    @FXML
+    private Label reportsSideMenu;
+    @FXML
     private Label logOutMenuItem;
-    @FXML
-    private Label applicationMenuItem;
-    @FXML
-    private Label vacanciesMenuItem;
-    @FXML
-    private Label staffMenuItem;
-    @FXML
-    private Label reportMenuItem;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        mapMenuRoute(applicationMenuItem, Route.APPLICATION);
-        mapMenuRoute(vacanciesMenuItem, Route.VACANCIES);
-        mapMenuRoute(staffMenuItem, Route.STAFF);
-        mapMenuRoute(reportMenuItem, Route.REPORT);
+        mapMenuRoute(homeSideMenu, Route.DASHBOARD);
+        mapMenuRoute(applicationsSideMenu, Route.APPLICATION);
+        mapMenuRoute(vacanciesSideMenu, Route.VACANCIES);
+        mapMenuRoute(staffSideMenu, Route.STAFF);
+        mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+
     }
-
-
 }

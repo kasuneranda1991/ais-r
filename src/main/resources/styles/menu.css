@@ -6,10 +6,24 @@
 .menu_item{
     -fx-font-size:18px;
     -fx-font-color:white;
+    -fx-text-fill: white;
     -fx-pre-width:25px;
+    -fx-background-color:#181740;
 }
 
 .menu_item:hover{
+    -fx-background-color:#223ea3;
+}
+
+.home_icon{
+    -fx-background-color:white;
+    -fx-text-fill: black;
+    -fx-border-radius:10;
+    -fx-font-size:20;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.home_icon:hover{
     -fx-background-color:#223ea3;
 }
 

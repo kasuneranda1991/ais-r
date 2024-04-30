@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import Enum.Errors;
 import Enum.Roles;
+import Enum.Route;
 import Helpers.Helper;
 import Helpers.UIHelper;
 import Services.AuthenticateService;
@@ -69,7 +70,7 @@ public class LoginController implements Initializable {
     {
         if (AuthenticateService.authenticate(Helper.getText(username), Helper.getText(password))) {
             UIHelper.setElementsVisible(Boolean.FALSE, authFailedLbl);
-            RouteService.redirectTo("Dashboard");
+            RouteService.redirectTo(Route.DASHBOARD);
         } else {
             UIHelper.setElementsVisible(Boolean.TRUE, authFailedLbl);
             Validation.setInvalidLabel(authFailedLbl, Errors.AUTH_FAILD.getMessage());
@@ -79,13 +80,13 @@ public class LoginController implements Initializable {
     @FXML
     private void registerAsAdmin(ActionEvent event) throws IOException {
         App.setRegistrationMode(Roles.ADMIN);
-        RouteService.redirectTo("Registration");
+        RouteService.redirectTo(Route.REGISTRATION);
     }
 
     @FXML
     private void registerAsManagemement(ActionEvent event) throws IOException {
         App.setRegistrationMode(Roles.MANAGEMENT);
-        RouteService.redirectTo("Registration");
+        RouteService.redirectTo(Route.REGISTRATION);
     }
 
     @FXML

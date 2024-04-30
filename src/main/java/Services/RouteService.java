@@ -4,11 +4,15 @@ import java.io.IOException;
 
 import com.cqu.aisr.App;
 
-public class RouteService {
+import Enum.Route;
 
-    public static void redirectTo(String page) {
+public class RouteService {
+    public static Route current;
+
+    public static void redirectTo(Route route) {
         try {
-            App.setRoot(page);
+            App.setRoot(route.getValue());
+            current = route;
         } catch (IOException e) {
             System.out.println(e);
         }

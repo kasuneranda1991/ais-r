@@ -24,7 +24,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 1280, 700);
-        // scene = new Scene(loadFXML("Registration"), 1280, 700);
         stage.setScene(scene);
         stage.show();
 
@@ -33,7 +32,6 @@ public class App extends Application {
             CSV.setHeading("staff.csv", Config.STAFF_CSV_HEADING.getValue());
         } else {
             PersistsService.get().mapStaffCSVData("staff.csv");
-            System.out.println(PersistsService.get().staffData().size());
         }
 
     }

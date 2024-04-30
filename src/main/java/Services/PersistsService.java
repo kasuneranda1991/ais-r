@@ -41,7 +41,6 @@ public class PersistsService {
         }
         staff_data.add(staff);
         data.put(STAFF_TABLE, staff_data);
-        // System.out.println(data.get(STAFF_TABLE).size());
     }
 
     public void mapStaffCSVData(String file) {
@@ -60,12 +59,10 @@ public class PersistsService {
                             csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.MGMT_LVL)),
                             csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.BRANCH)));
                     st.setId(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ID)));
-                    System.out.println("Exe: MNG");
                 } else if (csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ROLE)).equals(Roles.ADMIN.getValue())) {
                     st = new Administration(
                             csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.EM_TYPE)));
                     st.setId(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ID)));
-                    System.out.println("Exe: ADMIN");
                 }
                 if (st != null) {
                     st.setFirstName(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.FNAME)));
@@ -79,9 +76,7 @@ public class PersistsService {
                 }
 
             }
-            // System.out.println("DATA COUNT : "+staff_data.size());
             data.put(STAFF_TABLE, staff_data);
-            // System.out.println("GetStaffData : "+this.staffData().size());
         }
     }
 }

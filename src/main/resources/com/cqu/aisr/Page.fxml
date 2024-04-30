@@ -20,6 +20,15 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Label" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </top>
@@ -30,17 +39,6 @@
             <URL value="@../../../../styles/registration.css" />
             <URL value="@../../../styles/registration.css" />
          </stylesheets>
-         <left>
-            <VBox prefHeight="650.0" prefWidth="151.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: red;" text="Label" VBox.vgrow="ALWAYS" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: red;" text="Label" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: red;" text="Label" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: red;" text="Label" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: red;" text="Label" />
-               </children>
-            </VBox>
-         </left>
       </BorderPane>
    </children>
 </AnchorPane>
