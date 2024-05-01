@@ -1,7 +1,7 @@
 package Services;
 
 import Enum.Route;
-import Enum.StaffEnum;
+import Enum.CSVConst;
 import Models.Staff;
 
 public class AuthenticateService {
@@ -16,9 +16,9 @@ public class AuthenticateService {
      * @return boolean
      */
     public static Boolean authenticate(String username, String password) {
-        username = "admin@admin.com";
-        password = "123456789";
-        Staff stf = StaffService.findByFieldName(StaffEnum.EMAIL, username);
+        username = "admin@gmail.com";
+        password = "admin";
+        Staff stf = StaffService.findByFieldName(CSVConst.EMAIL, username);
         if (stf != null && stf.getPassword().equals(password)) {
             AuthService.get().setUser(stf);
             return true;

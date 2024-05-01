@@ -3,12 +3,13 @@ package Services;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import Enum.StaffEnum;
+import Enum.CSVConst;
 import Models.Staff;
+import Models.User;
 
 public class StaffService {
 
-    private static ArrayList<Staff> data = PersistsService.get().staffData();
+    private static ArrayList<User> data = PersistsService.get().staffData();
 
     /**
      * Find a staff using id
@@ -20,33 +21,20 @@ public class StaffService {
         return find(staff -> staff.getId().equals(id));
     }
 
-    public static Staff findByFieldName(StaffEnum field, String value) {
+    public static Staff findByFieldName(CSVConst field, String value) {
         switch (field) {
-            case StaffEnum.EMAIL:
+            case CSVConst.EMAIL:
                 return find(staff -> staff.getEmail().equals(value));
             default:
                 break;
         }
         return null;
-        // for (Staff staff : data) {
-        // switch (field) {
-        // case StaffEnum.ADDRESS:
-        // if (staff.getEmail().equals(value)) {
-        // System.out.println(staff.getCSV());
-        // }
-        // break;
-
-        // default:
-        // break;
-        // }
-        // }
-        // return null;
     }
 
     private static Staff find(Predicate<Staff> logic) {
-        for (Staff stf : data) {
-            if (logic.test(stf)) {
-                return stf;
+        for (User stf : data) {
+            if (logic.test((Staff) stf)) {
+                return (Staff) stf;
             }
         }
         return null;

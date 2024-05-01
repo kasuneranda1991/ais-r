@@ -122,7 +122,7 @@ public class RegistrationController implements Initializable {
                     branch,
                     mgmt_lvl);
         } else if (registrationType == Roles.MANAGEMENT) {
-                        Title.setText("Management staff registration");
+            Title.setText("Management staff registration");
             UIHelper.setElementsVisible(
                     Roles.ADMIN == registrationType,
                     LblForInputEmType,
@@ -194,7 +194,6 @@ public class RegistrationController implements Initializable {
                         branch.getValue());
             }
             PersistsService.get().addStaff(user);
-            System.out.println(PersistsService.get().staffData().size());
         }
 
     }

@@ -2,7 +2,7 @@ package com.cqu.aisr;
 
 import java.io.IOException;
 
-import Enum.Config;
+import Enum.CSVConst;
 import Enum.Roles;
 import Helpers.CSV;
 import Services.PersistsService;
@@ -29,9 +29,17 @@ public class App extends Application {
 
         if (!CSV.isFileExists("staff.csv")) {
             CSV.createFile("staff.csv");
-            CSV.setHeading("staff.csv", Config.STAFF_CSV_HEADING.getValue());
-        } else {
-            PersistsService.get().mapStaffCSVData("staff.csv");
+            CSV.setHeading("staff.csv", CSVConst.STAFF_CSV_HEADING.getValue());
+        }
+        if (!CSV.isFileExists("recruits.csv")) {
+            CSV.createFile("recruits.csv");
+            CSV.setHeading("recruits.csv", CSVConst.RECRUITS_CSV_HEADING.getValue());
+        }
+
+        try {
+            PersistsService.get().mapCSVData("staff.csv", "recruits.csv");
+        } catch (Exception e) {
+            System.out.println(e);
         }
 
     }

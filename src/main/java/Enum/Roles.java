@@ -6,6 +6,7 @@ package Enum;
  */
 public enum Roles {
     ADMIN("administrator"),
+    APPLICANT("applicant"),
     MANAGEMENT("management");
     
     private final String role;

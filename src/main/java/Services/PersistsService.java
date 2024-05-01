@@ -1,29 +1,36 @@
 package Services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Enum.CSVConst;
 import Enum.Roles;
-import Enum.StaffEnum;
 import Helpers.CSV;
 import Models.Administration;
+import Models.Applicant;
 import Models.Management;
 import Models.Staff;
+import Models.User;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
 public class PersistsService {
-    private HashMap<String, ArrayList<Staff>> data = new HashMap<>();
-    private ArrayList<Staff> staff_data = new ArrayList<>();
+    private HashMap<String, ArrayList<User>> data = new HashMap<>();
     private static PersistsService instance;
 
     private static String STAFF_TABLE = "staff";
+    private static String APPLICANT_TABLE = "‘recruits";
 
     private PersistsService() {
     }
 
-    public ArrayList<Staff> staffData() {
-        return staff_data;
+    public ArrayList<User> staffData() {
+        return data.get(STAFF_TABLE);
+    }
+
+    public ArrayList<User> applicantsData() {
+        return data.get(APPLICANT_TABLE);
     }
 
     public static PersistsService get() {
@@ -39,44 +46,99 @@ public class PersistsService {
         } catch (Exception e) {
             System.out.println(e);
         }
-        staff_data.add(staff);
-        data.put(STAFF_TABLE, staff_data);
+        staffData().add(staff);
+
+        // System.out.println("CHeck here");
+        data.put(STAFF_TABLE, staffData());
+        count();
     }
 
-    public void mapStaffCSVData(String file) {
-
-        CsvReader<CsvRecord> csv = CSV.read(file);
-        boolean isFirstIteration = true;
-        if (csv != null) {
-            for (final CsvRecord csvRecord : csv) {
-                if (isFirstIteration) {
-                    isFirstIteration = false;
-                    continue;
-                }
-                Staff st = null;
-                if (csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ROLE)).equals(Roles.MANAGEMENT.getValue())) {
-                    st = new Management(
-                            csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.MGMT_LVL)),
-                            csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.BRANCH)));
-                    st.setId(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ID)));
-                } else if (csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ROLE)).equals(Roles.ADMIN.getValue())) {
-                    st = new Administration(
-                            csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.EM_TYPE)));
-                    st.setId(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ID)));
-                }
-                if (st != null) {
-                    st.setFirstName(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.FNAME)));
-                    st.setLastName(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.FNAME)));
-                    st.setAddress(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.ADDRESS)));
-                    st.setPhone(Integer.parseInt(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.PHONE))));
-                    st.setEmail(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.EMAIL)));
-                    st.setUsername(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.USERNAME)));
-                    st.setPassword(csvRecord.getField(StaffEnum.getFieldIndex(StaffEnum.PASSWORD)));
-                    staff_data.add(st);
-                }
-
-            }
-            data.put(STAFF_TABLE, staff_data);
+    public void addApplicant(Applicant applicant) {
+        try {
+            CSV.store("recruits.csv", applicant.getCSV());
+        } catch (Exception e) {
+            System.out.println(e);
         }
+        applicantsData().add(applicant);
+
+        // System.out.println("CHeck here");
+        data.put(APPLICANT_TABLE, applicantsData());
+        count();
+    }
+
+    public void mapCSVData(String... files) {
+
+        for (String file : files) {
+            CsvReader<CsvRecord> csv = CSV.read(file);
+            boolean isFirstIteration = true;
+
+            if (csv != null) {
+                ArrayList<User> users = new ArrayList<>();
+                try {
+                    for (final CsvRecord csvRecord : csv) {
+                        if (isFirstIteration) {
+                            isFirstIteration = false;
+                            continue;
+                        }
+
+                        System.out.println("records :" + file);
+                        User usr = null;
+                        if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
+                                .equals(Roles.MANAGEMENT.getValue())) {
+                            usr = new Management(
+                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.MGMT_LVL)),
+                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.BRANCH)));
+                            usr.setId(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ID)));
+                        } else if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
+                                .equals(Roles.ADMIN.getValue())) {
+                            usr = new Administration(
+                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EM_TYPE)));
+                            usr.setId(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ID)));
+                        } else if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
+                                .equals(Roles.APPLICANT.getValue())) {
+                            try {
+
+                                usr = new Applicant(LocalDate.parse(csvRecord.getField(CSVConst
+                                        .getFieldIndexForHeading(CSVConst.INTW_DATE, CSVConst.RECRUITS_CSV_HEADING))));
+                            } catch (Exception e) {
+                                usr = new Applicant(null);
+                            }
+                        }
+                        if (usr != null) {
+
+                            usr.setFirstName(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.FNAME)));
+                            usr.setLastName(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.FNAME)));
+                            usr.setAddress(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ADDRESS)));
+                            usr.setPhone(Integer.parseInt(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.PHONE))));
+                            usr.setEmail(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EMAIL)));
+                            usr.setUsername(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.USERNAME)));
+                            usr.setPassword(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.PASSWORD)));
+
+                            users.add(usr);
+                        }
+                    }
+                } catch (Exception e) {
+
+                    System.out.println(e);
+                }
+
+                switch (file) {
+                    case "staff.csv":
+                        data.put(STAFF_TABLE, users);
+                        break;
+                    case "recruits.csv":
+                        data.put(APPLICANT_TABLE, users);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    private void count() {
+        System.out.println("Staff count: " + data.get(STAFF_TABLE).size());
+        System.out.println("Applicant count: " + data.get(APPLICANT_TABLE).size());
     }
 }

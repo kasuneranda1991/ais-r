@@ -1,7 +1,7 @@
 package Models;
 
 import Enum.Roles;
-import Interface.Csv;
+
 //import lombok.Getter;
 //import lombok.Setter;
 //import lombok.ToString;
@@ -9,7 +9,7 @@ import Interface.Csv;
 //@Getter
 //@Setter
 //@ToString(callSuper = true, includeFieldNames = true)
-public class Management extends Staff implements Csv {
+public class Management extends Staff {
     private String management_lvl;
     private String branch;
 
@@ -18,8 +18,6 @@ public class Management extends Staff implements Csv {
         this.branch = branch;
     }
 
-    
-    
     /**
      * Management model constructor
      *
@@ -77,7 +75,5 @@ public class Management extends Staff implements Csv {
     public void setBranch(String branch) {
         this.branch = branch;
     }
-    
-    
 
 }

@@ -46,10 +46,6 @@ public class CSV {
             Path p = Paths.get(Storage.getPath(fileName));
             CsvReader<CsvRecord> csv = CsvReader.builder().ofCsvRecord(p);
             return csv;
-            // for (final CsvRecord csvRecord : csv) {
-            // // System.out.println(csvRecord.getFields());
-            // System.out.println(csvRecord.getField(5));
-            // }
         } catch (Exception e) {
             System.out.println(e);
         }

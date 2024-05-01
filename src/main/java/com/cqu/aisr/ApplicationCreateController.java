@@ -10,7 +10,10 @@ import java.util.ResourceBundle;
 import Enum.EduQualification;
 import Enum.Route;
 import Enum.Rule;
+import Helpers.Helper;
 import Helpers.UIHelper;
+import Models.Applicant;
+import Services.PersistsService;
 import Services.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+
 /**
  * FXML Controller class
  *
@@ -107,7 +111,7 @@ public class ApplicationCreateController extends BaseController implements Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // interviewDate.setValue(LocalDate.now().plusDays(3));
-        
+
         eduQualification.setItems(EduQualification.getValues());
         eduQualification.setValue(EduQualification.DIP.getValue());
 
@@ -148,7 +152,7 @@ public class ApplicationCreateController extends BaseController implements Initi
 
         Validation validation = new Validation();
         Boolean isFormValid = Boolean.TRUE;
-        
+
         isFormValid &= validation.validate(fname, Rule.NOT_NULL, validation1, fNameOK);
         isFormValid &= validation.validate(lname, Rule.NOT_NULL, validation2, lNameOK);
         isFormValid &= validation.validate(email, Rule.EMAIL, validation3, emailOK);
@@ -158,8 +162,18 @@ public class ApplicationCreateController extends BaseController implements Initi
         isFormValid &= validation.validate(password, Rule.PASSWORD, validation8, passwordOK);
         isFormValid &= validation.validate(confirm, Rule.PASSWORD_CONFIRM, validation9, confirmOK, password);
         isFormValid &= validation.validate(interviewDate, Rule.DATE, validation10, dateOK);
-        if (!isFormValid) {
-            System.out.println("Invalid form");
+        if (isFormValid) {
+            Applicant applicant = new Applicant(
+                    Helper.getText(address),
+                    Helper.getText(lname),
+                    Helper.getText(address),
+                    Helper.getText(email),
+                    Helper.getInt(phone),
+                    Helper.getText(username),
+                    Helper.getText(password),
+                    interviewDate.getValue());
+            PersistsService.get().addApplicant(applicant);
+            System.out.println("Created...........................");
         }
     }
 }
