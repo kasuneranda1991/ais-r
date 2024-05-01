@@ -4,6 +4,7 @@ public enum Route {
     DASHBOARD("Dashboard"),
     REGISTRATION("Registration"),
     APPLICATION("Application"),
+    APPLICATION_CREATE("ApplicationCreate"),
     VACANCIES("Vacancies"),
     REPORT("Report"),
     STAFF("Staff"),

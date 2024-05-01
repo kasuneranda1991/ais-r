@@ -20,6 +20,9 @@ public class BaseController {
                 case Route.APPLICATION:
                     RouteService.redirectTo(Route.APPLICATION);
                     break;
+                case Route.APPLICATION_CREATE:
+                    RouteService.redirectTo(Route.APPLICATION_CREATE);
+                    break;
                 case Route.VACANCIES:
                     RouteService.redirectTo(Route.VACANCIES);
                     break;

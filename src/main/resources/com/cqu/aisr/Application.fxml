@@ -44,9 +44,9 @@
                      <children>
                         <Label fx:id="homeSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Home" textFill="WHITE" />
                         <Label fx:id="applicationsSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Applications" textFill="WHITE" />
-                        <VBox fx:id="applicationSubNav" prefHeight="51.0" prefWidth="151.0">
+                        <VBox prefHeight="51.0" prefWidth="151.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" prefWidth="112.0" text="create new" />
+                              <Label fx:id="applicationCreateSubNav" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" prefWidth="112.0" text="create new" />
                            </children>
                         </VBox>
                         <Label fx:id="vacanciesSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Vacancies" textFill="WHITE" />

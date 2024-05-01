@@ -27,8 +27,6 @@ public class ApplicationController extends BaseController implements Initializab
     @FXML
     private Label applicationsSideMenu;
     @FXML
-    private VBox applicationSubNav;
-    @FXML
     private Label vacanciesSideMenu;
     @FXML
     private Label staffSideMenu;
@@ -36,6 +34,8 @@ public class ApplicationController extends BaseController implements Initializab
     private Label reportsSideMenu;
     @FXML
     private Label logOutMenuItem;
+    @FXML
+    private Label applicationCreateSubNav;
 
     /**
      * Initializes the controller class.
@@ -49,6 +49,7 @@ public class ApplicationController extends BaseController implements Initializab
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(applicationCreateSubNav, Route.APPLICATION_CREATE);
 
     }
 }

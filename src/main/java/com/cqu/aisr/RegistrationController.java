@@ -8,6 +8,7 @@ import Enum.Branch;
 import Enum.EmploymentType;
 import Enum.ManagementLevel;
 import Enum.Roles;
+import Enum.Rule;
 import Helpers.Helper;
 import Helpers.UIHelper;
 import Models.Administration;
@@ -159,14 +160,14 @@ public class RegistrationController implements Initializable {
         Validation validation = new Validation();
         Boolean isFormValid = Boolean.TRUE;
 
-        isFormValid &= validation.validate(fName, "NotNull", fNameLbl, fNameOK);
-        isFormValid &= validation.validate(lName, "NotNull", lNameLbl, lNameOK);
-        isFormValid &= validation.validate(address, "NotNull", addressLbl, addressOK);
-        isFormValid &= validation.validate(phone, "Phone", phoneLbl, phoneOK);
-        isFormValid &= validation.validate(email, "Email", emailLbl, emailOK);
-        isFormValid &= validation.validate(username, "NotNull", usernameLbl, usernameOK);
-        isFormValid &= validation.validate(password, "Password", passwordLbl, passwordOK);
-        isFormValid &= validation.validate(confirm, "PasswordConfirm", confirmLbl, passwordConfOK, password);
+        isFormValid &= validation.validate(fName, Rule.NOT_NULL, fNameLbl, fNameOK);
+        isFormValid &= validation.validate(lName, Rule.NOT_NULL, lNameLbl, lNameOK);
+        isFormValid &= validation.validate(address, Rule.NOT_NULL, addressLbl, addressOK);
+        isFormValid &= validation.validate(phone, Rule.PHONE, phoneLbl, phoneOK);
+        isFormValid &= validation.validate(email, Rule.EMAIL, emailLbl, emailOK);
+        isFormValid &= validation.validate(username, Rule.NOT_NULL, usernameLbl, usernameOK);
+        isFormValid &= validation.validate(password, Rule.PASSWORD, passwordLbl, passwordOK);
+        isFormValid &= validation.validate(confirm, Rule.PASSWORD_CONFIRM, confirmLbl, passwordConfOK, password);
 
         if (isFormValid) {
 
