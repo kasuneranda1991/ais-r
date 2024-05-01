@@ -10,12 +10,17 @@ public enum CSVConst {
     PHONE("Phone"),
     EMAIL("Email"),
     INTW_DATE("Interview Date"),
+    CREATED_AT("Created at"),
+    CREATED_BY("Created by"),
+    CREATED_BRANCH("Created branch"),
+    STATUS("Status"),
     USERNAME("Username"),
     PASSWORD("Password"),
     ROLE("Role"),
     EM_TYPE("Employment Type"),
     BRANCH("Branch"),
     MGMT_LVL("Management Level"),
+    
     RECRUITS_CSV_HEADING(ID.getValue() +
             "," + FNAME.getValue() +
             "," + LNAME.getValue() +
@@ -25,7 +30,12 @@ public enum CSVConst {
             "," + USERNAME.getValue() +
             "," + PASSWORD.getValue() +
             "," + ROLE.getValue() +
-            "," + INTW_DATE.getValue()),
+            "," + INTW_DATE.getValue() +
+            "," + CREATED_BRANCH.getValue() +
+            "," + CREATED_BY.getValue() +
+            "," + CREATED_AT.getValue() +
+            "," + STATUS.getValue()),
+            
     STAFF_CSV_HEADING(ID.getValue() +
             "," + FNAME.getValue() +
             "," + LNAME.getValue() +

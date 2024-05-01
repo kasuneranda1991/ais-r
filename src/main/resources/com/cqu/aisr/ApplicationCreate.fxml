@@ -148,17 +148,12 @@
                         </VBox>
                         <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="11">
                            <children>
-                              <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="&lt;">
+                              <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
                               <Button fx:id="createBtn" mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Create">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Button">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>

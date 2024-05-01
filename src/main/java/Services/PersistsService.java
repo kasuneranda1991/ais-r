@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import Enum.CSVConst;
 import Enum.Roles;
+import Enum.Status;
 import Helpers.CSV;
 import Models.Administration;
 import Models.Applicant;
@@ -55,6 +56,11 @@ public class PersistsService {
 
     public void addApplicant(Applicant applicant) {
         try {
+            applicant.setCreatedAt(LocalDate.now().toString());
+            applicant.setCreatedBranch(AuthService.get().user().getBranch());
+            applicant.setCreatedBy(AuthService.get().user().getId());
+            applicant.setStatus(Status.PENDING.getValue());
+            System.out.println(AuthService.get().user().getBranch());
             CSV.store("recruits.csv", applicant.getCSV());
         } catch (Exception e) {
             System.out.println(e);
@@ -94,14 +100,29 @@ public class PersistsService {
                             usr = new Administration(
                                     csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EM_TYPE)));
                             usr.setId(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ID)));
+                            usr.setBranch(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.BRANCH)));
                         } else if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
                                 .equals(Roles.APPLICANT.getValue())) {
                             try {
 
-                                usr = new Applicant(LocalDate.parse(csvRecord.getField(CSVConst
-                                        .getFieldIndexForHeading(CSVConst.INTW_DATE, CSVConst.RECRUITS_CSV_HEADING))));
+                                usr = new Applicant(
+                                        LocalDate.parse(csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.INTW_DATE,
+                                                        CSVConst.RECRUITS_CSV_HEADING))),
+                                        csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.CREATED_BY,
+                                                        CSVConst.RECRUITS_CSV_HEADING)),
+                                        csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.CREATED_AT,
+                                                        CSVConst.RECRUITS_CSV_HEADING)),
+                                        csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.CREATED_BRANCH,
+                                                        CSVConst.RECRUITS_CSV_HEADING)),
+                                        csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.STATUS,
+                                                        CSVConst.RECRUITS_CSV_HEADING)));
                             } catch (Exception e) {
-                                usr = new Applicant(null);
+                                System.out.println(e);
                             }
                         }
                         if (usr != null) {

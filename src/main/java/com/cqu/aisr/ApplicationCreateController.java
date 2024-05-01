@@ -173,7 +173,6 @@ public class ApplicationCreateController extends BaseController implements Initi
                     Helper.getText(password),
                     interviewDate.getValue());
             PersistsService.get().addApplicant(applicant);
-            System.out.println("Created...........................");
         }
     }
 }

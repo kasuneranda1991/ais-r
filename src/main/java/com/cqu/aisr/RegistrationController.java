@@ -117,9 +117,7 @@ public class RegistrationController implements Initializable {
             Title.setText("Adminstration staff registration");
             UIHelper.setElementsVisible(
                     Boolean.FALSE,
-                    LblForInputBrnch,
                     LblForInputMgmtLvl,
-                    branch,
                     mgmt_lvl);
         } else if (registrationType == Roles.MANAGEMENT) {
             Title.setText("Management staff registration");
@@ -181,6 +179,7 @@ public class RegistrationController implements Initializable {
                         Helper.getText(username),
                         Helper.getText(password),
                         employment_type.getValue());
+                        user.setBranch(branch.getValue());
             } else if (registrationType == Roles.MANAGEMENT) {
                 user = new Management(
                         Helper.getText(fName),

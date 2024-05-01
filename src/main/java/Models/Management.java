@@ -15,7 +15,7 @@ public class Management extends Staff {
 
     public Management(String management_lvl, String branch) {
         this.management_lvl = management_lvl;
-        this.branch = branch;
+        setBranch(branch);
     }
 
     /**
@@ -41,8 +41,7 @@ public class Management extends Staff {
             String password,
             String management_lvl,
             String branch) {
-        super(
-                firstName,
+        super(firstName,
                 lastName,
                 address,
                 phone,
@@ -51,7 +50,7 @@ public class Management extends Staff {
                 password,
                 Roles.MANAGEMENT.getValue());
         this.management_lvl = management_lvl;
-        this.branch = branch;
+        setBranch(branch);
 
     }
 
@@ -67,13 +66,4 @@ public class Management extends Staff {
     public void setManagement_lvl(String management_lvl) {
         this.management_lvl = management_lvl;
     }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
-    }
-
 }

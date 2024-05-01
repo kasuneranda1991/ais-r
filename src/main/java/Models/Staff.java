@@ -9,8 +9,6 @@ package Models;
 // @ToString
 public class Staff extends User {
 
-    private String role;
-
     /**
      * Default constructor
      */
@@ -30,8 +28,7 @@ public class Staff extends User {
      * @param role
      */
 
-    public Staff(String firstName, String lastName, String address, int phone, String email,
-            String username, String password, String role) {
+    public Staff(String firstName, String lastName, String address, int phone, String email, String username, String password, String role) {
         super(firstName, lastName, address, email, phone, username, password, role);
     }
 

@@ -22,6 +22,7 @@ public class User extends Model implements Csv {
     private String username;
     private String password;
     private String role;
+    private String branch;
 
     /**
      * Default constructor
@@ -58,13 +59,6 @@ public class User extends Model implements Csv {
         this.email = email;
         this.username = username;
         this.password = password;
-        //     String lastName,
-        //     String address,
-        //     String email,
-        //     int phone,
-        //     String username,
-        //     String password,
-        //     String role
         this.role = role;
     }
 
@@ -82,6 +76,14 @@ public class User extends Model implements Csv {
                 getRole();
     }
 
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
