@@ -26,6 +26,13 @@ public class PersistsService {
     private PersistsService() {
     }
 
+    public static PersistsService get() {
+        if (instance == null) {
+            instance = new PersistsService();
+        }
+        return instance;
+    }
+
     public ArrayList<User> staffData() {
         return data.get(STAFF_TABLE);
     }
@@ -34,11 +41,16 @@ public class PersistsService {
         return data.get(APPLICANT_TABLE);
     }
 
-    public static PersistsService get() {
-        if (instance == null) {
-            instance = new PersistsService();
+    public void updateApplicant(Applicant applicant, HashMap<CSVConst, String> data) {
+        if (data.get(CSVConst.STATUS) != null) {
+            System.out.println("Updated Applicant ----" + data.get(CSVConst.STATUS));
+            applicant.setStatus(data.get(CSVConst.STATUS));
         }
-        return instance;
+        try {
+            CSV.update(APPLICANT_TABLE, applicant);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void addStaff(Staff staff) {
@@ -60,7 +72,6 @@ public class PersistsService {
             applicant.setCreatedBranch(AuthService.get().user().getBranch());
             applicant.setCreatedBy(AuthService.get().user().getId());
             applicant.setStatus(Status.PENDING.getValue());
-            System.out.println(AuthService.get().user().getBranch());
             CSV.store("recruits.csv", applicant.getCSV());
         } catch (Exception e) {
             System.out.println(e);
@@ -86,8 +97,6 @@ public class PersistsService {
                             isFirstIteration = false;
                             continue;
                         }
-
-                        System.out.println("records :" + file);
                         User usr = null;
                         if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
                                 .equals(Roles.MANAGEMENT.getValue())) {
@@ -106,9 +115,10 @@ public class PersistsService {
                             try {
 
                                 usr = new Applicant(
-                                        LocalDate.parse(csvRecord.getField(CSVConst
+                                        LocalDate.parse((String) (csvRecord.getField(CSVConst
                                                 .getFieldIndexForHeading(CSVConst.INTW_DATE,
-                                                        CSVConst.RECRUITS_CSV_HEADING))),
+                                                        CSVConst.RECRUITS_CSV_HEADING)))
+                                                .trim()),
                                         csvRecord.getField(CSVConst
                                                 .getFieldIndexForHeading(CSVConst.CREATED_BY,
                                                         CSVConst.RECRUITS_CSV_HEADING)),
@@ -120,7 +130,11 @@ public class PersistsService {
                                                         CSVConst.RECRUITS_CSV_HEADING)),
                                         csvRecord.getField(CSVConst
                                                 .getFieldIndexForHeading(CSVConst.STATUS,
+                                                        CSVConst.RECRUITS_CSV_HEADING)),
+                                        csvRecord.getField(CSVConst
+                                                .getFieldIndexForHeading(CSVConst.EDU,
                                                         CSVConst.RECRUITS_CSV_HEADING)));
+
                             } catch (Exception e) {
                                 System.out.println(e);
                             }
@@ -156,6 +170,10 @@ public class PersistsService {
                 }
             }
         }
+    }
+
+    public void update() {
+
     }
 
     private void count() {

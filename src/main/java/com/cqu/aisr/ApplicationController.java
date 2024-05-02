@@ -8,7 +8,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Enum.Route;
+import Models.User;
+import Services.PersistsService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -36,6 +39,10 @@ public class ApplicationController extends BaseController implements Initializab
     private Label logOutMenuItem;
     @FXML
     private Label applicationCreateSubNav;
+    @FXML
+    private Label name;
+    @FXML
+    private VBox applicationsPane;
 
     /**
      * Initializes the controller class.
@@ -50,6 +57,16 @@ public class ApplicationController extends BaseController implements Initializab
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
         mapMenuRoute(applicationCreateSubNav, Route.APPLICATION_CREATE);
-
+        ItemController.resetCount();
+        for (User applicant : PersistsService.get().applicantsData()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ListItem.fxml"));
+                applicationsPane.getChildren().add(loader.load());
+                ItemController controller = loader.getController();
+                controller.setData(applicant);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 }

@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import Enum.CSVConst;
+import Models.Applicant;
+import Models.Model;
+import Models.User;
+import Services.PersistsService;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
@@ -15,12 +20,30 @@ import de.siegmar.fastcsv.reader.CsvRecord;
  *         Application CSV maniputation
  */
 public class CSV {
+
+    private static String STAFF_TABLE = "staff";
+    private static String APPLICANT_TABLE = "recruits";
+
     public static void store(String path, String data) throws IOException {
         write(path, data, false);
     }
 
     public static void setHeading(String path, String heading) throws IOException {
         write(path, heading, true);
+    }
+
+    public static void update(String path, Model model) throws IOException {
+        String heading = null;
+        if (model instanceof Applicant) {
+
+            heading = CSVConst.RECRUITS_CSV_HEADING.getValue();
+            write(APPLICANT_TABLE + ".csv", heading, true);
+
+            for (User usr : PersistsService.get().applicantsData()) {
+                write(APPLICANT_TABLE + ".csv", usr.getCSV(), false);
+            }
+        }
+
     }
 
     public static void createFile(String filename) throws IOException {
@@ -41,7 +64,6 @@ public class CSV {
     }
 
     public static CsvReader<CsvRecord> read(String fileName) {
-        // CsvReader<CsvRecord> csv;
         try {
             Path p = Paths.get(Storage.getPath(fileName));
             CsvReader<CsvRecord> csv = CsvReader.builder().ofCsvRecord(p);

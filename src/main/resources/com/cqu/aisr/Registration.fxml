@@ -78,7 +78,6 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Reset" />
                               <Button mnemonicParsing="false" onAction="#redirectBack" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back" />
                            </children>
                            <padding>

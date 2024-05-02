@@ -89,8 +89,5 @@ public class LoginController implements Initializable {
         RouteService.redirectTo(Route.REGISTRATION);
     }
 
-    @FXML
-    private void resetForm(ActionEvent event) {
-    }
 
 }

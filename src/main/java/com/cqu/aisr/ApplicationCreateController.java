@@ -171,7 +171,8 @@ public class ApplicationCreateController extends BaseController implements Initi
                     Helper.getInt(phone),
                     Helper.getText(username),
                     Helper.getText(password),
-                    interviewDate.getValue());
+                    interviewDate.getValue(), eduQualification.getValue());
+                    System.out.println(eduQualification.getValue());
             PersistsService.get().addApplicant(applicant);
         }
     }

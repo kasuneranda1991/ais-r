@@ -19,6 +19,7 @@ import Services.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -97,6 +98,8 @@ public class RegistrationController implements Initializable {
     private Staff user;
     @FXML
     private Label Title;
+    @FXML
+    private Button submitBtn;
 
     /**
      * Initializes the controller class.

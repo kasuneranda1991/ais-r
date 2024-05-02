@@ -3,6 +3,7 @@ package Models;
 import java.time.LocalDate;
 
 import Enum.Roles;
+import Enum.Status;
 
 public class Applicant extends User {
     private LocalDate interviewDate;
@@ -10,30 +11,30 @@ public class Applicant extends User {
     private String createdAt;
     private String createdBranch;
     private String status;
+    private String edu;
 
     public Applicant(
-            LocalDate interviewDate) {
+            LocalDate interviewDate, String edu) {
         this.interviewDate = interviewDate;
+        this.edu = edu;
     }
 
     public Applicant(
-            LocalDate interviewDate,
-            String createdBy,
-            String createdAt,
-            String createdBranch,
-            String status) {
+            LocalDate interviewDate, String createdBy, String createdAt, String createdBranch, String status,
+            String edu) {
         this.interviewDate = interviewDate;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.createdBranch = createdBranch;
         this.status = status;
+        this.edu = edu;
     }
-    
-    
+
     public Applicant(String firstName, String lastName, String address, String email, int phone, String username,
-            String password, LocalDate interviewDate) {
+            String password, LocalDate interviewDate, String edu) {
         super(firstName, lastName, address, email, phone, username, password, Roles.APPLICANT.getValue());
         this.interviewDate = interviewDate;
+        this.edu = edu;
     }
 
     public Applicant(String firstName, String lastName, String address, String email, int phone, String username,
@@ -62,6 +63,10 @@ public class Applicant extends User {
         return createdAt;
     }
 
+    public String getEdu() {
+        return edu;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -86,9 +91,14 @@ public class Applicant extends User {
         this.createdBranch = createdBranch;
     }
 
+    public Boolean isApproved() {
+        return (status).trim().equals((Status.APPROVED.getValue()).trim());
+    }
+
     @Override
     public String getCSV() {
         return super.getCSV() +
+                ", " + getEdu() +
                 ", " + getInterviewDate() +
                 ", " + getCreatedBranch() +
                 ", " + getCreatedBy() +

@@ -10,6 +10,7 @@ public enum CSVConst {
     PHONE("Phone"),
     EMAIL("Email"),
     INTW_DATE("Interview Date"),
+    EDU("Education"),
     CREATED_AT("Created at"),
     CREATED_BY("Created by"),
     CREATED_BRANCH("Created branch"),
@@ -30,6 +31,7 @@ public enum CSVConst {
             "," + USERNAME.getValue() +
             "," + PASSWORD.getValue() +
             "," + ROLE.getValue() +
+            "," + EDU.getValue() +
             "," + INTW_DATE.getValue() +
             "," + CREATED_BRANCH.getValue() +
             "," + CREATED_BY.getValue() +

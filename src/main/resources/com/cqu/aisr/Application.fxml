@@ -37,10 +37,14 @@
                </children>
             </HBox>
          </top>
-         <center>
+         <stylesheets>
+            <URL value="@../../../../styles/registration.css" />
+            <URL value="@../../../styles/registration.css" />
+         </stylesheets>
+         <left>
             <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@../../../../styles/registration.css" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="650.0" prefWidth="151.0" style="-fx-background-color: #e6e7eb;">
+                  <VBox maxWidth="1.7976931348623157E308" prefHeight="650.0" prefWidth="201.0" style="-fx-background-color: #e6e7eb;">
                      <children>
                         <Label fx:id="homeSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Home" textFill="WHITE" />
                         <Label fx:id="applicationsSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Applications" textFill="WHITE" />
@@ -55,11 +59,21 @@
                      </children>
                   </VBox>
                </children></HBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
+               <children>
+                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="applicationsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="1076.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </VBox>
          </center>
-         <stylesheets>
-            <URL value="@../../../../styles/registration.css" />
-            <URL value="@../../../styles/registration.css" />
-         </stylesheets>
       </BorderPane>
    </children>
 </AnchorPane>

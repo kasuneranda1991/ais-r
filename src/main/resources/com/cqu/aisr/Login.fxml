@@ -35,12 +35,11 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <children>
-                              <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitForm" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Submit">
+                              <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitForm" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Login">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#resetForm" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Reset" />
                            </children>
                            <padding>
                               <Insets right="15.0" />
