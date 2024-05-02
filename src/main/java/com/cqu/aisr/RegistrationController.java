@@ -198,9 +198,13 @@ public class RegistrationController implements Initializable {
                         mgmt_lvl.getValue(),
                         branch.getValue());
             }
-            PersistsService.get().addStaff(user);
-            AuthenticateService.authenticateUser(user);
-            RouteService.redirectToWithMessage(Route.DASHBOARD, "You have been registed as " + user.getRole());
+            try {
+                PersistsService.get().addStaff(user);
+                AuthenticateService.authenticateUser(user);
+                RouteService.redirectToWithMessage(Route.DASHBOARD, "You have been registed as " + user.getRole());
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
 
     }

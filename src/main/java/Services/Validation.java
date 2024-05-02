@@ -22,81 +22,72 @@ public class Validation {
     private static String VALID_INPUT = "#63db00"; // valid input color
     private String error; // validation error
 
-    public Boolean validate(Node node, Rule rule, Label invalid) {
+    private Boolean validateRule(Node node, Rule rule, Node... nodes) {
         Boolean isValid = false;
         if (!isNotNull(node) && rule != Rule.NOT_NULL) {
-            this.setErrorMessage(Errors.IS_NOT_NULL.getMessage());
-        } else {
-            switch (rule) {
-                case Rule.DATE:
-                    isValid = this.isDate(node);
-                    break;
-                default:
-                    break;
-            }
+            return false;
         }
+
+        switch (rule) {
+            case NUMERIC:
+                isValid = isNumeric(node);
+                setErrorMessage(Errors.IS_NUMERIC.getMessage());
+                break;
+            case NOT_NULL:
+                isValid = isNotNull(node);
+                setErrorMessage(Errors.IS_NOT_NULL.getMessage());
+                break;
+            case EMAIL:
+                isValid = isEmail(node);
+                setErrorMessage(Errors.IS_EMAIL.getMessage());
+                break;
+            case PHONE:
+                isValid = isPhoneNumber(node);
+                setErrorMessage(Errors.IS_PHONE.getMessage());
+                break;
+            case PASSWORD:
+                isValid = isValidPassword(node);
+                setErrorMessage(Errors.PASSWORD.getMessage());
+                break;
+            case PASSWORD_CONFIRM:
+                if (nodes.length > 0) {
+                    isValid = isPasswordConfirmed(node, nodes[0]);
+                    setErrorMessage(Errors.PASSWORD_CONFIRMATION.getMessage());
+                }
+                break;
+            case DATE:
+                isValid = isDate(node);
+                break;
+            default:
+                break;
+        }
+
+        return isValid;
+    }
+
+    public Boolean validate(Node node, Rule rule, Label invalid) {
+        Boolean isValid = validateRule(node, rule);
         updateNode(isValid, node, invalid);
         return isValid;
 
     }
 
     public Boolean validate(Node node, Rule rule, Label invalid, Node success, Node... nodes) {
-        Boolean isValid = false;
-        if (!isNotNull(node) && rule != Rule.NOT_NULL) {
-        } else {
-            switch (rule) {
-                case Rule.NUMERIC:
-                    isValid = isNumeric(node);
-                    this.setErrorMessage(Errors.IS_NUMERIC.getMessage());
-                    break;
-                case Rule.NOT_NULL:
-                    isValid = isNotNull(node);
-                    this.setErrorMessage(Errors.IS_NOT_NULL.getMessage());
-                    break;
-                case Rule.EMAIL:
-                    isValid = isEmail(node);
-                    this.setErrorMessage(Errors.IS_EMAIL.getMessage());
-                    break;
-                case Rule.PHONE:
-                    isValid = isPhoneNumber(node);
-                    this.setErrorMessage(Errors.IS_PHONE.getMessage());
-                    break;
-                case Rule.PASSWORD:
-                    isValid = isValidPassword(node);
-                    this.setErrorMessage(Errors.PASSWORD.getMessage());
-                    break;
-                case Rule.PASSWORD_CONFIRM:
-                    if (nodes.length > 0) {
-                        isValid = isPasswordConfirmed(node, nodes[0]);
-                        this.setErrorMessage(Errors.PASSWORD_CONFIRMATION.getMessage());
-                    }
-                    break;
-                case Rule.DATE:
-                    isValid = this.isDate(node);
-                    break;
-                default:
-                    break;
-            }
-        }
+        Boolean isValid = validateRule(node, rule, nodes);
         updateNode(isValid, node, invalid, success);
         return isValid;
 
     }
 
     public void updateNode(Boolean isValid, Node node, Label invalidLabel) {
-        String style = null;
-        if (isValid) {
-            style = "-fx-border-color: " + VALID_INPUT + " ;  \n"
-                    + " -fx-border-width: 2px ;  ";
-            UIHelper.setElementsVisible(Boolean.FALSE, invalidLabel);
-        } else {
-            style = "-fx-border-color: " + INVALID_INPUT + " ;  \n"
-                    + " -fx-border-width: 2px ;  ";
-
-            UIHelper.setElementsVisible(Boolean.TRUE, invalidLabel);
-            setInvalidLabel(invalidLabel, this.getValidationMessage());
-        }
+        String style = isValid ? getBorderStyle(VALID_INPUT) : getBorderStyle(INVALID_INPUT);
         node.setStyle(style);
+        UIHelper.setElementsVisible(!isValid, invalidLabel);
+        setInvalidLabel(invalidLabel, getValidationMessage());
+    }
+
+    private String getBorderStyle(String color) {
+        return "-fx-border-color: " + color + " ;  \n" + " -fx-border-width: 2px ;  ";
     }
 
     public void updateNode(Boolean isValid, Node node, Label invalidLabel, Node success) {

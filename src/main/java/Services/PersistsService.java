@@ -23,6 +23,8 @@ public class PersistsService {
     private static String STAFF_TABLE = "staff";
     private static String APPLICANT_TABLE = "‘recruits";
 
+    private static String ADMIN = Roles.ADMIN.getValue();
+
     private PersistsService() {
     }
 
@@ -42,8 +44,7 @@ public class PersistsService {
     }
 
     public void updateApplicant(Applicant applicant, HashMap<CSVConst, String> data) {
-        if (data.get(CSVConst.STATUS) != null) {
-            System.out.println("Updated Applicant ----" + data.get(CSVConst.STATUS));
+        if (data.containsKey(CSVConst.STATUS)) {
             applicant.setStatus(data.get(CSVConst.STATUS));
         }
         try {
@@ -60,7 +61,6 @@ public class PersistsService {
             System.out.println(e);
         }
         staffData().add(staff);
-        data.put(STAFF_TABLE, staffData());
         count();
     }
 
@@ -75,7 +75,6 @@ public class PersistsService {
             System.out.println(e);
         }
         applicantsData().add(applicant);
-        data.put(APPLICANT_TABLE, applicantsData());
         count();
     }
 
@@ -94,57 +93,45 @@ public class PersistsService {
                             continue;
                         }
                         User usr = null;
-                        if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
-                                .equals(Roles.MANAGEMENT.getValue())) {
-                            usr = new Management(
-                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.MGMT_LVL)),
-                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.BRANCH)));
-                            usr.setId(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ID)));
-                        } else if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
-                                .equals(Roles.ADMIN.getValue())) {
-                            usr = new Administration(
-                                    csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EM_TYPE)));
-                            usr.setId(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ID)));
-                            usr.setBranch(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.BRANCH)));
-                        } else if (csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE))
-                                .equals(Roles.APPLICANT.getValue())) {
-                            try {
-
-                                usr = new Applicant(
-                                        LocalDate.parse((String) (csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.INTW_DATE,
-                                                        CSVConst.RECRUITS_CSV_HEADING)))
-                                                .trim()),
-                                        csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.CREATED_BY,
-                                                        CSVConst.RECRUITS_CSV_HEADING)),
-                                        csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.CREATED_AT,
-                                                        CSVConst.RECRUITS_CSV_HEADING)),
-                                        csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.CREATED_BRANCH,
-                                                        CSVConst.RECRUITS_CSV_HEADING)),
-                                        csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.STATUS,
-                                                        CSVConst.RECRUITS_CSV_HEADING)),
-                                        csvRecord.getField(CSVConst
-                                                .getFieldIndexForHeading(CSVConst.EDU,
-                                                        CSVConst.RECRUITS_CSV_HEADING)));
-
-                            } catch (Exception e) {
-                                System.out.println(e);
-                            }
+                        switch (getField(csvRecord, CSVConst.ROLE)) {
+                            case "Management":
+                                usr = new Management(
+                                        getField(csvRecord, CSVConst.MGMT_LVL),
+                                        getField(csvRecord, CSVConst.BRANCH));
+                                usr.setId(getField(csvRecord, CSVConst.ID));
+                                break;
+                            case "Admin":
+                                usr = new Administration(
+                                        getField(csvRecord, CSVConst.EM_TYPE));
+                                usr.setId(getField(csvRecord, CSVConst.ID));
+                                usr.setBranch(getField(csvRecord, CSVConst.BRANCH));
+                                break;
+                            case "Applicant":
+                                try {
+                                    usr = new Applicant(
+                                            LocalDate.parse(getField(csvRecord, CSVConst.INTW_DATE).trim()),
+                                            getField(csvRecord, CSVConst.CREATED_BY),
+                                            getField(csvRecord, CSVConst.CREATED_AT),
+                                            getField(csvRecord, CSVConst.CREATED_BRANCH),
+                                            getField(csvRecord, CSVConst.STATUS),
+                                            getField(csvRecord, CSVConst.EDU));
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
+                                break;
+                            default:
+                                break;
                         }
                         if (usr != null) {
 
-                            usr.setFirstName(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.FNAME)));
-                            usr.setLastName(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.FNAME)));
-                            usr.setAddress(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ADDRESS)));
-                            usr.setPhone(Integer.parseInt(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.PHONE))));
-                            usr.setEmail(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EMAIL)));
-                            usr.setUsername(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.USERNAME)));
-                            usr.setPassword(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.PASSWORD)));
-                            usr.setRole(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE)));
+                            usr.setFirstName(getField(csvRecord, CSVConst.FNAME));
+                            usr.setLastName(getField(csvRecord, CSVConst.LNAME));
+                            usr.setAddress(getField(csvRecord, CSVConst.ADDRESS));
+                            usr.setPhone(Integer.parseInt(getField(csvRecord, CSVConst.PHONE)));
+                            usr.setEmail(getField(csvRecord, CSVConst.EMAIL));
+                            usr.setUsername(getField(csvRecord, CSVConst.USERNAME));
+                            usr.setPassword(getField(csvRecord, CSVConst.PASSWORD));
+                            usr.setRole(getField(csvRecord, CSVConst.ROLE));
 
                             users.add(usr);
                         }
@@ -169,8 +156,8 @@ public class PersistsService {
         }
     }
 
-    public void update() {
-
+    public String getField(CsvRecord record, CSVConst field) {
+        return record.getField(CSVConst.getFieldIndex(field));
     }
 
     private void count() {
