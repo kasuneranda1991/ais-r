@@ -8,13 +8,16 @@ import Enum.Branch;
 import Enum.EmploymentType;
 import Enum.ManagementLevel;
 import Enum.Roles;
+import Enum.Route;
 import Enum.Rule;
 import Helpers.Helper;
 import Helpers.UIHelper;
 import Models.Administration;
 import Models.Management;
 import Models.Staff;
+import Services.AuthenticateService;
 import Services.PersistsService;
+import Services.RouteService;
 import Services.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -182,7 +185,7 @@ public class RegistrationController implements Initializable {
                         Helper.getText(username),
                         Helper.getText(password),
                         employment_type.getValue());
-                        user.setBranch(branch.getValue());
+                user.setBranch(branch.getValue());
             } else if (registrationType == Roles.MANAGEMENT) {
                 user = new Management(
                         Helper.getText(fName),
@@ -196,6 +199,8 @@ public class RegistrationController implements Initializable {
                         branch.getValue());
             }
             PersistsService.get().addStaff(user);
+            AuthenticateService.authenticateUser(user);
+            RouteService.redirectToWithMessage(Route.DASHBOARD, "You have been registed as " + user.getRole());
         }
 
     }

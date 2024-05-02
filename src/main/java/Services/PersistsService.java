@@ -60,8 +60,6 @@ public class PersistsService {
             System.out.println(e);
         }
         staffData().add(staff);
-
-        // System.out.println("CHeck here");
         data.put(STAFF_TABLE, staffData());
         count();
     }
@@ -77,8 +75,6 @@ public class PersistsService {
             System.out.println(e);
         }
         applicantsData().add(applicant);
-
-        // System.out.println("CHeck here");
         data.put(APPLICANT_TABLE, applicantsData());
         count();
     }
@@ -148,6 +144,7 @@ public class PersistsService {
                             usr.setEmail(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.EMAIL)));
                             usr.setUsername(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.USERNAME)));
                             usr.setPassword(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.PASSWORD)));
+                            usr.setRole(csvRecord.getField(CSVConst.getFieldIndex(CSVConst.ROLE)));
 
                             users.add(usr);
                         }

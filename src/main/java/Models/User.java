@@ -1,5 +1,6 @@
 package Models;
 
+import Enum.Roles;
 import Interface.Csv;
 //import lombok.Getter;
 //import lombok.Setter;
@@ -83,7 +84,7 @@ public class User extends Model implements Csv {
     public void setBranch(String branch) {
         this.branch = branch;
     }
-    
+
     public String getFirstName() {
         return firstName;
     }
@@ -142,6 +143,18 @@ public class User extends Model implements Csv {
 
     public String getRole() {
         return role;
+    }
+
+    private Boolean isRole(Roles role) {
+        return getRole().trim().equals((role.getValue()).trim());
+    }
+
+    public Boolean isAdmin() {
+        return isRole(Roles.ADMIN);
+    }
+
+    public Boolean isManager() {
+        return isRole(Roles.MANAGEMENT);
     }
 
     public void setRole(String role) {

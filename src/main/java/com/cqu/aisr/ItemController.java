@@ -12,6 +12,7 @@ import Enum.CSVConst;
 import Enum.Status;
 import Models.Applicant;
 import Models.Model;
+import Services.AuthService;
 import Services.PersistsService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,8 +66,10 @@ public class ItemController implements Initializable {
             id.setText("#" + count);
             address.setText(ap.getAddress());
             edu.setText(ap.getEdu());
-            if (ap.isApproved()) {
-                approveBtn.setVisible(false);
+            if (!ap.isApproved() && AuthService.get().user().isManager()) {
+                approveBtn.setVisible(Boolean.TRUE);
+            } else {
+                approveBtn.setVisible(Boolean.FALSE);
             }
         }
     }
@@ -95,7 +98,6 @@ public class ItemController implements Initializable {
         Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
         informationAlert.setWidth(600);
         informationAlert.setTitle("Applicant Details");
-        informationAlert.setHeaderText(null);
         informationAlert.setContentText(
                 "First Name: " + applicant.getFirstName() + "\n" +
                         "Last Name: " + applicant.getLastName() + "\n" +

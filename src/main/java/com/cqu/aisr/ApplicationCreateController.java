@@ -14,6 +14,7 @@ import Helpers.Helper;
 import Helpers.UIHelper;
 import Models.Applicant;
 import Services.PersistsService;
+import Services.RouteService;
 import Services.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -172,8 +173,9 @@ public class ApplicationCreateController extends BaseController implements Initi
                     Helper.getText(username),
                     Helper.getText(password),
                     interviewDate.getValue(), eduQualification.getValue());
-                    System.out.println(eduQualification.getValue());
+            System.out.println(eduQualification.getValue());
             PersistsService.get().addApplicant(applicant);
+            RouteService.redirectToWithMessage(Route.APPLICATION, "Application created.");
         }
     }
 }

@@ -1,6 +1,11 @@
-Id,First Name,Last Name,Address,Phone,Email,Username,Password,Role,Employment Type,Branch,Management Level
-748df43a-f4e9-4162-9232-efc019109230,Kasun,kjnkjnkjnkjnfdkjnkjn,kjndskjfnskjn,435025485,admin@gmail.com,dskfjsdnk,admin,administrator,Full-Time,Melbourne,
-b4f01f50-78be-457f-9b21-6bb403b5addd,dgkjfdkjn,kjnkjnkjnkjnfdkjnkjn,kjndskjfnskjn,435025485,dkfjsnk@dsfds.sdfs,dskfjsdnk,123456789,administrator,Full-Time,,
-d95df3ea-9316-49f2-a703-4f0ae5b2533b,dsfdsln,nlknlkdsnflskn,lkndsflksn,435025485,dsfjsjk@wdfdsfsd.com,dskfjsbjkb,123456789,management, ,Melbourne, Supervisor
-14cc1353-a8bc-4539-ab74-4fa6b0a30364,jhbhjb,hjbjhbhjbjh,bjhbhjb,1234567891,dsfds@sdfsd.com,hbffdksjb,123456789,administrator,Full-Time,null,
-71047ba1-1e45-4725-8d99-ff5be1e4f6d5,kkkjnjk,kjnkjnkj,nkjnkj,1234567891,xzsd@sdsfds.com,jlknlksd,123456789,administrator,Full-Time,Melbourne,
+id,First Name,Last Name,Address,Phone,Email,Username,Password,Role,Employment Type,Branch,Management Level
+a56ac029-2448-48b8-bfd9-ad9c79cec6ab,Admin,Admin Last,Admin Address,1234567891,admin@email.com,admin,123456789,administrator,Full-Time,Melbourne
+fb066be4-532e-41d9-91dd-3e0b1ef1bd1a,manager,sdliajij,lijsdifjsoij,1234567891,manager@email.com,dfgllkd,123456789,management, ,Melbourne, Supervisor
+c71bac93-852c-4700-80c2-47ad7feca8b4,dsfdskjn,jknsdkj,kjnjknfd123,1234567892,fdgfd@dssfs.com,dflkdnlkn,123456789,administrator,Full-Time,Melbourne
+e3831fa5-c574-4d60-8dfd-5f58f21f3f5a,dsfkjdskbkkj,kjbsdkjbk,kjbfdkjbsdjkb,1234567891,dfdkhbfd@dsfd.com,sfglkfdnlkn,123456789,administrator,Full-Time,Melbourne
+bdef93e6-1ab8-4f76-af70-96358059a5b6,dsflkdsjlk,lkjsdlkfjs,lksdmlkfsdm,1234567891,dsfds@sdfds.com,dsfkjdsn,123456789,administrator,Full-Time,Melbourne
+9dea5bc5-dd94-41ba-892f-2d370818d1ed,fdkjkgndkjn,jinsdini,niunsdiun,1234567891,sdfds@dssfs.com,dfdsfs,123456789,administrator,Full-Time,Melbourne
+9be73ac6-5e23-4914-9b02-f6e7db47aed7,jhjhvjhv,jhvjhv,jhvjhv,1234567891,dfgfd@df.com,dfgd,123456789,administrator,Full-Time,Melbourne
+ef405ebd-f3cb-4bb2-b8f0-6fc23c1c3f25,dfskj,kjdflksj,lkjdflksj,1234567891,dsfd@sdf.com,gfdgfd56,123456789,administrator,Full-Time,Melbourne
+89f3ab14-6c16-49aa-b63b-cd2355c7dddb,kdfskjh,kjhdskfjsh,kjhkjdfhs,1234567891,sdfgkdlgjfd@dfdsf.po,dflidj,123456789,administrator,Full-Time,Melbourne
+78b71ae5-df71-4e25-b7ce-3f01376aed25,managerdddddddd,kdsj,kjdvnfnj,1234567891,dsfds@dsfs.com,dsfkjdsnkjn,123456789,management, ,Melbourne, Supervisor
