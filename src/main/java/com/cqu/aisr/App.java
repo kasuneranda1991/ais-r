@@ -2,23 +2,31 @@ package com.cqu.aisr;
 
 import java.io.IOException;
 
-import javax.crypto.SecretKey;
-
 import Controllers.Enum.CSVConst;
+import Controllers.Enum.Config;
 import Controllers.Enum.Roles;
+import Controllers.Enum.Route;
 import Controllers.Helpers.CSV;
-import Controllers.Helpers.Security;
+import Controllers.Services.AuthenticateService;
+import Controllers.Services.NotificationService;
 import Controllers.Services.PersistsService;
+import Controllers.Services.RouteService;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+
+    private Timeline timeline;
 
     private static Scene scene;
 
@@ -27,6 +35,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 1920, 1000);
+        scene.setOnMouseMoved(e -> resetTimeline());
+        scene.setOnKeyTyped(e -> resetTimeline());
         stage.setScene(scene);
         stage.show();
 
@@ -45,14 +55,24 @@ public class App extends Application {
         } catch (Exception e) {
             System.out.println(e);
         }
-        SecretKey key = Security.getKey();
-        System.out.println("key => " + key);
-        String name = "+0FD8TPvAzXLcojPg9+J5g==\n" + //
-                        "";
-        String data_en = Security.encrypt(name, key);
-        System.out.println("encypt:" + data_en);
-        System.out.println("decrypt:" + Security.decrypt(data_en, key));
 
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(Integer.parseInt(Config.INACTIVITY.getValue())), event -> {
+                    if (!RouteService.current.equals(Route.LOGIN)) {
+                        Platform.runLater(() -> {
+                            NotificationService.message("You are Inactive. You have been logged out.");
+                            AuthenticateService.logout();
+                        });
+                    }
+
+                }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void resetTimeline() {
+        timeline.stop();
+        timeline.playFromStart();
     }
 
     public static void setRoot(String fxml) throws IOException {
