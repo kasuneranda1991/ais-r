@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import Controllers.Enum.Branch;
 import Controllers.Enum.CSVConst;
+import Controllers.Enum.Department;
 import Controllers.Enum.Status;
 import Controllers.Services.AuthService;
 import Controllers.Services.PersistsService;
@@ -45,22 +45,19 @@ public class ItemController implements Initializable {
     private Button assignToBranch;
 
     @FXML
-    private ChoiceBox<String> branchAssign;
+    private ChoiceBox<String> deptAssign;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        branchAssign.setItems(Branch.getValues());
+        deptAssign.setItems(Department.getValues());
 
         // Add listener to choice box
-        branchAssign.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Applicant Branch Before: " + applicant.getBranch());
+        deptAssign.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                PersistsService.get().updateApplicant(applicant, CSVConst.BRANCH, newValue);
-                System.out.println("Selected Branch: " + newValue);
-                System.out.println("Applicant Branch After: " + applicant.getBranch());
+                PersistsService.get().updateApplicant(applicant, CSVConst.DEPT, newValue);
             }
         });
     }
@@ -77,14 +74,13 @@ public class ItemController implements Initializable {
             name.setText(ap.getFirstName());
             id.setText("#" + count);
             address.setText(ap.getAddress());
-            branchAssign.setValue(ap.getBranch().trim());
+            deptAssign.setValue(ap.getDepartment());
             edu.setText(ap.getEdu());
             if (!ap.isApproved() && AuthService.get().user().isManager()) {
                 approveBtn.setVisible(Boolean.TRUE);
             } else {
                 approveBtn.setVisible(Boolean.FALSE);
             }
-            System.out.println("BRANCH TO SET:==========>" + ap.getBranch());
         }
     }
 

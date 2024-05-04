@@ -3,25 +3,25 @@ package Controllers.Enum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public enum Branch {
-    MEL("Melbourne"),
-    BNE("Brisbane"),
-    ADL("Adelaide"),
-    SYD("Sydney");
+public enum Department {
+    SWD("Software Development"),
+    ARS("Aerospace"),
+    MEC("Mecanical"),
+    ELEC("Electronic");
 
-    private final String branch;
+    private final String dept;
 
-    Branch(String branch) {
-        this.branch = branch;
+    Department(String dept) {
+        this.dept = dept;
     }
 
     public String getValue() {
-        return this.branch;
+        return this.dept;
     }
 
     public static ObservableList<String> getValues() {
         ObservableList<String> values = FXCollections.observableArrayList();
-        for (Branch type : Branch.values()) {
+        for (Department type : Department.values()) {
             values.add(type.getValue());
         }
         return values;

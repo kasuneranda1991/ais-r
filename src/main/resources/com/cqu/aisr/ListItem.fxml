@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1000.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1300.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
    <children>
       <Label fx:id="id" alignment="CENTER" prefHeight="77.0" prefWidth="48.0" style="-fx-border-color: #ede7e6;" text="ID">
          <opaqueInsets>
@@ -33,8 +33,8 @@
          <children>
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">
                <children>
-                  <Label text="Assign to branch" />
-                  <ChoiceBox fx:id="branchAssign" prefWidth="150.0" />
+                  <Label text="Assign to Department" />
+                  <ChoiceBox fx:id="deptAssign" prefWidth="150.0" />
                </children>
             </VBox>
             <Button fx:id="approveBtn" mnemonicParsing="false" onAction="#approve" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Approve">

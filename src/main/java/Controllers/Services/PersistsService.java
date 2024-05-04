@@ -49,6 +49,8 @@ public class PersistsService {
     public void updateApplicant(Applicant applicant, CSVConst field, String data) {
         if (field.equals(CSVConst.BRANCH)) {
             applicant.setBranch(data);
+        } else if (field.equals(CSVConst.DEPT)) {
+            applicant.setDepartment(data);
         }
         try {
             CSV.update(APPLICANT_TABLE, applicant);
@@ -130,7 +132,7 @@ public class PersistsService {
                                             getField(csvRecord, CSVConst.CREATED_BRANCH),
                                             getField(csvRecord, CSVConst.STATUS),
                                             getField(csvRecord, CSVConst.EDU));
-                                    usr.setBranch(getField(csvRecord, CSVConst.BRANCH));
+                                    ((Applicant) usr).setDepartment(getField(csvRecord, CSVConst.DEPT));
                                 } catch (Exception e) {
                                     System.out.println(e);
                                 }

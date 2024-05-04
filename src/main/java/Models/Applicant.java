@@ -12,6 +12,7 @@ public class Applicant extends User {
     private String createdBranch;
     private String status;
     private String edu;
+    private String department;
 
     public Applicant(
             LocalDate interviewDate, String edu) {
@@ -75,6 +76,15 @@ public class Applicant extends User {
         return status;
     }
 
+    public String getDepartment() {
+        return this.department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+    
+
     public void setInterviewDate(LocalDate interviewDate) {
         this.interviewDate = interviewDate;
     }
@@ -98,7 +108,7 @@ public class Applicant extends User {
     @Override
     public String getCSV() {
         return super.getCSV() +
-                ", " + getBranch() +
+                ", " + getDepartment() +
                 ", " + getEdu() +
                 ", " + getInterviewDate() +
                 ", " + getCreatedBranch() +
