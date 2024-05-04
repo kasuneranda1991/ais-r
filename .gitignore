@@ -2,3 +2,4 @@
 src/main/java/Storage/staff.csv
 target/
 .vscode/launch.json
+src/main/java/Storage/recruits.csv

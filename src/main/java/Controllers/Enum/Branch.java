@@ -3,11 +3,11 @@ package Controllers.Enum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public enum Branch{
+public enum Branch {
     MEL("Melbourne"),
     BNE("Brisbane"),
     ADL("Adelaide"),
-    SYD("Sydney");  
+    SYD("Sydney");
 
     private final String branch;
 
@@ -18,7 +18,7 @@ public enum Branch{
     public String getValue() {
         return this.branch;
     }
-    
+
     public static ObservableList<String> getValues() {
         ObservableList<String> values = FXCollections.observableArrayList();
         for (Branch type : Branch.values()) {
@@ -26,4 +26,15 @@ public enum Branch{
         }
         return values;
     }
+
+    public static Branch getEnum(String branch) {
+        for (Branch type : Branch.values()) {
+            if (type.getValue().equals(branch)) {
+                return type;
+            }
+        }
+        // Default return value if no match is found
+        return null;
+    }
+
 }

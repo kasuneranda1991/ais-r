@@ -3,7 +3,7 @@ package Controllers.Enum;
 public enum Config {
     STORAGE_PATH("src/main/java/Storage/"),
     SECRET_KEY("ZAK8d0xd9W0fG9dmxCTiOw=="),
-    ENCRYPT_DATA("TRUE"); // TRUE | FALSE
+    ENCRYPT_DATA("FALSE"); // TRUE | FALSE
 
     private final String conf;
 

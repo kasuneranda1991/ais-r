@@ -65,7 +65,17 @@
                <children>
                   <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="200.0">
                      <content>
-                        <VBox fx:id="applicationsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="1076.0" />
+                        <VBox fx:id="applicationsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1000.0" prefWidth="1076.0">
+                           <children>
+                              <Label text="Applications" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children></VBox>
                      </content>
                   </ScrollPane>
                </children>

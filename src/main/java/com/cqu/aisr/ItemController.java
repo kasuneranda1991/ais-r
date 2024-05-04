@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package com.cqu.aisr;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import Controllers.Enum.Branch;
 import Controllers.Enum.CSVConst;
 import Controllers.Enum.Status;
 import Controllers.Services.AuthService;
@@ -19,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 /**
@@ -43,14 +42,27 @@ public class ItemController implements Initializable {
 
     private Applicant applicant;
     @FXML
-    private Button seeMoreBtn;
+    private Button assignToBranch;
+
+    @FXML
+    private ChoiceBox<String> branchAssign;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        branchAssign.setItems(Branch.getValues());
 
+        // Add listener to choice box
+        branchAssign.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Applicant Branch Before: " + applicant.getBranch());
+            if (newValue != null) {
+                PersistsService.get().updateApplicant(applicant, CSVConst.BRANCH, newValue);
+                System.out.println("Selected Branch: " + newValue);
+                System.out.println("Applicant Branch After: " + applicant.getBranch());
+            }
+        });
     }
 
     public void setApplicant(Applicant applicant) {
@@ -65,12 +77,14 @@ public class ItemController implements Initializable {
             name.setText(ap.getFirstName());
             id.setText("#" + count);
             address.setText(ap.getAddress());
+            branchAssign.setValue(ap.getBranch().trim());
             edu.setText(ap.getEdu());
             if (!ap.isApproved() && AuthService.get().user().isManager()) {
                 approveBtn.setVisible(Boolean.TRUE);
             } else {
                 approveBtn.setVisible(Boolean.FALSE);
             }
+            System.out.println("BRANCH TO SET:==========>" + ap.getBranch());
         }
     }
 

@@ -98,6 +98,7 @@ public class Applicant extends User {
     @Override
     public String getCSV() {
         return super.getCSV() +
+                ", " + getBranch() +
                 ", " + getEdu() +
                 ", " + getInterviewDate() +
                 ", " + getCreatedBranch() +

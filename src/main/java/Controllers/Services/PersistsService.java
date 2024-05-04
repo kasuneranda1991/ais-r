@@ -46,10 +46,22 @@ public class PersistsService {
         return data.get(APPLICANT_TABLE);
     }
 
+    public void updateApplicant(Applicant applicant, CSVConst field, String data) {
+        if (field.equals(CSVConst.BRANCH)) {
+            applicant.setBranch(data);
+        }
+        try {
+            CSV.update(APPLICANT_TABLE, applicant);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void updateApplicant(Applicant applicant, HashMap<CSVConst, String> data) {
         if (data.containsKey(CSVConst.STATUS)) {
             applicant.setStatus(data.get(CSVConst.STATUS));
         }
+
         try {
             CSV.update(APPLICANT_TABLE, applicant);
         } catch (Exception e) {
@@ -118,6 +130,7 @@ public class PersistsService {
                                             getField(csvRecord, CSVConst.CREATED_BRANCH),
                                             getField(csvRecord, CSVConst.STATUS),
                                             getField(csvRecord, CSVConst.EDU));
+                                    usr.setBranch(getField(csvRecord, CSVConst.BRANCH));
                                 } catch (Exception e) {
                                     System.out.println(e);
                                 }
@@ -160,16 +173,17 @@ public class PersistsService {
     }
 
     public String getField(CsvRecord record, CSVConst field) {
+        String data = null;
         try {
             int index = (mappingFile.equals("recruits.csv"))
                     ? CSVConst.getFieldIndexForHeading(field, CSVConst.RECRUITS_CSV_HEADING)
                     : CSVConst.getFieldIndex(field);
-            return (Config.ENCRYPT_DATA.asBoolean()) ? Security.decrypt(record.getField(index))
+            data = (Config.ENCRYPT_DATA.asBoolean()) ? Security.decrypt(record.getField(index))
                     : record.getField(index);
         } catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return data.trim();
     }
 
     private void count() {

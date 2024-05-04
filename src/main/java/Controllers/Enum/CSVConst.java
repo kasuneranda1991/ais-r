@@ -31,6 +31,7 @@ public enum CSVConst {
             "," + USERNAME.getValue() +
             "," + PASSWORD.getValue() +
             "," + ROLE.getValue() +
+            "," + BRANCH.getValue() +
             "," + EDU.getValue() +
             "," + INTW_DATE.getValue() +
             "," + CREATED_BRANCH.getValue() +

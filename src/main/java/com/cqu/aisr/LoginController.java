@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
     {
         if (AuthenticateService.authenticate(Helper.getText(username), Helper.getText(password))) {
             UIHelper.setElementsVisible(Boolean.FALSE, authFailedLbl);
-            RouteService.redirectTo(Route.DASHBOARD);
+            RouteService.redirectTo(Route.APPLICATION);
         } else {
             UIHelper.setElementsVisible(Boolean.TRUE, authFailedLbl);
             Validation.setInvalidLabel(authFailedLbl, Errors.AUTH_FAILD.getMessage());
