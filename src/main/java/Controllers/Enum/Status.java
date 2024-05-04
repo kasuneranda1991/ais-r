@@ -1,4 +1,4 @@
-package Enum;
+package Controllers.Enum;
 
 public enum Status {
     APPROVED("Approved"),

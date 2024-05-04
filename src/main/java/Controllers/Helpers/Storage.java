@@ -1,6 +1,6 @@
-package Helpers;
+package Controllers.Helpers;
 
-import Enum.Config;
+import Controllers.Enum.Config;
 /**
  * @author Kasun Eranda - 12216898
  * Application Storage base functions goes here

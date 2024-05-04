@@ -1,9 +1,9 @@
 package com.cqu.aisr;
 
-import Enum.Route;
-import Services.AuthService;
-import Services.PersistsService;
-import Services.RouteService;
+import Controllers.Enum.Route;
+import Controllers.Services.AuthService;
+import Controllers.Services.PersistsService;
+import Controllers.Services.RouteService;
 import javafx.scene.control.Label;
 
 public class BaseController {

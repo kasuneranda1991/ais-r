@@ -1,6 +1,6 @@
 package Models;
 
-import Enum.Roles;
+import Controllers.Enum.Roles;
 
 //import lombok.Getter;
 //import lombok.Setter;

@@ -2,8 +2,8 @@ package Models;
 
 import java.time.LocalDate;
 
-import Enum.Roles;
-import Enum.Status;
+import Controllers.Enum.Roles;
+import Controllers.Enum.Status;
 
 public class Applicant extends User {
     private LocalDate interviewDate;

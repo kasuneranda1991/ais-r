@@ -1,10 +1,7 @@
 package Models;
 
-import Enum.Roles;
-import Interface.Csv;
-//import lombok.Getter;
-//import lombok.Setter;
-//import lombok.ToString;
+import Controllers.Enum.Roles;
+import Controllers.Interface.Csv;
 
 /**
  * @author Kasun Eranda - 12216898

@@ -1,4 +1,4 @@
-package Helpers;
+package Controllers.Helpers;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import Enum.CSVConst;
+import Controllers.Enum.CSVConst;
+import Controllers.Enum.Config;
+import Controllers.Services.PersistsService;
 import Models.Applicant;
 import Models.Model;
 import Models.User;
-import Services.PersistsService;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
@@ -58,7 +59,7 @@ public class CSV {
     private static void write(String path, String data, Boolean doOverwrite) throws IOException {
         FileWriter pw = new FileWriter(Storage.getPath(path), !doOverwrite);
         BufferedWriter bw = new BufferedWriter(pw);
-        bw.write(data);
+        bw.write((!doOverwrite) ? encryptBeforeSave(data) : data);
         bw.newLine();
         bw.close();
     }
@@ -76,6 +77,27 @@ public class CSV {
 
     public static Boolean isFileExists(String path) throws IOException {
         return new File(Storage.getPath(path)).isFile();
+    }
+
+    public static String encryptBeforeSave(String data) {
+        switch (Config.ENCRYPT_DATA.getValue()) {
+            case "TRUE":
+                StringBuilder sb = new StringBuilder();
+                String[] splittedData = data.split(",");
+
+                for (int i = 0; i < splittedData.length; i++) {
+                    sb.append(Security.encrypt(splittedData[i]));
+                    if (i != splittedData.length - 1) {
+                        sb.append(",");
+                    }
+                }
+                data = sb.toString();
+                break;
+
+            default:
+                break;
+        }
+        return data;
     }
 
 }

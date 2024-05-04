@@ -2,10 +2,13 @@ package com.cqu.aisr;
 
 import java.io.IOException;
 
-import Enum.CSVConst;
-import Enum.Roles;
-import Helpers.CSV;
-import Services.PersistsService;
+import javax.crypto.SecretKey;
+
+import Controllers.Enum.CSVConst;
+import Controllers.Enum.Roles;
+import Controllers.Helpers.CSV;
+import Controllers.Helpers.Security;
+import Controllers.Services.PersistsService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,9 +41,17 @@ public class App extends Application {
 
         try {
             PersistsService.get().mapCSVData("staff.csv", "recruits.csv");
+            System.out.println(PersistsService.get().staffData().size());
         } catch (Exception e) {
             System.out.println(e);
         }
+        SecretKey key = Security.getKey();
+        System.out.println("key => " + key);
+        String name = "+0FD8TPvAzXLcojPg9+J5g==\n" + //
+                        "";
+        String data_en = Security.encrypt(name, key);
+        System.out.println("encypt:" + data_en);
+        System.out.println("decrypt:" + Security.decrypt(data_en, key));
 
     }
 

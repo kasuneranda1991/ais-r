@@ -1,4 +1,4 @@
-package Enum;
+package Controllers.Enum;
 
 /**
  * This enum represent used validation messages

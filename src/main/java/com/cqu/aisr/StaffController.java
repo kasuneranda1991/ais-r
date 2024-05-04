@@ -7,7 +7,7 @@ package com.cqu.aisr;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Enum.Route;
+import Controllers.Enum.Route;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

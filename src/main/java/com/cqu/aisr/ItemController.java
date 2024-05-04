@@ -8,12 +8,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import Enum.CSVConst;
-import Enum.Status;
+import Controllers.Enum.CSVConst;
+import Controllers.Enum.Status;
+import Controllers.Services.AuthService;
+import Controllers.Services.PersistsService;
 import Models.Applicant;
 import Models.Model;
-import Services.AuthService;
-import Services.PersistsService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

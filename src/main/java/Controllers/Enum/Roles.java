@@ -1,4 +1,4 @@
-package Enum;
+package Controllers.Enum;
 
 /**
  * @author kasun eranda - 12216898

@@ -1,13 +1,15 @@
-package Services;
+package Controllers.Services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Enum.CSVConst;
-import Enum.Roles;
-import Enum.Status;
-import Helpers.CSV;
+import Controllers.Enum.CSVConst;
+import Controllers.Enum.Config;
+import Controllers.Enum.Roles;
+import Controllers.Enum.Status;
+import Controllers.Helpers.CSV;
+import Controllers.Helpers.Security;
 import Models.Administration;
 import Models.Applicant;
 import Models.Management;
@@ -17,6 +19,7 @@ import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
 public class PersistsService {
+    private String mappingFile = null;
     private HashMap<String, ArrayList<User>> data = new HashMap<>();
     private static PersistsService instance;
 
@@ -83,7 +86,7 @@ public class PersistsService {
         for (String file : files) {
             CsvReader<CsvRecord> csv = CSV.read(file);
             boolean isFirstIteration = true;
-
+            mappingFile = file;
             if (csv != null) {
                 ArrayList<User> users = new ArrayList<>();
                 try {
@@ -94,19 +97,19 @@ public class PersistsService {
                         }
                         User usr = null;
                         switch (getField(csvRecord, CSVConst.ROLE)) {
-                            case "Management":
+                            case "management":
                                 usr = new Management(
                                         getField(csvRecord, CSVConst.MGMT_LVL),
                                         getField(csvRecord, CSVConst.BRANCH));
                                 usr.setId(getField(csvRecord, CSVConst.ID));
                                 break;
-                            case "Admin":
+                            case "administrator":
                                 usr = new Administration(
                                         getField(csvRecord, CSVConst.EM_TYPE));
                                 usr.setId(getField(csvRecord, CSVConst.ID));
                                 usr.setBranch(getField(csvRecord, CSVConst.BRANCH));
                                 break;
-                            case "Applicant":
+                            case "applicant":
                                 try {
                                     usr = new Applicant(
                                             LocalDate.parse(getField(csvRecord, CSVConst.INTW_DATE).trim()),
@@ -157,7 +160,16 @@ public class PersistsService {
     }
 
     public String getField(CsvRecord record, CSVConst field) {
-        return record.getField(CSVConst.getFieldIndex(field));
+        try {
+            int index = (mappingFile.equals("recruits.csv"))
+                    ? CSVConst.getFieldIndexForHeading(field, CSVConst.RECRUITS_CSV_HEADING)
+                    : CSVConst.getFieldIndex(field);
+            return (Config.ENCRYPT_DATA.asBoolean()) ? Security.decrypt(record.getField(index))
+                    : record.getField(index);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
     private void count() {
