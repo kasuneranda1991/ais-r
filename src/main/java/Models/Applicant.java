@@ -2,8 +2,10 @@ package Models;
 
 import java.time.LocalDate;
 
+import Controllers.Enum.Department;
 import Controllers.Enum.Roles;
 import Controllers.Enum.Status;
+import Controllers.Services.PersistsService;
 
 public class Applicant extends User {
     private LocalDate interviewDate;
@@ -83,7 +85,6 @@ public class Applicant extends User {
     public void setDepartment(String department) {
         this.department = department;
     }
-    
 
     public void setInterviewDate(LocalDate interviewDate) {
         this.interviewDate = interviewDate;
@@ -103,6 +104,32 @@ public class Applicant extends User {
 
     public Boolean isApproved() {
         return (status).trim().equals((Status.APPROVED.getValue()).trim());
+    }
+
+    public static String stats() {
+        int swd = 0;
+        int ars = 0;
+        int elc = 0;
+        int mec = 0;
+
+        for (User user : PersistsService.get().applicantsData()) {
+            String dept = ((Applicant) user).getDepartment();
+            if (Department.SWD.getValue().equals(dept)) {
+                swd++;
+            } else if (Department.ARS.getValue().equals(dept)) {
+                ars++;
+            } else if (Department.MEC.getValue().equals(dept)) {
+                mec++;
+            } else if (Department.ELEC.getValue().equals(dept)) {
+                elc++;
+            }
+
+        }
+
+        return "Assign to " + Department.SWD.getValue() + ": " + swd + "\n" +
+                "Assign to " + Department.ARS.getValue() + ": " + ars + "\n" +
+                "Assign to " + Department.ELEC.getValue() + ": " + elc + "\n" +
+                "Assign to " + Department.MEC.getValue() + ": " + mec + "\n";
     }
 
     @Override

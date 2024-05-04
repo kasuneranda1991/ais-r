@@ -54,6 +54,38 @@
                         </VBox>
                      </children>
                   </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="1129.0" style="-fx-background-color: #EEEEEE;">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" text="Reports">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="totalApplicants" text="Total Applicants">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </Tab>
+                            <Tab fx:id="staffCount" text="Staff count">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </Tab>
+                              <Tab fx:id="applicantsOnDept" text="Applicants assign to department">
+                                <content>
+                                  <AnchorPane maxHeight="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="1129.0" />
+                                </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </VBox>
                </children></HBox>
          </center>
          <stylesheets>
