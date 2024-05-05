@@ -58,7 +58,7 @@ public class App extends Application {
 
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(Integer.parseInt(Config.INACTIVITY.getValue())), event -> {
-                    if (!RouteService.current.equals(Route.LOGIN)) {
+                    if (RouteService.current != null && !RouteService.current.equals(Route.LOGIN)) {
                         Platform.runLater(() -> {
                             NotificationService.message("You are Inactive. You have been logged out.");
                             AuthenticateService.logout();

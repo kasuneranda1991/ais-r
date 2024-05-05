@@ -165,15 +165,14 @@ public class ApplicationCreateController extends BaseController implements Initi
         isFormValid &= validation.validate(interviewDate, Rule.DATE, validation10, dateOK);
         if (isFormValid) {
             Applicant applicant = new Applicant(
-                    Helper.getText(address),
+                    Helper.getText(fname),
                     Helper.getText(lname),
                     Helper.getText(address),
                     Helper.getText(email),
                     Helper.getInt(phone),
                     Helper.getText(username),
                     Helper.getText(password),
-                    interviewDate.getValue(), eduQualification.getValue());
-            System.out.println(eduQualification.getValue());
+                    interviewDate.getValue(), eduQualification.getValue()); 
             PersistsService.get().addApplicant(applicant);
             RouteService.redirectToWithMessage(Route.APPLICATION, "Application created.");
         }

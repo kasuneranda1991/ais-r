@@ -11,7 +11,6 @@ import Controllers.Enum.Roles;
 //@ToString(callSuper = true, includeFieldNames = true)
 public class Management extends Staff {
     private String management_lvl;
-    private String branch;
 
     public Management(String management_lvl, String branch) {
         this.management_lvl = management_lvl;

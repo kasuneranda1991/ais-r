@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import Controllers.Enum.CSVConst;
 import Controllers.Enum.Department;
 import Controllers.Enum.Status;
+import Controllers.Helpers.UIHelper;
 import Controllers.Services.AuthService;
 import Controllers.Services.PersistsService;
 import Models.Applicant;
@@ -60,6 +61,7 @@ public class ItemController implements Initializable {
                 PersistsService.get().updateApplicant(applicant, CSVConst.DEPT, newValue);
             }
         });
+        UIHelper.setElementsVisible(AuthService.get().user().isManager(), deptAssign);
     }
 
     public void setApplicant(Applicant applicant) {
