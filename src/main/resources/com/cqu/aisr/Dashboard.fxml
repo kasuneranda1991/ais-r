@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.DashboardController">
+   <children>
+      <BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #1A1A33;" BorderPane.alignment="CENTER_LEFT">
+               <children>
+                  <Label alignment="CENTER" prefHeight="49.0" prefWidth="104.0" text="AIS-R" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="loggedInUserlbl" alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefHeight="50.0" prefWidth="153.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Username" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="logOutMenuItem" alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Logout" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <stylesheets>
+            <URL value="@../../../../styles/registration.css" />
+            <URL value="@../../../styles/registration.css" />
+         </stylesheets>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e6e7eb;" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e6e7eb;" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="147.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="applicationMenuItem" alignment="CENTER" prefHeight="75.0" prefWidth="226.0" styleClass="home_icon" stylesheets="@../../../styles/menu.css" text="Application" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="vacanciesMenuItem" alignment="CENTER" prefHeight="75.0" prefWidth="226.0" styleClass="home_icon" stylesheets="@../../../styles/menu.css" text="Vacancies" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="staffMenuItem" alignment="CENTER" prefHeight="75.0" prefWidth="226.0" styleClass="home_icon" stylesheets="@../../../styles/menu.css" text="Staff" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="reportMenuItem" alignment="CENTER" prefHeight="75.0" prefWidth="226.0" styleClass="home_icon" stylesheets="@../../../styles/menu.css" text="Reports" />
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

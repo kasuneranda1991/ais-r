@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1300.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
+   <children>
+      <Label fx:id="id" alignment="CENTER" prefHeight="77.0" prefWidth="48.0" style="-fx-border-color: #ede7e6;" text="ID">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="name" alignment="CENTER" prefHeight="77.0" prefWidth="192.0" style="-fx-border-color: #ede7e6;" text="Label">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="address" alignment="CENTER" prefHeight="77.0" prefWidth="192.0" style="-fx-border-color: #ede7e6;" text="Address">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="edu" alignment="CENTER" prefHeight="77.0" prefWidth="155.0" style="-fx-border-color: #ede7e6;" text="Qualifications">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">
+               <children>
+                  <Label text="Assign to Department" />
+                  <ChoiceBox fx:id="deptAssign" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <Button fx:id="approveBtn" mnemonicParsing="false" onAction="#approve" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Approve">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Button>
+            <Button fx:id="seeMoreBtn" mnemonicParsing="false" onAction="#seeMore" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="See more">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</HBox>
