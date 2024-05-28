@@ -13,7 +13,7 @@ public class StaffService {
 
     /**
      * Find a staff using id
-     * 
+     *
      * @param id
      * @return
      */
@@ -22,11 +22,8 @@ public class StaffService {
     }
 
     public static Staff findByFieldName(CSVConst field, String value) {
-        switch (field) {
-            case CSVConst.EMAIL:
-                return find(staff -> staff.getEmail().equals(value));
-            default:
-                break;
+        if (field.equals(CSVConst.EMAIL)) {
+            return find(staff -> staff.getEmail().equals(value));
         }
         return null;
     }

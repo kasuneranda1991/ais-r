@@ -40,8 +40,6 @@ public class ApplicationController extends BaseController implements Initializab
     @FXML
     private Label applicationCreateSubNav;
     @FXML
-    private Label name;
-    @FXML
     private VBox applicationsPane;
 
     /**
