@@ -35,7 +35,7 @@ public class StaffDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getAddress());
-            statement.setString(4, user.getPhone());
+            statement.setInt(4, user.getPhone());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getUsername());
             statement.setString(7, user.getPassword());
@@ -215,7 +215,7 @@ public class StaffDAO {
                 statement.setString(12, "AdministrationStaff");
             }
 
-            statement.setInt(13, user.getId()); // Assuming User has a getId method
+            statement.setString(13, user.getId()); // Assuming User has a getId method
 
             boolean rowUpdated = statement.executeUpdate() > 0;
             statement.close();

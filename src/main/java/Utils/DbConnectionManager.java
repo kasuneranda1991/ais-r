@@ -6,10 +6,8 @@ package Utils;
 
 import Controllers.Services.PersistsService;
 import DAO.ApplicantDAO;
-import DAO.RecruitmentDAO;
 import DAO.StaffDAO;
 import Models.Applicant;
-import Models.Recruitment;
 import Models.Staff;
 import Models.User;
 import java.sql.Connection;
@@ -31,7 +29,7 @@ public class DbConnectionManager {
 
     private String dbName = "AIS_R_DB";
     private String user = "root";
-    private String password = "root";
+    private String password = "root@123";
     private String url = "jdbc:mysql://localhost:3306?useLegacyDatetimeCode=false&serverTimezone=UTC";
     
     private String STAFF_TABLE = "Staff";
@@ -87,9 +85,9 @@ public class DbConnectionManager {
                 "username VARCHAR(50) NOT NULL, " +
                 "password VARCHAR(50) NOT NULL, " +
                 "role VARCHAR(50) NOT NULL, " +
-                "branch VARCHAR(50) NOT NULL " +
-                "management_lvl VARCHAR(50) NOT NULL " +
-                "employment_type VARCHAR(50) NOT NULL " +
+                "branch VARCHAR(50) NULL, " +
+                "management_lvl VARCHAR(50)  NULL, " +
+                "employment_type VARCHAR(50) NULL, " +
                 "type VARCHAR(50) NOT NULL " +
                 ")";
 
@@ -116,13 +114,13 @@ public class DbConnectionManager {
                 "username VARCHAR(50) NOT NULL, " +
                 "password VARCHAR(50) NOT NULL, " +
                 "role VARCHAR(50) NOT NULL, " +
-                "branch VARCHAR(50) NOT NULL " +
-                "interviewDate VARCHAR(50) NOT NULL " +
-                "createdBy VARCHAR(50) NOT NULL " +
-                "createdAt VARCHAR(50) NOT NULL " +
-                "createdBranch VARCHAR(50) NOT NULL " +
-                "status VARCHAR(50) NOT NULL " +
-                "edu VARCHAR(50) NOT NULL " +
+                "branch VARCHAR(50) NULL, " +
+                "interviewDate VARCHAR(50) NOT NULL, " +
+                "createdBy VARCHAR(50) NOT NULL, " +
+                "createdAt VARCHAR(50) NOT NULL, " +
+                "createdBranch VARCHAR(50) NOT NULL, " +
+                "status VARCHAR(50) NOT NULL, " +
+                "edu VARCHAR(50) NOT NULL, " +
                 "department VARCHAR(50) NOT NULL " +
                 ")";
 

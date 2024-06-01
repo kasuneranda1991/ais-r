@@ -37,7 +37,7 @@ public class ApplicantDAO {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getAddress());
-            statement.setString(4, user.getPhone());
+            statement.setInt(4, user.getPhone());
             statement.setString(5, user.getEmail());
             statement.setString(6, user.getUsername());
             statement.setString(7, user.getPassword());
@@ -46,7 +46,7 @@ public class ApplicantDAO {
 
             if (user instanceof Applicant) {
                 Applicant applicant = (Applicant) user;
-                statement.setString(10, applicant.getInterviewDate());
+                statement.setString(10, applicant.getInterviewDate().toString());
                 statement.setString(11, applicant.getCreatedBy());
                 statement.setString(12, applicant.getCreatedAt());
                 statement.setString(13, applicant.getCreatedBranch());

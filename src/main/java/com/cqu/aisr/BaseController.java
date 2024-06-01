@@ -30,6 +30,8 @@ public class BaseController {
                 RouteService.redirectToWithMessage(Route.REPORT, "Feature not finished");
             } else if (route == Route.STAFF) {
                 RouteService.redirectToWithMessage(Route.STAFF, "Feature not finished");
+            } else if (route == Route.CHART) {
+                RouteService.redirectTo(Route.CHART);
             } else if (route == Route.LOGOUT) {
                 RouteService.redirectTo(Route.LOGOUT);
             }
