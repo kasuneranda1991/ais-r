@@ -11,6 +11,7 @@ import Controllers.Services.AuthenticateService;
 import Controllers.Services.NotificationService;
 import Controllers.Services.PersistsService;
 import Controllers.Services.RouteService;
+import Utils.DbConnectionManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -68,6 +69,10 @@ public class App extends Application {
                 }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        
+        DbConnectionManager dbManager = DbConnectionManager.shared();
+        dbManager.createTablesAndRestoreDataIfNeeded();
+        
     }
 
     private void resetTimeline() {

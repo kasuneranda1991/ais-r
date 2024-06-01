@@ -8,6 +8,7 @@ public enum Route {
     VACANCIES("Vacancies"),
     REPORT("Report"),
     STAFF("Staff"),
+    CHART("Charts"),
     LOGOUT("Login"),
     LOGIN("Login");
 
