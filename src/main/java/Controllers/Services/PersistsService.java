@@ -47,10 +47,17 @@ public class PersistsService {
     }
 
     public void updateApplicant(Applicant applicant, CSVConst field, String data) {
-        if (field.equals(CSVConst.BRANCH)) {
-            applicant.setBranch(data);
-        } else if (field.equals(CSVConst.DEPT)) {
-            applicant.setDepartment(data);
+        switch (field) {
+            case BRANCH -> applicant.setBranch(data);
+            case FNAME -> applicant.setFirstName(data);
+            case LNAME -> applicant.setLastName(data);
+            case EMAIL -> applicant.setEmail(data);
+            case PHONE -> applicant.setPhone(Integer.parseInt(data));
+            case ADDRESS -> applicant.setAddress(data);
+            case USERNAME -> applicant.setUsername(data);
+            case PASSWORD -> applicant.setPassword(data);
+            default -> {
+            }
         }
         try {
             CSV.update(APPLICANT_TABLE, applicant);
@@ -62,6 +69,8 @@ public class PersistsService {
     public void updateApplicant(Applicant applicant, HashMap<CSVConst, String> data) {
         if (data.containsKey(CSVConst.STATUS)) {
             applicant.setStatus(data.get(CSVConst.STATUS));
+        } else if (data.containsKey(CSVConst.EMAIL)) {
+            applicant.setEmail(data.get(CSVConst.EMAIL));
         }
 
         try {

@@ -6,6 +6,7 @@ package Controllers.Helpers;
 
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 /**
@@ -35,5 +36,15 @@ public class UIHelper {
             return el;
         }
         return null;
+    }
+
+    public static TextField input(String placeholder) {
+        return new TextField(placeholder);
+    }
+
+    public static Label label(String text) {
+        Label l = new Label(text);
+        l.setWrapText(true);
+        return l;
     }
 }
