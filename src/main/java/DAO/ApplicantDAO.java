@@ -11,6 +11,8 @@ import Models.Staff;
 import Models.User;
 import Utils.DbConnectionManager;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -24,7 +26,7 @@ import java.time.LocalDate;
  * @author kinkinigamage
  */
 public class ApplicantDAO {
-    
+
     public ApplicantDAO() {
     }
 
@@ -54,7 +56,7 @@ public class ApplicantDAO {
                 statement.setString(15, applicant.getEdu());
                 statement.setString(16, applicant.getDepartment());
             }
-            
+
             boolean rowInserted = statement.executeUpdate() > 0;
             statement.close();
             return rowInserted;
@@ -72,7 +74,7 @@ public class ApplicantDAO {
 
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
-        
+
         while (resultSet.next()) {
             int applicantID = resultSet.getInt("applicantID");
             String firstName = resultSet.getString("firstName");
@@ -84,7 +86,7 @@ public class ApplicantDAO {
             String password = resultSet.getString("password");
             String role = resultSet.getString("role");
             String branch = resultSet.getString("branch");
-            
+
             String interviewDate = resultSet.getString("interviewDate");
             String createdBy = resultSet.getString("createdBy");
             String createdAt = resultSet.getString("createdAt");
@@ -93,7 +95,8 @@ public class ApplicantDAO {
             String edu = resultSet.getString("edu");
             String department = resultSet.getString("department");
 
-            Applicant applicant = new Applicant(firstName, lastName, address, email, phone, username, password, LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+            Applicant applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
+                    LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
 
             listApplicants.add(applicant);
         }
@@ -102,7 +105,27 @@ public class ApplicantDAO {
         statement.close();
         return listApplicants;
     }
-    
+
+    public Map<String, Integer> getApplicantCountByDepartment() throws SQLException {
+        Map<String, Integer> departmentCounts = new HashMap<>();
+        Connection jdbcConnection = DbConnectionManager.shared().getConnection();
+
+        String sql = "SELECT department, COUNT(*) as count FROM Applicants GROUP BY department";
+
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            String department = resultSet.getString("department");
+            int count = resultSet.getInt("count");
+            departmentCounts.put(department, count);
+        }
+
+        resultSet.close();
+        statement.close();
+        return departmentCounts;
+    }
+
     public User login(String username, String password) {
         String sql = "SELECT * FROM Applicants WHERE username = ? AND password = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
@@ -129,7 +152,8 @@ public class ApplicantDAO {
                 String createdBranch = resultSet.getString("createdBranch");
                 String status = resultSet.getString("status");
 
-                applicant = new Applicant(firstName, lastName, address, email, phone, fetchedUsername, fetchedPassword, LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+                applicant = new Applicant(firstName, lastName, address, email, phone, fetchedUsername, fetchedPassword,
+                        LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
 
             }
 
@@ -141,7 +165,7 @@ public class ApplicantDAO {
             return null;
         }
     }
-    
+
     public Applicant getApplicantById(int id) {
         String sql = "SELECT * FROM Applicants WHERE applicantID = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
@@ -171,7 +195,8 @@ public class ApplicantDAO {
                 String edu = resultSet.getString("edu");
                 String department = resultSet.getString("department");
 
-                applicant = new Applicant(firstName, lastName, address, email, phone, username, password, LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+                applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
+                        LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
                 applicant.setDepartment(department);
             }
 
