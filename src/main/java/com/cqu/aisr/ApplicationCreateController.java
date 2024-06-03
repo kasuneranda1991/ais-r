@@ -105,6 +105,18 @@ public class ApplicationCreateController extends BaseController implements Initi
     private Label validation10;
     @FXML
     private ImageView dateOK;
+    @FXML
+    private TextField workingEx;
+    @FXML
+    private TextField otherEx;
+    @FXML
+    private Label otherExValidation;
+    @FXML
+    private Label workinExValidation;
+    @FXML
+    private ImageView workingExOK;
+    @FXML
+    private ImageView otherExOK;
 
     /**
      * Initializes the controller class.
@@ -160,6 +172,8 @@ public class ApplicationCreateController extends BaseController implements Initi
         isFormValid &= validation.validate(phone, Rule.PHONE, validation4, phoneOK);
         isFormValid &= validation.validate(address, Rule.NOT_NULL, validation5, addressOK);
         isFormValid &= validation.validate(username, Rule.NOT_NULL, validation7, usernameOK);
+        isFormValid &= validation.validate(workingEx, Rule.NOT_NULL, workinExValidation, workingExOK);
+        isFormValid &= validation.validate(otherEx, Rule.NOT_NULL, otherExValidation, otherExOK);
         isFormValid &= validation.validate(password, Rule.PASSWORD, validation8, passwordOK);
         isFormValid &= validation.validate(confirm, Rule.PASSWORD_CONFIRM, validation9, confirmOK, password);
         isFormValid &= validation.validate(interviewDate, Rule.DATE, validation10, dateOK);
@@ -172,7 +186,9 @@ public class ApplicationCreateController extends BaseController implements Initi
                     Helper.getInt(phone),
                     Helper.getText(username),
                     Helper.getText(password),
-                    interviewDate.getValue(), eduQualification.getValue()); 
+                    interviewDate.getValue(), eduQualification.getValue());
+            applicant.setWorkingEx(Helper.getText(workingEx));
+            applicant.setOther(Helper.getText(otherEx));
             PersistsService.get().addApplicant(applicant);
             RouteService.redirectToWithMessage(Route.APPLICATION, "Application created.");
         }

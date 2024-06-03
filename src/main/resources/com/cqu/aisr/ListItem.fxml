@@ -33,6 +33,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">
                <children>
+                  <Label text="Secondary Departments" />
+                  <TextField fx:id="secondaryDept" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">
+               <children>
                   <Label text="Assign to Department" />
                   <ChoiceBox fx:id="deptAssign" prefWidth="150.0" />
                </children>

@@ -5,15 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Controllers.Enum.CSVConst;
-import static Controllers.Enum.CSVConst.ADDRESS;
-import static Controllers.Enum.CSVConst.BRANCH;
-import static Controllers.Enum.CSVConst.EMAIL;
-import static Controllers.Enum.CSVConst.FNAME;
-import static Controllers.Enum.CSVConst.LNAME;
-import static Controllers.Enum.CSVConst.MGMT_LVL;
-import static Controllers.Enum.CSVConst.PASSWORD;
-import static Controllers.Enum.CSVConst.PHONE;
-import static Controllers.Enum.CSVConst.USERNAME;
 import Controllers.Enum.Config;
 import Controllers.Enum.Roles;
 import Controllers.Enum.Status;
@@ -90,6 +81,7 @@ public class PersistsService {
     }
 
     public void updateApplicant(Applicant applicant, CSVConst field, String data) {
+        System.out.println("Update call for field: " + field.getValue() + " Data: " + data);
         switch (field) {
             case BRANCH ->
                 applicant.setBranch(data);
@@ -107,10 +99,25 @@ public class PersistsService {
                 applicant.setUsername(data);
             case PASSWORD ->
                 applicant.setPassword(data);
+            case WORKING_EX ->
+                applicant.setWorkingEx(data);
+            case OTHER -> {
+                System.out.println("Other update activated");
+                applicant.setOther(data);
+            }
+            case DEPT -> {
+                System.out.println("Update Department :" + data);
+                applicant.setDepartment(data);
+            }
+            case SECONDARY_DEPTS -> {
+                System.out.println("Update Second Department :" + data);
+                applicant.setSecondaryDepartments(data);
+            }
             default -> {
             }
         }
         try {
+            System.out.println("Update Applicant data");
             CSV.update(APPLICANT_TABLE, applicant);
         } catch (Exception e) {
             System.out.println(e);
@@ -193,6 +200,9 @@ public class PersistsService {
                                             getField(csvRecord, CSVConst.STATUS),
                                             getField(csvRecord, CSVConst.EDU));
                                     ((Applicant) usr).setDepartment(getField(csvRecord, CSVConst.DEPT));
+                                    ((Applicant) usr).setWorkingEx(getField(csvRecord, CSVConst.WORKING_EX));
+                                    ((Applicant) usr).setOther(getField(csvRecord, CSVConst.OTHER));
+                                    ((Applicant) usr).setOther(getField(csvRecord, CSVConst.SECONDARY_DEPTS));
                                 } catch (Exception e) {
                                     System.out.println(e);
                                 }

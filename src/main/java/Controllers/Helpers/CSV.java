@@ -39,8 +39,9 @@ public class CSV {
 
             heading = CSVConst.RECRUITS_CSV_HEADING.getValue();
             write(APPLICANT_TABLE + ".csv", heading, true);
-
+            System.out.println(heading);
             for (User usr : PersistsService.get().applicantsData()) {
+                System.out.println(usr.getCSV());
                 write(APPLICANT_TABLE + ".csv", usr.getCSV(), false);
             }
         } else if (model instanceof Staff) {

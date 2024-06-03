@@ -1,4 +1,3 @@
-
 package com.cqu.aisr;
 
 import java.net.URL;
@@ -17,6 +16,7 @@ import Controllers.Services.RouteService;
 import Controllers.Services.Validation;
 import Models.Applicant;
 import Models.Model;
+import javafx.beans.value.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,6 +60,8 @@ public class ItemController implements Initializable {
     private Button seeMoreBtn;
 
     private HashMap<String, HashMap> editformData;
+    @FXML
+    private TextField secondaryDept;
 
     /**
      * Initializes the controller class.
@@ -70,10 +72,25 @@ public class ItemController implements Initializable {
 
         // Add listener to choice box
         deptAssign.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
+
+            if (!(newValue == null)) {
+                System.out.println("Primary Deparment changed form " + oldValue + " to " + newValue);
                 PersistsService.get().updateApplicant(applicant, CSVConst.DEPT, newValue);
             }
         });
+
+        secondaryDept.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obsr, String old, String nevDept) {
+
+                if (!(nevDept == null) && nevDept.endsWith(",")) {
+                    System.out.println("Secondary department changed : " + nevDept.replace(",", " ").trim());
+                    PersistsService.get().updateApplicant(applicant, CSVConst.SECONDARY_DEPTS, nevDept.replace(",", " ").trim());
+                }
+
+            }
+        });
+
         UIHelper.setElementsVisible(AuthService.get().user().isManager(), deptAssign);
 
         editBtn.setOnAction(e -> {
@@ -95,6 +112,7 @@ public class ItemController implements Initializable {
             id.setText("#" + count);
             address.setText(ap.getAddress());
             deptAssign.setValue(ap.getDepartment());
+//            secondaryDept.setText(ap.getSecondaryDepartments());
             edu.setText(ap.getEdu());
             if (!ap.isApproved() && AuthService.get().user().isManager()) {
                 approveBtn.setVisible(Boolean.TRUE);
@@ -117,6 +135,8 @@ public class ItemController implements Initializable {
         row = appendTextInput(root, applicant.getAddress(), "Address:", "address", row);
         row = appendTextInput(root, String.valueOf(applicant.getPhone()), "Phone:", "phone", row);
         row = appendTextInput(root, applicant.getEmail(), "Email:", "email", row);
+        row = appendTextInput(root, applicant.getWorkingEx(), "Years of working experience:", "workEx", row);
+        row = appendTextInput(root, applicant.getOther(), "Other Experience:", "otherEx", row);
         row = appendTextInput(root, applicant.getUsername(), "Username:", "username", row);
         row = appendTextInput(root, applicant.getPassword(), "Password:", "password", row);
 
@@ -147,6 +167,8 @@ public class ItemController implements Initializable {
                 PersistsService.get().updateApplicant(applicant, CSVConst.EMAIL, getInput("email").getText());
                 PersistsService.get().updateApplicant(applicant, CSVConst.PHONE, getInput("phone").getText());
                 PersistsService.get().updateApplicant(applicant, CSVConst.ADDRESS, getInput("address").getText());
+                PersistsService.get().updateApplicant(applicant, CSVConst.WORKING_EX, getInput("workEx").getText());
+                PersistsService.get().updateApplicant(applicant, CSVConst.OTHER, getInput("otherEx").getText());
                 PersistsService.get().updateApplicant(applicant, CSVConst.USERNAME, getInput("username").getText());
                 PersistsService.get().updateApplicant(applicant, CSVConst.PASSWORD, getInput("password").getText());
                 System.out.println("Applicant Updated");
@@ -200,15 +222,15 @@ public class ItemController implements Initializable {
         informationAlert.setWidth(600);
         informationAlert.setTitle("Applicant Details");
         informationAlert.setContentText(
-                "First Name: " + applicant.getFirstName() + "\n" +
-                        "Last Name: " + applicant.getLastName() + "\n" +
-                        "Email : " + applicant.getEmail() + "\n" +
-                        "Phone : " + applicant.getPhone() + "\n" +
-                        "Address : " + applicant.getAddress() + "\n" +
-                        "Created at : " + applicant.getCreatedAt() + "\n" +
-                        "Created branch : " + applicant.getCreatedBranch() + "\n" +
-                        "Created by (staff id): " + applicant.getCreatedBy() + "\n" +
-                        "Education: " + applicant.getEdu() + "\n");
+                "First Name: " + applicant.getFirstName() + "\n"
+                + "Last Name: " + applicant.getLastName() + "\n"
+                + "Email : " + applicant.getEmail() + "\n"
+                + "Phone : " + applicant.getPhone() + "\n"
+                + "Address : " + applicant.getAddress() + "\n"
+                + "Created at : " + applicant.getCreatedAt() + "\n"
+                + "Created branch : " + applicant.getCreatedBranch() + "\n"
+                + "Created by (staff id): " + applicant.getCreatedBy() + "\n"
+                + "Education: " + applicant.getEdu() + "\n");
         informationAlert.showAndWait();
     }
 

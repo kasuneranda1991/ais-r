@@ -22,36 +22,41 @@ public enum CSVConst {
     EM_TYPE("Employment Type"),
     BRANCH("Branch"),
     MGMT_LVL("Management Level"),
+    WORKING_EX("Working Experience"),
+    OTHER("Other"),
+    SECONDARY_DEPTS("Secondary Departments"),
+    RECRUITS_CSV_HEADING(ID.getValue()
+            + "," + FNAME.getValue()
+            + "," + LNAME.getValue()
+            + "," + ADDRESS.getValue()
+            + "," + PHONE.getValue()
+            + "," + EMAIL.getValue()
+            + "," + USERNAME.getValue()
+            + "," + PASSWORD.getValue()
+            + "," + ROLE.getValue()
+            + "," + DEPT.getValue()
+            + "," + EDU.getValue()
+            + "," + INTW_DATE.getValue()
+            + "," + CREATED_BRANCH.getValue()
+            + "," + CREATED_BY.getValue()
+            + "," + CREATED_AT.getValue()
+            + "," + STATUS.getValue()
+            + "," + WORKING_EX.getValue()
+            + "," + OTHER.getValue()
+            + "," + SECONDARY_DEPTS.getValue()),
     
-    RECRUITS_CSV_HEADING(ID.getValue() +
-            "," + FNAME.getValue() +
-            "," + LNAME.getValue() +
-            "," + ADDRESS.getValue() +
-            "," + PHONE.getValue() +
-            "," + EMAIL.getValue() +
-            "," + USERNAME.getValue() +
-            "," + PASSWORD.getValue() +
-            "," + ROLE.getValue() +
-            "," + DEPT.getValue() +
-            "," + EDU.getValue() +
-            "," + INTW_DATE.getValue() +
-            "," + CREATED_BRANCH.getValue() +
-            "," + CREATED_BY.getValue() +
-            "," + CREATED_AT.getValue() +
-            "," + STATUS.getValue()),
-            
-    STAFF_CSV_HEADING(ID.getValue() +
-            "," + FNAME.getValue() +
-            "," + LNAME.getValue() +
-            "," + ADDRESS.getValue() +
-            "," + PHONE.getValue() +
-            "," + EMAIL.getValue() +
-            "," + USERNAME.getValue() +
-            "," + PASSWORD.getValue() +
-            "," + ROLE.getValue() +
-            "," + EM_TYPE.getValue() +
-            "," + BRANCH.getValue() +
-            "," + MGMT_LVL.getValue());
+    STAFF_CSV_HEADING(ID.getValue()
+            + "," + FNAME.getValue()
+            + "," + LNAME.getValue()
+            + "," + ADDRESS.getValue()
+            + "," + PHONE.getValue()
+            + "," + EMAIL.getValue()
+            + "," + USERNAME.getValue()
+            + "," + PASSWORD.getValue()
+            + "," + ROLE.getValue()
+            + "," + EM_TYPE.getValue()
+            + "," + BRANCH.getValue()
+            + "," + MGMT_LVL.getValue());
 
     private final String conf;
     private static CSVConst heading;

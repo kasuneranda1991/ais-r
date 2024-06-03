@@ -8,6 +8,7 @@ import Controllers.Enum.Status;
 import Controllers.Services.PersistsService;
 
 public class Applicant extends User {
+
     private LocalDate interviewDate;
     private String createdBy;
     private String createdAt;
@@ -15,6 +16,9 @@ public class Applicant extends User {
     private String status;
     private String edu;
     private String department;
+    private String workingEx;
+    private String other;
+    private String secondaryDepartments;
 
     public Applicant(
             LocalDate interviewDate, String edu) {
@@ -48,6 +52,30 @@ public class Applicant extends User {
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.createdBranch = createdBranch;
+    }
+
+    public String getSecondaryDepartments() {
+        return secondaryDepartments;
+    }
+
+    public void setSecondaryDepartments(String secondaryDepartments) {
+        this.secondaryDepartments = secondaryDepartments;
+    }
+
+    public String getWorkingEx() {
+        return workingEx;
+    }
+
+    public void setWorkingEx(String workingEx) {
+        this.workingEx = workingEx;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
     }
 
     public LocalDate getInterviewDate() {
@@ -126,22 +154,25 @@ public class Applicant extends User {
 
         }
 
-        return "Assign to " + Department.SWD.getValue() + ": " + swd + "\n" +
-                "Assign to " + Department.ARS.getValue() + ": " + ars + "\n" +
-                "Assign to " + Department.ELEC.getValue() + ": " + elc + "\n" +
-                "Assign to " + Department.MEC.getValue() + ": " + mec + "\n";
+        return "Assign to " + Department.SWD.getValue() + ": " + swd + "\n"
+                + "Assign to " + Department.ARS.getValue() + ": " + ars + "\n"
+                + "Assign to " + Department.ELEC.getValue() + ": " + elc + "\n"
+                + "Assign to " + Department.MEC.getValue() + ": " + mec + "\n";
     }
 
     @Override
     public String getCSV() {
-        return super.getCSV() +
-                ", " + getDepartment() +
-                ", " + getEdu() +
-                ", " + getInterviewDate() +
-                ", " + getCreatedBranch() +
-                ", " + getCreatedBy() +
-                ", " + getCreatedAt() +
-                ", " + getStatus();
+        return super.getCSV()
+                + ", " + getDepartment()
+                + ", " + getEdu()
+                + ", " + getInterviewDate()
+                + ", " + getCreatedBranch()
+                + ", " + getCreatedBy()
+                + ", " + getCreatedAt()
+                + ", " + getStatus()
+                + ", " + getWorkingEx()
+                + ", " + getOther()
+                + ", " + getSecondaryDepartments();
     }
 
 }
