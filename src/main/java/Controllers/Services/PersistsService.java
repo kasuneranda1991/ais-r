@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Controllers.Enum.CSVConst;
+import static Controllers.Enum.CSVConst.ADDRESS;
+import static Controllers.Enum.CSVConst.BRANCH;
+import static Controllers.Enum.CSVConst.EMAIL;
+import static Controllers.Enum.CSVConst.FNAME;
+import static Controllers.Enum.CSVConst.LNAME;
+import static Controllers.Enum.CSVConst.MGMT_LVL;
+import static Controllers.Enum.CSVConst.PASSWORD;
+import static Controllers.Enum.CSVConst.PHONE;
+import static Controllers.Enum.CSVConst.USERNAME;
 import Controllers.Enum.Config;
 import Controllers.Enum.Roles;
 import Controllers.Enum.Status;
@@ -19,6 +28,7 @@ import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
 public class PersistsService {
+
     private String mappingFile = null;
     private HashMap<String, ArrayList<User>> data = new HashMap<>();
     private static PersistsService instance;
@@ -46,16 +56,57 @@ public class PersistsService {
         return data.get(APPLICANT_TABLE);
     }
 
+    public void updateStaff(Staff staff, CSVConst field, String data) {
+
+        switch (field) {
+            case BRANCH ->
+                staff.setBranch(data);
+            case FNAME ->
+                staff.setFirstName(data);
+            case LNAME ->
+                staff.setLastName(data);
+            case EMAIL ->
+                staff.setEmail(data);
+            case PHONE ->
+                staff.setPhone(Integer.parseInt(data));
+            case ADDRESS ->
+                staff.setAddress(data);
+            case USERNAME ->
+                staff.setUsername(data);
+            case PASSWORD ->
+                staff.setPassword(data);
+            case MGMT_LVL ->
+                ((Management) staff).setManagement_lvl(data);
+            case EM_TYPE ->
+                ((Administration) staff).setEmployment_type(data);
+            default -> {
+            }
+        }
+        try {
+            CSV.update(STAFF_TABLE, staff);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void updateApplicant(Applicant applicant, CSVConst field, String data) {
         switch (field) {
-            case BRANCH -> applicant.setBranch(data);
-            case FNAME -> applicant.setFirstName(data);
-            case LNAME -> applicant.setLastName(data);
-            case EMAIL -> applicant.setEmail(data);
-            case PHONE -> applicant.setPhone(Integer.parseInt(data));
-            case ADDRESS -> applicant.setAddress(data);
-            case USERNAME -> applicant.setUsername(data);
-            case PASSWORD -> applicant.setPassword(data);
+            case BRANCH ->
+                applicant.setBranch(data);
+            case FNAME ->
+                applicant.setFirstName(data);
+            case LNAME ->
+                applicant.setLastName(data);
+            case EMAIL ->
+                applicant.setEmail(data);
+            case PHONE ->
+                applicant.setPhone(Integer.parseInt(data));
+            case ADDRESS ->
+                applicant.setAddress(data);
+            case USERNAME ->
+                applicant.setUsername(data);
+            case PASSWORD ->
+                applicant.setPassword(data);
             default -> {
             }
         }

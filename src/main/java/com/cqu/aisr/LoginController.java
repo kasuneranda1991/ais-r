@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
     {
         if (AuthenticateService.authenticate(Helper.getText(username), Helper.getText(password))) {
             UIHelper.setElementsVisible(Boolean.FALSE, authFailedLbl);
-            RouteService.redirectTo(Route.APPLICATION);
+            RouteService.redirectTo(Route.DASHBOARD);
         } else {
             UIHelper.setElementsVisible(Boolean.TRUE, authFailedLbl);
             Validation.setInvalidLabel(authFailedLbl, Errors.AUTH_FAILD.getMessage());
@@ -79,12 +79,14 @@ public class LoginController implements Initializable {
 
     @FXML
     private void registerAsAdmin(ActionEvent event) throws IOException {
+        System.out.println("Clicked register as admin button");
         App.setRegistrationMode(Roles.ADMIN);
         RouteService.redirectTo(Route.REGISTRATION);
     }
 
     @FXML
     private void registerAsManagemement(ActionEvent event) throws IOException {
+        System.out.println("Clicked register as management button");
         App.setRegistrationMode(Roles.MANAGEMENT);
         RouteService.redirectTo(Route.REGISTRATION);
     }

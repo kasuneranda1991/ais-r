@@ -2,6 +2,7 @@ package com.cqu.aisr;
 
 import Controllers.Enum.Route;
 import Controllers.Services.AuthService;
+import Controllers.Services.AuthenticateService;
 import Controllers.Services.PersistsService;
 import Controllers.Services.RouteService;
 import javafx.scene.control.Label;
@@ -33,7 +34,10 @@ public class BaseController {
             } else if (route == Route.CHART) {
                 RouteService.redirectTo(Route.CHART);
             } else if (route == Route.LOGOUT) {
+                AuthenticateService.logout();
                 RouteService.redirectTo(Route.LOGOUT);
+            } else if (route == Route.REGISTRATION) {
+                RouteService.redirectTo(Route.REGISTRATION);
             }
         });
     }

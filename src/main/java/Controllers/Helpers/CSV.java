@@ -12,13 +12,13 @@ import Controllers.Enum.Config;
 import Controllers.Services.PersistsService;
 import Models.Applicant;
 import Models.Model;
+import Models.Staff;
 import Models.User;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
 /**
- * @author kasun eranda - 12216898
- *         Application CSV maniputation
+ * @author kasun eranda - 12216898 Application CSV maniputation
  */
 public class CSV {
 
@@ -42,6 +42,13 @@ public class CSV {
 
             for (User usr : PersistsService.get().applicantsData()) {
                 write(APPLICANT_TABLE + ".csv", usr.getCSV(), false);
+            }
+        } else if (model instanceof Staff) {
+            heading = CSVConst.STAFF_CSV_HEADING.getValue();
+            write(STAFF_TABLE + ".csv", heading, true);
+
+            for (User usr : PersistsService.get().staffData()) {
+                write(STAFF_TABLE + ".csv", usr.getCSV(), false);
             }
         }
 

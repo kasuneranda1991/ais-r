@@ -31,7 +31,9 @@ public class AuthenticateService {
     }
 
     public static void logout() {
+        System.out.println("User has been logged out");
         AuthService.get().setUser(null);
+        System.out.println("Auth user after logged out:" + AuthService.get().user() == null);
         RouteService.redirectTo(Route.LOGIN);
     }
 }

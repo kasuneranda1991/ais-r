@@ -27,6 +27,10 @@ public class UIHelper {
             } else if (obj instanceof ChoiceBox) {
                 ChoiceBox el = (ChoiceBox) obj;
                 el.setVisible(isVisible);
+            } else if (obj instanceof TextField) {
+                TextField el = (TextField) obj;
+                System.out.println("Set text input visibility: "+isVisible);
+                el.setVisible(isVisible);
             }
         }
     }
