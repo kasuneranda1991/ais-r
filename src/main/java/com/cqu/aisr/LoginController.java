@@ -90,6 +90,12 @@ public class LoginController implements Initializable {
         App.setRegistrationMode(Roles.MANAGEMENT);
         RouteService.redirectTo(Route.REGISTRATION);
     }
+    
+    @FXML
+    private void editRecruit(ActionEvent event) throws IOException {
+        System.out.println("Clicked edit recruit button");
+        RouteService.redirectTo(Route.EDITAPPLICANT);
+    }
 
 
 }

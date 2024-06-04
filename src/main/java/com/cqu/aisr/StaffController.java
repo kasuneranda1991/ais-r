@@ -36,6 +36,8 @@ public class StaffController extends BaseController implements Initializable {
     private VBox applicationSubNav;
     @FXML
     private Label reportsSideMenu;
+     @FXML
+    private Label chartSideMenu;
     /**
      * Initializes the controller class.
      */
@@ -48,6 +50,7 @@ public class StaffController extends BaseController implements Initializable {
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(chartSideMenu, Route.CHART);
     }
     
 }

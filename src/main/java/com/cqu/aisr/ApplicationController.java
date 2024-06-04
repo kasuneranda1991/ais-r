@@ -41,6 +41,8 @@ public class ApplicationController extends BaseController implements Initializab
     private Label applicationCreateSubNav;
     @FXML
     private VBox applicationsPane;
+    @FXML
+    private Label chartSideMenu;
 
     /**
      * Initializes the controller class.
@@ -54,6 +56,7 @@ public class ApplicationController extends BaseController implements Initializab
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(chartSideMenu, Route.CHART);
         mapMenuRoute(applicationCreateSubNav, Route.APPLICATION_CREATE);
         ItemController.resetCount();
         for (User applicant : PersistsService.get().applicantsData()) {

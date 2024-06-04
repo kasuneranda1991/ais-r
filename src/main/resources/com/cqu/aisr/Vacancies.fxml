@@ -9,7 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.VacanciesController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" styleClass="mainFxmlClass"
+   xmlns="http://javafx.com/javafx/8"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.VacanciesController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -49,12 +51,14 @@
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="50.0" prefWidth="112.0" text="create new" />
                            </children>
+                           <Label fx:id="chartSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Charts" textFill="WHITE" />
                         </VBox>
                         <Label fx:id="staffSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Staff" textFill="WHITE" />
                         <Label fx:id="reportsSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Reports" textFill="WHITE" />
                      </children>
                   </VBox>
-               </children></HBox>
+               </children>
+            </HBox>
          </center>
          <stylesheets>
             <URL value="@../../../../styles/registration.css" />

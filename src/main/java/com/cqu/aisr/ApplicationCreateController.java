@@ -117,6 +117,8 @@ public class ApplicationCreateController extends BaseController implements Initi
     private ImageView workingExOK;
     @FXML
     private ImageView otherExOK;
+    @FXML
+    private Label chartSideMenu;
 
     /**
      * Initializes the controller class.
@@ -135,6 +137,7 @@ public class ApplicationCreateController extends BaseController implements Initi
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(chartSideMenu, Route.CHART);
 
         UIHelper.setElementsVisible(
                 Boolean.FALSE,

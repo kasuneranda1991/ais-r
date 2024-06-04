@@ -121,7 +121,8 @@ public class DbConnectionManager {
                 "createdBranch VARCHAR(50) NOT NULL, " +
                 "status VARCHAR(50) NOT NULL, " +
                 "edu VARCHAR(50) NOT NULL, " +
-                "department VARCHAR(50) NOT NULL " +
+                "department VARCHAR(50) NOT NULL, " +
+                "oneTimeToken VARCHAR(150)  NULL " +
                 ")";
 
             try {

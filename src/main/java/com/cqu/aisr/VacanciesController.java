@@ -36,6 +36,8 @@ public class VacanciesController extends BaseController implements Initializable
     private Label staffSideMenu;
     @FXML
     private Label reportsSideMenu;
+    @FXML
+    private Label chartSideMenu;
 
     /**
      * Initializes the controller class.
@@ -49,6 +51,7 @@ public class VacanciesController extends BaseController implements Initializable
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(chartSideMenu, Route.CHART);
     }
 
 }

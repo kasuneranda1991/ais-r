@@ -1,6 +1,7 @@
 package com.cqu.aisr;
 
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -29,6 +30,9 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
 
 /**
  * FXML Controller class
@@ -49,9 +53,7 @@ public class ItemController implements Initializable {
     private Label edu;
     @FXML
     private Button approveBtn;
-
     private Applicant applicant;
-
     @FXML
     private ChoiceBox<String> deptAssign;
     @FXML
@@ -62,6 +64,8 @@ public class ItemController implements Initializable {
     private HashMap<String, HashMap> editformData;
     @FXML
     private TextField secondaryDept;
+    @FXML
+    private Button sendTokenButton;
 
     /**
      * Initializes the controller class.
@@ -85,9 +89,9 @@ public class ItemController implements Initializable {
 
                 if (!(nevDept == null) && nevDept.endsWith(",")) {
                     System.out.println("Secondary department changed : " + nevDept.replace(",", " ").trim());
-                    PersistsService.get().updateApplicant(applicant, CSVConst.SECONDARY_DEPTS, nevDept.replace(",", " ").trim());
+                    PersistsService.get().updateApplicant(applicant, CSVConst.SECONDARY_DEPTS,
+                            nevDept.replace(",", " ").trim());
                 }
-
             }
         });
 
@@ -112,7 +116,7 @@ public class ItemController implements Initializable {
             id.setText("#" + count);
             address.setText(ap.getAddress());
             deptAssign.setValue(ap.getDepartment());
-//            secondaryDept.setText(ap.getSecondaryDepartments());
+            // secondaryDept.setText(ap.getSecondaryDepartments());
             edu.setText(ap.getEdu());
             if (!ap.isApproved() && AuthService.get().user().isManager()) {
                 approveBtn.setVisible(Boolean.TRUE);
@@ -145,7 +149,7 @@ public class ItemController implements Initializable {
         alert.setTitle("Edit details");
         alert.setHeaderText("Edit user John:");
         alert.getDialogPane().setContent(root);
-        alert.getDialogPane().setPrefSize(600, 600);
+        alert.getDialogPane().setPrefSize(600, 750);
 
         // Show the alert and wait for user response
         Button okButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
@@ -251,4 +255,78 @@ public class ItemController implements Initializable {
         editformData.put(variable, inputfields);
         return row;
     }
+
+    @FXML
+    public void sendToken(ActionEvent event) {
+
+        // Fake SMTP server information
+        String host = "localhost";
+        int port = 25;
+        String subject = "AIS-R Token";
+
+        Properties properties = new Properties();
+        properties.setProperty("mail.smtp.host", host);
+        properties.setProperty("mail.smtp.port", String.valueOf(port));
+
+        Session session = Session.getDefaultInstance(properties);
+
+        try {
+
+            String token = generateToken();
+
+            String body = "Your Token is : " + token + "\n\n"
+                    + "Please use this token to complete your registration. \n\n"
+                    + "Thank you. \n\n"
+                    + "AIS-R Team. \n\n";
+
+            MimeMessage message = new MimeMessage(session);
+
+            message.setFrom(new InternetAddress("sender@example.com"));
+
+            String to = applicant.getEmail();
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+            message.setSubject(subject);
+
+            message.setText(body);
+
+            Transport.send(message);
+
+            applicant.setOneTimeToken(token);
+            HashMap<CSVConst, String> updatedata = new HashMap<>();
+
+            // update applicant with token in mysql database
+            updatedata.put(CSVConst.ONE_TIME_TOKEN, token);
+
+            PersistsService.get().updateApplicant(applicant, updatedata);
+            
+            System.out.println(applicant.getCSV());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Token Sent");
+            alert.setHeaderText("Token sent to " + to);
+            alert.setContentText("Token has been sent to " + to + ". Please check email.");
+            alert.showAndWait();
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+
+    public static String generateToken() {
+
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int TOKEN_LENGTH = 10;
+        SecureRandom random = new SecureRandom();
+        StringBuilder token = new StringBuilder();
+
+        for (int i = 0; i < TOKEN_LENGTH; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            token.append(randomChar);
+        }
+
+        return token.toString();
+    }
+
 }

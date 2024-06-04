@@ -19,6 +19,7 @@ public class Applicant extends User {
     private String workingEx;
     private String other;
     private String secondaryDepartments;
+    private String oneTimeToken;
 
     public Applicant(
             LocalDate interviewDate, String edu) {
@@ -134,6 +135,16 @@ public class Applicant extends User {
         return (status).trim().equals((Status.APPROVED.getValue()).trim());
     }
 
+    public String getOneTimeToken() {
+        return oneTimeToken;
+    }
+
+    public void setOneTimeToken(String oneTimeToken) {
+        this.oneTimeToken = oneTimeToken.trim();
+    }
+
+    
+    
     public static String stats() {
         int swd = 0;
         int ars = 0;
@@ -172,7 +183,9 @@ public class Applicant extends User {
                 + ", " + getStatus()
                 + ", " + getWorkingEx()
                 + ", " + getOther()
-                + ", " + getSecondaryDepartments();
+                + ", " + getSecondaryDepartments()
+                + ", " + getOneTimeToken()
+                ;
     }
 
 }

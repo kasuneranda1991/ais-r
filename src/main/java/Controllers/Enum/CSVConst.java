@@ -25,6 +25,7 @@ public enum CSVConst {
     WORKING_EX("Working Experience"),
     OTHER("Other"),
     SECONDARY_DEPTS("Secondary Departments"),
+    ONE_TIME_TOKEN("One Time Token"),
     RECRUITS_CSV_HEADING(ID.getValue()
             + "," + FNAME.getValue()
             + "," + LNAME.getValue()
@@ -43,7 +44,8 @@ public enum CSVConst {
             + "," + STATUS.getValue()
             + "," + WORKING_EX.getValue()
             + "," + OTHER.getValue()
-            + "," + SECONDARY_DEPTS.getValue()),
+            + "," + SECONDARY_DEPTS.getValue()
+            + "," + ONE_TIME_TOKEN.getValue()),
     
     STAFF_CSV_HEADING(ID.getValue()
             + "," + FNAME.getValue()

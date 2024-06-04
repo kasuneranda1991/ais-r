@@ -80,7 +80,8 @@ public class ChartsController extends BaseController implements Initializable {
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
         chartType.setItems(Charts.getValues());
-
+        chartType.setValue(Charts.BAR.getValue()); // Set initial value to BAR chart
+        changeChart();
     }
 
     @FXML

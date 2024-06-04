@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.EditApplicantController">
    <children>
       <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -36,48 +35,30 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitForm" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Login">
+                              <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitForm" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Submit">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
+                                                            <Button mnemonicParsing="false" onAction="#redirectBack" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back" />
+
                            </children>
                            <padding>
                               <Insets right="15.0" />
                            </padding>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <children>
-                              <Button fx:id="registerAsAdmin" mnemonicParsing="false" onAction="#registerAsAdmin" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Register as a Admin" />
-                              <Button fx:id="registerMngmtBtn" mnemonicParsing="false" onAction="#registerAsManagemement" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Register as a Management" />
-                              <Button fx:id="recruitBtn" mnemonicParsing="false" onAction="#editRecruit" prefHeight="39.0" prefWidth="128.0" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Recruit" />
-                           </children>
-                           <padding>
-                              <Insets right="15.0" />
-                           </padding>
-                        </HBox>
+               
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <children>
-                              <Label fx:id="authFailedLbl" text="Invalid" textFill="#c92020" />
+                              <Label fx:id="authFailedLbl" text="Invalid token!" textFill="#c92020" />
                            </children></VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <Label text="Username" />
-                              <TextField fx:id="username" />
-                              <Label fx:id="validationUserName" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="550.0" text="validation" textFill="#c92020">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </Label>
-                              <Label text="Password">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <PasswordField fx:id="password" />
-                              <Label fx:id="validationPassword" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="550.0" text="validation" textFill="#c92020">
+                              <Label text="Token" />
+                              <TextField fx:id="token" />
+                              <Label fx:id="validationToken" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="550.0" text="validation" textFill="#c92020">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -97,7 +78,7 @@
          <top>
             <VBox alignment="CENTER" prefHeight="51.0" prefWidth="1280.0" style="-fx-background-color: #022c56;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" styleClass="heading1" stylesheets="@../../../styles/registration.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="heading1" stylesheets="@../../../styles/registration.css" text="Validate Token" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>

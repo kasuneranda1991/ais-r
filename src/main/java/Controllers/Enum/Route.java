@@ -10,6 +10,7 @@ public enum Route {
     STAFF("Staff"),
     CHART("Charts"),
     LOGOUT("Login"),
+    EDITAPPLICANT("editApplicant"),
     LOGIN("Login");
 
     private final String route;

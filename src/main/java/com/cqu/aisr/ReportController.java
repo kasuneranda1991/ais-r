@@ -42,6 +42,8 @@ public class ReportController extends BaseController implements Initializable {
     private VBox applicationSubNav;
     @FXML
     private Tab totalApplicants, staffCount, applicantsOnDept;
+    @FXML
+    private Label chartSideMenu;
 
     /**
      * Initializes the controller class.
@@ -65,6 +67,7 @@ public class ReportController extends BaseController implements Initializable {
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(chartSideMenu, Route.CHART);
     }
 
     public Label setReport(String content) {

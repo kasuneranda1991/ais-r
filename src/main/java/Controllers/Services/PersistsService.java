@@ -46,6 +46,22 @@ public class PersistsService {
     public ArrayList<User> applicantsData() {
         return data.get(APPLICANT_TABLE);
     }
+    
+    public Applicant getApplicantByToken(String token) {
+        for (User applicant : applicantsData()) {
+            if (((Applicant) applicant).getOneTimeToken().trim().equals(token.trim())) {
+                ((Applicant) applicant).setOneTimeToken("");
+                try {
+                    CSV.update(APPLICANT_TABLE, applicant);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                return (Applicant) applicant;
+            }
+        }
+        return null;
+    }
+
 
     public void updateStaff(Staff staff, CSVConst field, String data) {
 
@@ -202,7 +218,8 @@ public class PersistsService {
                                     ((Applicant) usr).setDepartment(getField(csvRecord, CSVConst.DEPT));
                                     ((Applicant) usr).setWorkingEx(getField(csvRecord, CSVConst.WORKING_EX));
                                     ((Applicant) usr).setOther(getField(csvRecord, CSVConst.OTHER));
-                                    ((Applicant) usr).setOther(getField(csvRecord, CSVConst.SECONDARY_DEPTS));
+                                    ((Applicant) usr).setSecondaryDepartments(getField(csvRecord, CSVConst.SECONDARY_DEPTS));
+                                    ((Applicant) usr).setOneTimeToken(getField(csvRecord, CSVConst.ONE_TIME_TOKEN));
                                 } catch (Exception e) {
                                     System.out.println(e);
                                 }
@@ -236,7 +253,6 @@ public class PersistsService {
                     case "recruits.csv":
                         data.put(APPLICANT_TABLE, users);
                         break;
-
                     default:
                         break;
                 }
@@ -262,4 +278,5 @@ public class PersistsService {
         System.out.println("Staff count: " + data.get(STAFF_TABLE).size());
         System.out.println("Applicant count: " + data.get(APPLICANT_TABLE).size());
     }
+
 }

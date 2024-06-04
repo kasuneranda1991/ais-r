@@ -54,6 +54,7 @@
                            </children>
                         </VBox>
                         <Label fx:id="vacanciesSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Vacancies" textFill="WHITE" />
+                        <Label fx:id="chartSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Charts" textFill="WHITE" />
                         <Label fx:id="staffSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Staff" textFill="WHITE" />
                         <Label fx:id="reportsSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Reports" textFill="WHITE" />
                      </children>
