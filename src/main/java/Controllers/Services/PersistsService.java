@@ -10,6 +10,8 @@ import Controllers.Enum.Roles;
 import Controllers.Enum.Status;
 import Controllers.Helpers.CSV;
 import Controllers.Helpers.Security;
+import DAO.ApplicantDAO;
+import DAO.StaffDAO;
 import Models.Administration;
 import Models.Applicant;
 import Models.Management;
@@ -17,6 +19,7 @@ import Models.Staff;
 import Models.User;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
+import java.util.List;
 
 public class PersistsService {
 
@@ -48,11 +51,19 @@ public class PersistsService {
     }
     
     public Applicant getApplicantByToken(String token) {
-        for (User applicant : applicantsData()) {
+        ApplicantDAO applicantDAO = new ApplicantDAO();
+        List<Applicant> allApplicants = null;
+        try {
+            allApplicants = applicantDAO.listAllApplicants();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        for (User applicant : allApplicants) {
             if (((Applicant) applicant).getOneTimeToken().trim().equals(token.trim())) {
                 ((Applicant) applicant).setOneTimeToken("");
                 try {
-                    CSV.update(APPLICANT_TABLE, applicant);
+//                    CSV.update(APPLICANT_TABLE, applicant);
+                    applicantDAO.updateApplicant((Applicant) applicant);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -90,7 +101,9 @@ public class PersistsService {
             }
         }
         try {
-            CSV.update(STAFF_TABLE, staff);
+            StaffDAO staffDAO = new StaffDAO();
+            staffDAO.updateStaff(staff);
+//            CSV.update(STAFF_TABLE, staff);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -134,7 +147,9 @@ public class PersistsService {
         }
         try {
             System.out.println("Update Applicant data");
-            CSV.update(APPLICANT_TABLE, applicant);
+//            CSV.update(APPLICANT_TABLE, applicant);
+            ApplicantDAO applicantDAO = new ApplicantDAO();
+            applicantDAO.updateApplicant(applicant);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -148,7 +163,9 @@ public class PersistsService {
         }
 
         try {
-            CSV.update(APPLICANT_TABLE, applicant);
+//            CSV.update(APPLICANT_TABLE, applicant);
+            ApplicantDAO applicantDAO = new ApplicantDAO();
+            applicantDAO.updateApplicant(applicant);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -156,7 +173,9 @@ public class PersistsService {
 
     public void addStaff(Staff staff) {
         try {
-            CSV.store("staff.csv", staff.getCSV());
+//            CSV.store("staff.csv", staff.getCSV());
+            StaffDAO staffDAO = new StaffDAO();
+            staffDAO.insertStaff(staff);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -170,7 +189,10 @@ public class PersistsService {
             applicant.setCreatedBranch(AuthService.get().user().getBranch());
             applicant.setCreatedBy(AuthService.get().user().getId());
             applicant.setStatus(Status.PENDING.getValue());
-            CSV.store("recruits.csv", applicant.getCSV());
+            
+            ApplicantDAO applicantDAO = new ApplicantDAO();
+            applicantDAO.insertApplicant(applicant);
+//            CSV.store("recruits.csv", applicant.getCSV());
         } catch (Exception e) {
             System.out.println(e);
         }
