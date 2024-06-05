@@ -104,6 +104,47 @@ public class StaffDAO {
         return listUsers;
     }
     
+    public static ArrayList<User> listAllStaffForReport() throws SQLException {
+        ArrayList<User> listUsers = new ArrayList<>();
+        Connection jdbcConnection = DbConnectionManager.shared().getConnection();
+
+        String sql = "SELECT * FROM Staff;";
+
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        
+        while (resultSet.next()) {
+            int staffID = resultSet.getInt("userID");
+            String firstName = resultSet.getString("firstName");
+            String lastName = resultSet.getString("lastName");
+            String address = resultSet.getString("address");
+            int phone = resultSet.getInt("phone");
+            String email = resultSet.getString("email");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String role = resultSet.getString("role");
+            String branch = resultSet.getString("branch");
+            String management_lvl = resultSet.getString("management_lvl");
+            String employment_type = resultSet.getString("employment_type");
+            String type = resultSet.getString("type");
+
+            User user;
+            if ("ManagementStaff".equals(type)) {
+                user = new Management(firstName, lastName, address, phone, email, username, password, management_lvl, branch);
+            } else if ("AdministrationStaff".equals(type)) {
+                user = new Administration(firstName, lastName, address, phone, email, username, password, employment_type);
+            } else {
+                user = new User(firstName, lastName, address, email, phone, username, password, role);
+            }
+
+            listUsers.add(user);
+        }
+
+        resultSet.close();
+        statement.close();
+        return listUsers;
+    }
+
     public User login(String username, String password) {
         String sql = "SELECT * FROM Staff WHERE username = ? AND password = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();

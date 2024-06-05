@@ -5,16 +5,29 @@
 package com.cqu.aisr;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Controllers.Enum.Route;
 import Controllers.Services.PersistsService;
+import DAO.ApplicantDAO;
+import DAO.StaffDAO;
 import Models.Applicant;
 import Models.Staff;
+import Models.User;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 /**
@@ -41,7 +54,7 @@ public class ReportController extends BaseController implements Initializable {
     @FXML
     private VBox applicationSubNav;
     @FXML
-    private Tab totalApplicants, staffCount, applicantsOnDept;
+    private Tab totalApplicants, staffCount, applicantsOnDept, listOfRecruits, listOfManagers;
     @FXML
     private Label chartSideMenu;
 
@@ -60,6 +73,19 @@ public class ReportController extends BaseController implements Initializable {
                         "Total Managers: " + Staff.totalManagers()));
 
         applicantsOnDept.setContent(setReport(Applicant.stats()));
+      
+        try {
+            listOfRecruits.setContent(setReportTableApplicant(ApplicantDAO.listAllApplicantsForReport()));
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            listOfManagers.setContent(setReportTableStaff(StaffDAO.listAllStaffForReport()));
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         updateUser(loggedInUserlbl);
         mapMenuRoute(homeSideMenu, Route.DASHBOARD);
         mapMenuRoute(applicationsSideMenu, Route.APPLICATION);
@@ -84,5 +110,94 @@ public class ReportController extends BaseController implements Initializable {
                         "-fx-padding: 10 20 10 20;");
         return label;
     }
+
+     public TableView<Applicant> setReportTableApplicant(List<Applicant> applicants) {
+        // Convert the list of applicants to an ObservableList
+
+        ObservableList<Applicant> observableApplicants = FXCollections.observableArrayList(applicants);
+
+        // Create a TableView
+        TableView<Applicant> tableView = new TableView<>();
+
+        // Define columns
+        TableColumn<Applicant, String> nameColumn = new TableColumn<>("Firs Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+
+        TableColumn<Applicant, Integer> lastNameColumn = new TableColumn<>("Last Name");
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        
+        TableColumn<Applicant, Integer> depColumn = new TableColumn<>("Department");
+        depColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
+        
+        TableColumn<Applicant, Integer> branchColumn = new TableColumn<>("Branch");
+        branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
+        
+        TableColumn<Applicant, Integer> intvColumn = new TableColumn<>("Interview Date");
+        intvColumn.setCellValueFactory(new PropertyValueFactory<>("interviewDate"));
+        
+        TableColumn<Applicant, Integer> eduColumn = new TableColumn<>("Qualification");
+        eduColumn.setCellValueFactory(new PropertyValueFactory<>("edu"));
+
+        // Add columns to the TableView
+        tableView.getColumns().add(nameColumn);
+        tableView.getColumns().add(lastNameColumn);
+        tableView.getColumns().add(depColumn);
+        tableView.getColumns().add(branchColumn);
+        tableView.getColumns().add(intvColumn);
+        tableView.getColumns().add(eduColumn);
+
+        // Bind the ObservableList to the TableView
+        tableView.setItems(observableApplicants);
+
+        // Return the TableView
+        return tableView;
+    }
+
+    // setReportTableStaff
+    public TableView<User> setReportTableStaff(List<User> staffs) {
+        // Convert the list of staffs to an ObservableList
+        ObservableList<User> observableStaffs = FXCollections.observableArrayList(staffs);
+
+        // Create a TableView
+        TableView<User> tableView = new TableView<>();
+
+        // Define columns
+        TableColumn<User, String> nameColumn = new TableColumn<>("Firs Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+
+        TableColumn<User, Integer> lastNameColumn = new TableColumn<>("Last Name");
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        
+        TableColumn<User, Integer> addrColumn = new TableColumn<>("Address");
+        addrColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+        TableColumn<User, Integer> mlColumn = new TableColumn<>("Management Level");
+        mlColumn.setCellValueFactory(new PropertyValueFactory<>("management_lvl"));
+
+        TableColumn<User, Integer> intvColumn = new TableColumn<>("Management Level");
+        intvColumn.setCellValueFactory(new PropertyValueFactory<>("management_lvl"));
+
+        TableColumn<User, Integer> roleColumn = new TableColumn<>("Role");
+        roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
+        
+        TableColumn<User, Integer> branchColumn = new TableColumn<>("Branch");
+        branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
+
+        // Add columns to the TableView
+        tableView.getColumns().add(nameColumn);
+        tableView.getColumns().add(lastNameColumn);
+        tableView.getColumns().add(addrColumn);
+        tableView.getColumns().add(mlColumn);
+        tableView.getColumns().add(roleColumn);
+        tableView.getColumns().add(branchColumn);
+
+        // Bind the ObservableList to the TableView
+        tableView.setItems(observableStaffs);
+
+        // Return the TableView
+        return tableView;
+    }
+    
+
 
 }

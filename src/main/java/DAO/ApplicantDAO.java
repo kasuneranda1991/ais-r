@@ -10,6 +10,9 @@ import Models.Management;
 import Models.Staff;
 import Models.User;
 import Utils.DbConnectionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -105,6 +108,52 @@ public class ApplicantDAO {
         statement.close();
         return listApplicants;
     }
+
+    public static ArrayList<Applicant> listAllApplicantsForReport() throws SQLException {
+        ArrayList<Applicant> listApplicants = new ArrayList<>();
+        Connection jdbcConnection = DbConnectionManager.shared().getConnection();
+
+        String sql = "SELECT *, count(applicantID) FROM Applicants GROUP BY branch, email ORDER BY lastName DESC;";
+
+        Statement statement = jdbcConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            int applicantID = resultSet.getInt("applicantID");
+            String firstName = resultSet.getString("firstName");
+            String lastName = resultSet.getString("lastName");
+            String address = resultSet.getString("address");
+            int phone = resultSet.getInt("phone");
+            String email = resultSet.getString("email");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String role = resultSet.getString("role");
+            String branch = resultSet.getString("branch");
+
+            String interviewDate = resultSet.getString("interviewDate");
+            String createdBy = resultSet.getString("createdBy");
+            String createdAt = resultSet.getString("createdAt");
+            String createdBranch = resultSet.getString("createdBranch");
+            String status = resultSet.getString("status");
+            String edu = resultSet.getString("edu");
+            String department = resultSet.getString("department");
+
+            Applicant applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
+                    LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+                    ((Applicant) applicant).setDepartment(department);
+                    ((Applicant) applicant).setEdu(edu);
+                    ((Applicant) applicant).setBranch(branch);
+
+            listApplicants.add(applicant);
+        }
+
+        System.out.println(listApplicants);
+        resultSet.close();
+        statement.close();
+        return listApplicants;
+    }
+
+    // ObservableList<Recruit> recruitList = FXCollections.observableArrayList();
 
     public Map<String, Integer> getApplicantCountByDepartment() throws SQLException {
         Map<String, Integer> departmentCounts = new HashMap<>();

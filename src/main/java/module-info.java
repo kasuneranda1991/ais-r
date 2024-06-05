@@ -6,6 +6,7 @@ module com.cqu.aisr {
     requires java.mail;
 
     opens com.cqu.aisr to javafx.fxml;
+    opens Models to javafx.base;
 
     exports com.cqu.aisr;
 

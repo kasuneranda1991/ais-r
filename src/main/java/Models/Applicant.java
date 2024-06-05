@@ -99,6 +99,10 @@ public class Applicant extends User {
         return edu;
     }
 
+    public void setEdu(String edu) {
+        this.edu = edu;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -169,7 +173,7 @@ public class Applicant extends User {
                 + "Assign to " + Department.ARS.getValue() + ": " + ars + "\n"
                 + "Assign to " + Department.ELEC.getValue() + ": " + elc + "\n"
                 + "Assign to " + Department.MEC.getValue() + ": " + mec + "\n";
-    }
+    }    
 
     @Override
     public String getCSV() {
