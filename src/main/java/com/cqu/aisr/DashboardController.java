@@ -31,6 +31,8 @@ public class DashboardController extends BaseController implements Initializable
     private Label staffMenuItem;
     @FXML
     private Label reportMenuItem;
+    @FXML
+    private Label chartMenuItem;
 
     /**
      * Initializes the controller class.
@@ -42,6 +44,7 @@ public class DashboardController extends BaseController implements Initializable
         mapMenuRoute(vacanciesMenuItem, Route.VACANCIES);
         mapMenuRoute(staffMenuItem, Route.STAFF);
         mapMenuRoute(reportMenuItem, Route.REPORT);
+        mapMenuRoute(chartMenuItem, Route.CHART);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
     }
 
