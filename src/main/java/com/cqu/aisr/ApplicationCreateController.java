@@ -152,6 +152,8 @@ public class ApplicationCreateController extends BaseController implements Initi
                 validation8,
                 validation9,
                 validation10,
+                workinExValidation,
+                otherEx,
                 fNameOK,
                 lNameOK,
                 emailOK,
@@ -160,7 +162,7 @@ public class ApplicationCreateController extends BaseController implements Initi
                 usernameOK,
                 passwordOK,
                 dateOK,
-                confirmOK);
+                confirmOK,workingExOK,otherExOK);
         createBtn.setOnAction(e -> {
             doSubmit();
         });
