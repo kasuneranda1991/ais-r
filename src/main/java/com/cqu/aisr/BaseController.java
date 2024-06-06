@@ -29,7 +29,7 @@ public class BaseController {
             } else if (route == Route.VACANCIES) {
                 RouteService.redirectToWithMessage(Route.VACANCIES, "Feature not finished");
             } else if (route == Route.REPORT) {
-                RouteService.redirectToWithMessage(Route.REPORT, "Feature not finished");
+                RouteService.redirectTo(Route.REPORT);
             } else if (route == Route.STAFF) {
                 RouteService.redirectToWithMessage(Route.STAFF, "Feature not finished");
             } else if (route == Route.CHART) {

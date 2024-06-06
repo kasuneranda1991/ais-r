@@ -270,7 +270,9 @@ public class RegistrationController implements Initializable {
                     RouteService.redirectToWithMessage(Route.DASHBOARD, "You have been registed as " + user.getRole());
                 } catch (Exception e) {
                     System.out.println(e);
+                    System.out.println("Exit");
                 }
+                
             }
         }
         

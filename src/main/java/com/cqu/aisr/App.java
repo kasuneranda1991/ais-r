@@ -35,7 +35,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 1920, 1000);
+        scene = new Scene(loadFXML("Login"), 800, 600);
         scene.setOnMouseMoved(e -> resetTimeline());
         scene.setOnKeyTyped(e -> resetTimeline());
         stage.setScene(scene);

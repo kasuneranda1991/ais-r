@@ -43,6 +43,8 @@ public class ApplicationController extends BaseController implements Initializab
     private VBox applicationsPane;
     @FXML
     private Label chartSideMenu;
+    @FXML
+    private Label profileMenuItem;
 
     /**
      * Initializes the controller class.
@@ -58,6 +60,7 @@ public class ApplicationController extends BaseController implements Initializab
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
         mapMenuRoute(chartSideMenu, Route.CHART);
         mapMenuRoute(applicationCreateSubNav, Route.APPLICATION_CREATE);
+        mapMenuRoute(profileMenuItem, Route.REGISTRATION);
         ItemController.resetCount();
         for (User applicant : PersistsService.get().applicantsData()) {
             try {

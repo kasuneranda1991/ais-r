@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -8,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1300.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1300.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
    <children>
       <Label fx:id="id" alignment="CENTER" prefHeight="77.0" prefWidth="48.0" style="-fx-border-color: #ede7e6;" text="ID">
          <opaqueInsets>
@@ -35,7 +39,10 @@
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">
                <children>
                   <Label text="Secondary Departments" />
-                  <TextField fx:id="secondaryDept" />
+                  <TextField fx:id="secondaryDept">
+                     <tooltip>
+                        <Tooltip text="Empty Tooltip" />
+                     </tooltip></TextField>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="167.0">

@@ -33,6 +33,7 @@ import javafx.scene.layout.GridPane;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
+import javafx.scene.control.Tooltip;
 
 /**
  * FXML Controller class
@@ -101,6 +102,11 @@ public class ItemController implements Initializable {
             editformData = new HashMap<String, HashMap>();
             setDataForEdit();
         });
+        
+        final Tooltip tooltp = new Tooltip();
+        tooltp.setText("Please add the secondary department by separating comma ex.Software,");
+        
+        secondaryDept.setTooltip(tooltp);
     }
 
     public void setApplicant(Applicant applicant) {

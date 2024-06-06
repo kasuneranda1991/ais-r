@@ -59,6 +59,7 @@
                   <Label fx:id="chartSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Charts" textFill="WHITE" />
                   <Label fx:id="staffSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Staff" textFill="WHITE" />
                   <Label fx:id="reportsSideMenu" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Reports" textFill="WHITE" />
+                  <Label fx:id="profileMenuItem" alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="60.0" styleClass="menu_item" stylesheets="@../../../styles/menu.css" text="Profile" textFill="WHITE" />
                </children>
             </VBox>
          </left>
@@ -153,7 +154,7 @@
                         </VBox>
                         <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
                            <children>
-                              <Button mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back">
+                              <Button fx:id="backBtn" mnemonicParsing="false" styleClass="btn" stylesheets="@../../../styles/ui_elements.css" text="Back">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>

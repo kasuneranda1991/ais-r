@@ -4,6 +4,7 @@
  */
 package Utils;
 
+import Controllers.Enum.Config;
 import Controllers.Services.PersistsService;
 import DAO.ApplicantDAO;
 import DAO.StaffDAO;
@@ -29,7 +30,7 @@ public class DbConnectionManager {
 
     private String dbName = "AIS_R_DB";
     private String user = "root";
-    private String password = "root@123";
+    private String password = Config.DB_PASSWORD.getValue();
     private String url = "jdbc:mysql://localhost:3306?useLegacyDatetimeCode=false&serverTimezone=UTC";
     
     private String STAFF_TABLE = "Staff";

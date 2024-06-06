@@ -104,6 +104,7 @@ public class ApplicantDAO {
             String workingExperience = resultSet.getString("workingExperience");
             String secondaryDepartments = resultSet.getString("secondaryDepartments");
             String other = resultSet.getString("other");
+            String oneTimeToken = resultSet.getString("oneTimeToken");
 
             Applicant applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
                     LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
@@ -112,6 +113,7 @@ public class ApplicantDAO {
                 applicant.setWorkingEx(workingExperience);
                 applicant.setSecondaryDepartments(secondaryDepartments);
                 applicant.setOther(other);
+                applicant.setOneTimeToken(oneTimeToken);
             applicant.setId(applicantID);
             listApplicants.add(applicant);
         }
@@ -125,7 +127,7 @@ public class ApplicantDAO {
         ArrayList<Applicant> listApplicants = new ArrayList<>();
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
-        String sql = "SELECT *, count(applicantID) FROM Applicants GROUP BY branch, email ORDER BY lastName DESC;";
+        String sql = "SELECT *, COUNT(applicantID) FROM Applicants GROUP BY branch, email, applicantID ORDER BY lastName DESC;";
 
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -282,8 +284,6 @@ public class ApplicantDAO {
 
     public boolean updateApplicant(Applicant applicant) {
         String sql = "UPDATE Applicants SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, interviewDate = ?, createdBy = ?, createdAt = ?, createdBranch = ?, status = ?, edu = ?, department = ?, workingExperience = ?, secondaryDepartments = ?, other=?, oneTimeToken = ? WHERE applicantID = ?";
-//        String sql = "UPDATE Applicants SET firstName = 'csdcsd' WHERE applicantID = '99749b31-250c-4997-a686-4d3bfa65f1fb'";
-//        String sql = "UPDATE Applicants SET firstName = ? WHERE applicantID = ?";
 
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 

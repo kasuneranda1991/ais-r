@@ -3,8 +3,9 @@ package Controllers.Enum;
 public enum Config {
     STORAGE_PATH("src/main/java/Storage/"),
     SECRET_KEY("ZAK8d0xd9W0fG9dmxCTiOw=="),
-    INACTIVITY("6000"),
-    ENCRYPT_DATA("FALSE"); // TRUE | FALSE
+    INACTIVITY("600000"),
+    ENCRYPT_DATA("FALSE"), // TRUE | FALSE,
+    DB_PASSWORD("root");
 
     private final String conf;
 

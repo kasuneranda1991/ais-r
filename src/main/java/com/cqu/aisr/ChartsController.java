@@ -65,6 +65,8 @@ public class ChartsController extends BaseController implements Initializable {
     private AnchorPane borderPane123;
     @FXML
     private Pane chartPane;
+    @FXML
+    private Label profileMenuItem;
 
     /**
      * Initializes the controller class.
@@ -79,6 +81,7 @@ public class ChartsController extends BaseController implements Initializable {
         mapMenuRoute(staffSideMenu, Route.STAFF);
         mapMenuRoute(reportsSideMenu, Route.REPORT);
         mapMenuRoute(logOutMenuItem, Route.LOGOUT);
+        mapMenuRoute(profileMenuItem, Route.REGISTRATION);
         chartType.setItems(Charts.getValues());
         chartType.setValue(Charts.BAR.getValue()); // Set initial value to BAR chart
         changeChart();

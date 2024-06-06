@@ -66,6 +66,8 @@ public class ApplicationCreateController extends BaseController implements Initi
     @FXML
     private Button createBtn;
     @FXML
+    private Button backBtn;
+    @FXML
     private TextField fname;
     @FXML
     private TextField lname;
@@ -161,6 +163,9 @@ public class ApplicationCreateController extends BaseController implements Initi
                 confirmOK);
         createBtn.setOnAction(e -> {
             doSubmit();
+        });
+        backBtn.setOnAction(e -> {
+            RouteService.redirectTo(Route.APPLICATION);
         });
     }
 
