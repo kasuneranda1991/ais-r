@@ -55,9 +55,9 @@ public class ApplicantDAO {
                 statement.setString(11, applicant.getCreatedBy());
                 statement.setString(12, applicant.getCreatedAt());
                 statement.setString(13, applicant.getCreatedBranch());
-                statement.setString(14, applicant.getStatus());
-                statement.setString(15, applicant.getEdu());
-                statement.setString(16, applicant.getDepartment());
+                statement.setString(14, applicant.getStatus() != null ? applicant.getStatus() : "");
+                statement.setString(15, applicant.getEdu() != null ? applicant.getEdu() : "");
+                statement.setString(16, applicant.getDepartment() != null ? applicant.getDepartment() : "");
                 statement.setString(17, applicant.getWorkingEx());
                 statement.setString(18, applicant.getSecondaryDepartments());
                 statement.setString(19, applicant.getOther());
@@ -100,9 +100,18 @@ public class ApplicantDAO {
             String status = resultSet.getString("status");
             String edu = resultSet.getString("edu");
             String department = resultSet.getString("department");
+            
+            String workingExperience = resultSet.getString("workingExperience");
+            String secondaryDepartments = resultSet.getString("secondaryDepartments");
+            String other = resultSet.getString("other");
 
             Applicant applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
                     LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+                applicant.setDepartment(department);
+                applicant.setEdu(edu);
+                applicant.setWorkingEx(workingExperience);
+                applicant.setSecondaryDepartments(secondaryDepartments);
+                applicant.setOther(other);
 
             listApplicants.add(applicant);
         }
@@ -246,10 +255,18 @@ public class ApplicantDAO {
                 String status = resultSet.getString("status");
                 String edu = resultSet.getString("edu");
                 String department = resultSet.getString("department");
+                String workingExperience = resultSet.getString("workingExperience");
+                String secondaryDepartments = resultSet.getString("secondaryDepartments");
+                String other = resultSet.getString("other");
+                String oneTimeToken = resultSet.getString("oneTimeToken");
 
                 applicant = new Applicant(firstName, lastName, address, email, phone, username, password,
                         LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
                 applicant.setDepartment(department);
+                applicant.setWorkingEx(workingExperience);
+                applicant.setSecondaryDepartments(secondaryDepartments);
+                applicant.setOther(other);
+                applicant.setOneTimeToken(oneTimeToken);
             }
 
             resultSet.close();
@@ -287,6 +304,7 @@ public class ApplicantDAO {
             statement.setString(18, applicant.getSecondaryDepartments());
             statement.setString(19, applicant.getOther());
             statement.setString(20, applicant.getOneTimeToken());
+            statement.setInt(21, Integer.parseInt(applicant.getId()));
 
             boolean rowUpdated = statement.executeUpdate() > 0;
             statement.close();
