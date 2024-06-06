@@ -2,11 +2,9 @@ package Controllers.Services;
 
 import Controllers.Enum.CSVConst;
 import Controllers.Enum.Route;
-import Controllers.Helpers.Helper;
+import Models.Applicant;
 import Models.Staff;
 import Models.User;
-import Controllers.Services.PersistsService;
-import Models.Applicant;
 
 
 public class AuthenticateService {
@@ -22,6 +20,8 @@ public class AuthenticateService {
      */
 
     public static Boolean authenticate(String username, String password) {
+        // username = "admin@email.com";
+        // password = "123456789";
         Staff stf = StaffService.findByFieldName(CSVConst.EMAIL, username);
         if (stf != null && stf.getPassword().equals(password)) {
             AuthService.get().setUser(stf);

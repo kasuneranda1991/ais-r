@@ -3,7 +3,15 @@ package com.cqu.aisr;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.ResourceBundle;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import Controllers.Enum.CSVConst;
 import Controllers.Enum.Department;
@@ -17,7 +25,8 @@ import Controllers.Services.RouteService;
 import Controllers.Services.Validation;
 import Models.Applicant;
 import Models.Model;
-import javafx.beans.value.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,11 +38,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.Properties;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -122,7 +128,7 @@ public class ItemController implements Initializable {
             id.setText("#" + count);
             address.setText(ap.getAddress());
             deptAssign.setValue(ap.getDepartment());
-            // secondaryDept.setText(ap.getSecondaryDepartments());
+            secondaryDept.setText(ap.getSecondaryDepartments());
             edu.setText(ap.getEdu());
             if (!ap.isApproved() && AuthService.get().user().isManager()) {
                 approveBtn.setVisible(Boolean.TRUE);

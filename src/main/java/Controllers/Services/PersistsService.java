@@ -3,6 +3,7 @@ package Controllers.Services;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import Controllers.Enum.CSVConst;
 import Controllers.Enum.Config;
@@ -20,7 +21,6 @@ import Models.Staff;
 import Models.User;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
-import java.util.List;
 
 public class PersistsService {
 
@@ -213,6 +213,7 @@ public class PersistsService {
             applicant.setCreatedBy(AuthService.get().user().getId());
             applicant.setStatus(Status.PENDING.getValue());
             applicant.setId(Helper.generateUID());
+            applicant.setDepartment("Not Assigned");
             
             ApplicantDAO applicantDAO = new ApplicantDAO();
             applicantDAO.insertApplicant(applicant);
@@ -220,6 +221,7 @@ public class PersistsService {
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.printf("=======Applicant Data=", applicant.getCSV());
         applicantsData().add(applicant);
         count();
     }

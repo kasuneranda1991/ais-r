@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1300.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="1400.0" style="-fx-border-color: green;" stylesheets="@../../../styles/ui_elements.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cqu.aisr.ItemController">
    <children>
       <Label fx:id="id" alignment="CENTER" prefHeight="77.0" prefWidth="48.0" style="-fx-border-color: #ede7e6;" text="ID">
          <opaqueInsets>

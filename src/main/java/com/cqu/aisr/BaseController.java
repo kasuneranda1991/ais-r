@@ -11,7 +11,8 @@ public class BaseController {
 
     public void updateUser(Label userLbl) {
         System.out.println("csv "+ AuthService.get().user().getCSV());
-//        userLbl.setText(AuthService.get().user().getFirstName());
+        userLbl.setVisible(false);
+    //    userLbl.setText(AuthService.get().user().getFirstName());
     }
 
     public void mapMenuRoute(Label lbl, Route route) {

@@ -145,11 +145,11 @@ public class Applicant extends User {
     }
 
     public void setOneTimeToken(String oneTimeToken) {
-        this.oneTimeToken = oneTimeToken.trim();
+        if (oneTimeToken != null) {
+            this.oneTimeToken = oneTimeToken.trim();
+        }
     }
 
-    
-    
     public static String stats() {
         int swd = 0;
         int ars = 0;
@@ -174,7 +174,7 @@ public class Applicant extends User {
                 + "Assign to " + Department.ARS.getValue() + ": " + ars + "\n"
                 + "Assign to " + Department.ELEC.getValue() + ": " + elc + "\n"
                 + "Assign to " + Department.MEC.getValue() + ": " + mec + "\n";
-    }    
+    }
 
     @Override
     public String getCSV() {
@@ -189,8 +189,7 @@ public class Applicant extends User {
                 + ", " + getWorkingEx()
                 + ", " + getOther()
                 + ", " + getSecondaryDepartments()
-                + ", " + getOneTimeToken()
-                ;
+                + ", " + getOneTimeToken();
     }
 
 }

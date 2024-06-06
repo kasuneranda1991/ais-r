@@ -5,20 +5,21 @@
 package com.cqu.aisr;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import Controllers.Enum.Route;
 import Controllers.Services.PersistsService;
 import DAO.ApplicantDAO;
 import DAO.StaffDAO;
 import Models.Applicant;
+import Models.Management;
 import Models.Staff;
 import Models.User;
-
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -75,7 +76,7 @@ public class ReportController extends BaseController implements Initializable {
                         "Total Managers: " + Staff.totalManagers()));
 
         applicantsOnDept.setContent(setReport(Applicant.stats()));
-      
+
         try {
             listOfRecruits.setContent(setReportTableApplicant(ApplicantDAO.listAllApplicantsForReport()));
         } catch (SQLException ex) {
@@ -114,7 +115,7 @@ public class ReportController extends BaseController implements Initializable {
         return label;
     }
 
-     public TableView<Applicant> setReportTableApplicant(List<Applicant> applicants) {
+    public TableView<Applicant> setReportTableApplicant(List<Applicant> applicants) {
         // Convert the list of applicants to an ObservableList
 
         ObservableList<Applicant> observableApplicants = FXCollections.observableArrayList(applicants);
@@ -128,16 +129,16 @@ public class ReportController extends BaseController implements Initializable {
 
         TableColumn<Applicant, Integer> lastNameColumn = new TableColumn<>("Last Name");
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        
+
         TableColumn<Applicant, Integer> depColumn = new TableColumn<>("Department");
         depColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
-        
+
         TableColumn<Applicant, Integer> branchColumn = new TableColumn<>("Branch");
         branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
-        
+
         TableColumn<Applicant, Integer> intvColumn = new TableColumn<>("Interview Date");
         intvColumn.setCellValueFactory(new PropertyValueFactory<>("interviewDate"));
-        
+
         TableColumn<Applicant, Integer> eduColumn = new TableColumn<>("Qualification");
         eduColumn.setCellValueFactory(new PropertyValueFactory<>("edu"));
 
@@ -165,34 +166,32 @@ public class ReportController extends BaseController implements Initializable {
         TableView<User> tableView = new TableView<>();
 
         // Define columns
-        TableColumn<User, String> nameColumn = new TableColumn<>("Firs Name");
+        TableColumn<User, String> nameColumn = new TableColumn<>("First Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 
-        TableColumn<User, Integer> lastNameColumn = new TableColumn<>("Last Name");
+        TableColumn<User, String> lastNameColumn = new TableColumn<>("Last Name");
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        
-        TableColumn<User, Integer> addrColumn = new TableColumn<>("Address");
+
+        TableColumn<User, String> addrColumn = new TableColumn<>("Address");
         addrColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        TableColumn<User, Integer> mlColumn = new TableColumn<>("Management Level");
-        mlColumn.setCellValueFactory(new PropertyValueFactory<>("management_lvl"));
+        TableColumn<User, String> mlColumn = new TableColumn<>("Management Level");
+        mlColumn.setCellValueFactory(cellData -> {
+            String managementLevel = "N/A";
+            if (cellData.getValue() instanceof Management) {
+                managementLevel = ((Management)(cellData.getValue())).getManagement_lvl();
+            }
+            return new SimpleStringProperty(managementLevel);
+        });
 
-        TableColumn<User, Integer> intvColumn = new TableColumn<>("Management Level");
-        intvColumn.setCellValueFactory(new PropertyValueFactory<>("management_lvl"));
-
-        TableColumn<User, Integer> roleColumn = new TableColumn<>("Role");
+        TableColumn<User, String> roleColumn = new TableColumn<>("Role");
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-        
-        TableColumn<User, Integer> branchColumn = new TableColumn<>("Branch");
+
+        TableColumn<User, String> branchColumn = new TableColumn<>("Branch");
         branchColumn.setCellValueFactory(new PropertyValueFactory<>("branch"));
 
         // Add columns to the TableView
-        tableView.getColumns().add(nameColumn);
-        tableView.getColumns().add(lastNameColumn);
-        tableView.getColumns().add(addrColumn);
-        tableView.getColumns().add(mlColumn);
-        tableView.getColumns().add(roleColumn);
-        tableView.getColumns().add(branchColumn);
+        tableView.getColumns().addAll(nameColumn, lastNameColumn, addrColumn, mlColumn, roleColumn, branchColumn);
 
         // Bind the ObservableList to the TableView
         tableView.setItems(observableStaffs);
@@ -200,7 +199,5 @@ public class ReportController extends BaseController implements Initializable {
         // Return the TableView
         return tableView;
     }
-    
-
 
 }
