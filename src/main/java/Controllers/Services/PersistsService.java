@@ -81,9 +81,7 @@ public class PersistsService {
             System.out.println(e);
         }
         for (User applicant : allApplicants) {
-            System.out.println("token obj" + ((Applicant) applicant).getOneTimeToken());
-            System.out.println("token " + ((Applicant) applicant).getOneTimeToken().trim().equals(token.trim()));
-            if (((Applicant) applicant).getOneTimeToken().trim().equals(token.trim())) {
+            if (((Applicant) applicant).getOneTimeToken() != null && ((Applicant) applicant).getOneTimeToken().trim().equals(token.trim())) {
                 ((Applicant) applicant).setOneTimeToken("");
                 try {
 //                    CSV.update(APPLICANT_TABLE, applicant);
