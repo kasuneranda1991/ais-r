@@ -151,7 +151,7 @@ public class ApplicationCreateController extends BaseController implements Initi
                 validation9,
                 validation10,
                 workinExValidation,
-                otherEx,
+                otherExValidation,
                 fNameOK,
                 lNameOK,
                 emailOK,
