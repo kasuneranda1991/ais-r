@@ -76,7 +76,7 @@ public class DbConnectionManager {
     private void createStaffTableIfNeeded() {
         if (!doesTableExist(STAFF_TABLE)) {
             String sql = "CREATE TABLE " + STAFF_TABLE + " (" +
-                "userID INT AUTO_INCREMENT PRIMARY KEY, " +
+                "userID VARCHAR(255) PRIMARY KEY, " +
                 "firstName VARCHAR(255) NOT NULL, " +
                 "lastName VARCHAR(255) NOT NULL, " +
                 "address VARCHAR(255) NOT NULL, " +
@@ -105,7 +105,7 @@ public class DbConnectionManager {
     private void createRecruitmentTableIfNeeded() {
         if (!doesTableExist(APPLICANTS_TABLE)) {
             String sql = "CREATE TABLE " + APPLICANTS_TABLE + " (" +
-                "applicantID INT AUTO_INCREMENT PRIMARY KEY, " +
+                "applicantID VARCHAR(255) PRIMARY KEY, " +
                 "firstName VARCHAR(255) NOT NULL, " +
                 "lastName VARCHAR(255) NOT NULL, " +
                 "address VARCHAR(255) NOT NULL, " +

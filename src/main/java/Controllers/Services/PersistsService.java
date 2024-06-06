@@ -9,6 +9,7 @@ import Controllers.Enum.Config;
 import Controllers.Enum.Roles;
 import Controllers.Enum.Status;
 import Controllers.Helpers.CSV;
+import Controllers.Helpers.Helper;
 import Controllers.Helpers.Security;
 import DAO.ApplicantDAO;
 import DAO.StaffDAO;
@@ -196,6 +197,7 @@ public class PersistsService {
         try {
 //            CSV.store("staff.csv", staff.getCSV());
             StaffDAO staffDAO = new StaffDAO();
+            staff.setId(Helper.generateUID());
             staffDAO.insertStaff(staff);
         } catch (Exception e) {
             System.out.println(e);
@@ -210,6 +212,7 @@ public class PersistsService {
             applicant.setCreatedBranch(AuthService.get().user().getBranch());
             applicant.setCreatedBy(AuthService.get().user().getId());
             applicant.setStatus(Status.PENDING.getValue());
+            applicant.setId(Helper.generateUID());
             
             ApplicantDAO applicantDAO = new ApplicantDAO();
             applicantDAO.insertApplicant(applicant);

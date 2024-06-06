@@ -53,6 +53,7 @@ public class Applicant extends User {
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.createdBranch = createdBranch;
+        this.status = status;
     }
 
     public String getSecondaryDepartments() {

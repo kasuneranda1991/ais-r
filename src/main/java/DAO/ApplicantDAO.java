@@ -34,7 +34,7 @@ public class ApplicantDAO {
     }
 
     public boolean insertApplicant(User user) {
-        String sql = "INSERT INTO Applicants (firstName, lastName, address, phone, email, username, password, role, branch, interviewDate, createdBy, createdAt, createdBranch, status, edu, department, workingExperience, secondaryDepartments, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Applicants (firstName, lastName, address, phone, email, username, password, role, branch, interviewDate, createdBy, createdAt, createdBranch, status, edu, department, workingExperience, secondaryDepartments, other, applicantID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {
@@ -54,7 +54,7 @@ public class ApplicantDAO {
                 statement.setString(10, applicant.getInterviewDate().toString());
                 statement.setString(11, applicant.getCreatedBy());
                 statement.setString(12, applicant.getCreatedAt());
-                statement.setString(13, applicant.getCreatedBranch());
+                statement.setString(13, applicant.getCreatedBranch() != null ? applicant.getCreatedBranch() : "");
                 statement.setString(14, applicant.getStatus() != null ? applicant.getStatus() : "");
                 statement.setString(15, applicant.getEdu() != null ? applicant.getEdu() : "");
                 statement.setString(16, applicant.getDepartment() != null ? applicant.getDepartment() : "");
@@ -62,7 +62,7 @@ public class ApplicantDAO {
                 statement.setString(18, applicant.getSecondaryDepartments());
                 statement.setString(19, applicant.getOther());
             }
-
+            statement.setString(20, user.getId());
             boolean rowInserted = statement.executeUpdate() > 0;
             statement.close();
             return rowInserted;
@@ -82,7 +82,7 @@ public class ApplicantDAO {
         ResultSet resultSet = statement.executeQuery(sql);
 
         while (resultSet.next()) {
-            int applicantID = resultSet.getInt("applicantID");
+            String applicantID = resultSet.getString("applicantID");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String address = resultSet.getString("address");
@@ -112,7 +112,7 @@ public class ApplicantDAO {
                 applicant.setWorkingEx(workingExperience);
                 applicant.setSecondaryDepartments(secondaryDepartments);
                 applicant.setOther(other);
-
+            applicant.setId(applicantID);
             listApplicants.add(applicant);
         }
 
@@ -131,7 +131,7 @@ public class ApplicantDAO {
         ResultSet resultSet = statement.executeQuery(sql);
 
         while (resultSet.next()) {
-            int applicantID = resultSet.getInt("applicantID");
+            String applicantID = resultSet.getString("applicantID");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String address = resultSet.getString("address");
@@ -155,7 +155,7 @@ public class ApplicantDAO {
                     ((Applicant) applicant).setDepartment(department);
                     ((Applicant) applicant).setEdu(edu);
                     ((Applicant) applicant).setBranch(branch);
-
+            applicant.setId(applicantID);
             listApplicants.add(applicant);
         }
 
@@ -199,7 +199,7 @@ public class ApplicantDAO {
             Applicant applicant = null;
 
             if (resultSet.next()) {
-                int applicantID = resultSet.getInt("applicantID");
+                String applicantID = resultSet.getString("applicantID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -215,6 +215,7 @@ public class ApplicantDAO {
 
                 applicant = new Applicant(firstName, lastName, address, email, phone, fetchedUsername, fetchedPassword,
                         LocalDate.parse(interviewDate), createdBy, createdAt, createdBranch, status);
+                applicant.setId(applicantID);
 
             }
 
@@ -232,13 +233,13 @@ public class ApplicantDAO {
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
         try {
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-            statement.setInt(1, id);
+            statement.setString(1, String.valueOf(id));
 
             ResultSet resultSet = statement.executeQuery();
             Applicant applicant = null;
 
             if (resultSet.next()) {
-                int applicantID = resultSet.getInt("applicantID");
+                String applicantID = resultSet.getString("applicantID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -267,6 +268,7 @@ public class ApplicantDAO {
                 applicant.setSecondaryDepartments(secondaryDepartments);
                 applicant.setOther(other);
                 applicant.setOneTimeToken(oneTimeToken);
+                applicant.setId(applicantID);
             }
 
             resultSet.close();
@@ -280,6 +282,9 @@ public class ApplicantDAO {
 
     public boolean updateApplicant(Applicant applicant) {
         String sql = "UPDATE Applicants SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, interviewDate = ?, createdBy = ?, createdAt = ?, createdBranch = ?, status = ?, edu = ?, department = ?, workingExperience = ?, secondaryDepartments = ?, other=?, oneTimeToken = ? WHERE applicantID = ?";
+//        String sql = "UPDATE Applicants SET firstName = 'csdcsd' WHERE applicantID = '99749b31-250c-4997-a686-4d3bfa65f1fb'";
+//        String sql = "UPDATE Applicants SET firstName = ? WHERE applicantID = ?";
+
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {
@@ -304,9 +309,11 @@ public class ApplicantDAO {
             statement.setString(18, applicant.getSecondaryDepartments());
             statement.setString(19, applicant.getOther());
             statement.setString(20, applicant.getOneTimeToken());
-            statement.setInt(21, Integer.parseInt(applicant.getId()));
+            statement.setString(21, applicant.getId());
 
             boolean rowUpdated = statement.executeUpdate() > 0;
+            System.out.println("isUpdated: " + rowUpdated);
+            System.out.println("applicant ID: " + applicant.getId());
             statement.close();
             return rowUpdated;
         } catch (SQLException ex) {

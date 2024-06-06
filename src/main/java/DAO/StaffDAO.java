@@ -27,9 +27,9 @@ public class StaffDAO {
     }
 
     public boolean insertStaff(User user) {
-        String sql = "INSERT INTO Staff (firstName, lastName, address, phone, email, username, password, role, branch, management_lvl, employment_type, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Staff (firstName, lastName, address, phone, email, username, password, role, branch, management_lvl, employment_type, type, userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
-
+        System.out.println("user id: " + user.getId());
         try {
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
             statement.setString(1, user.getFirstName());
@@ -53,7 +53,7 @@ public class StaffDAO {
                 statement.setString(11, administrationStaff.getEmployment_type());
                 statement.setString(12, "AdministrationStaff");
             }
-            
+            statement.setString(13, user.getId());
             boolean rowInserted = statement.executeUpdate() > 0;
             statement.close();
             return rowInserted;
@@ -73,7 +73,7 @@ public class StaffDAO {
         ResultSet resultSet = statement.executeQuery(sql);
         
         while (resultSet.next()) {
-            int staffID = resultSet.getInt("userID");
+            String staffID = resultSet.getString("userID");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String address = resultSet.getString("address");
@@ -95,7 +95,8 @@ public class StaffDAO {
             } else {
                 user = new User(firstName, lastName, address, email, phone, username, password, role);
             }
-
+            user.setBranch(branch);
+            user.setId(staffID);
             listUsers.add(user);
         }
 
@@ -114,7 +115,7 @@ public class StaffDAO {
         ResultSet resultSet = statement.executeQuery(sql);
         
         while (resultSet.next()) {
-            int staffID = resultSet.getInt("userID");
+            String staffID = resultSet.getString("userID");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String address = resultSet.getString("address");
@@ -136,7 +137,7 @@ public class StaffDAO {
             } else {
                 user = new User(firstName, lastName, address, email, phone, username, password, role);
             }
-
+            user.setId(staffID);
             listUsers.add(user);
         }
 
@@ -157,7 +158,7 @@ public class StaffDAO {
             Staff staff = null;
 
             if (resultSet.next()) {
-                int staffID = resultSet.getInt("userID");
+                String staffID = resultSet.getString("userID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -176,6 +177,7 @@ public class StaffDAO {
                 } else if ("AdministrationStaff".equals(type)) {
                     staff = new Administration(firstName, lastName, address, phone, email, fetchedUsername, fetchedPassword, employment_type);
                 }
+                staff.setId(staffID);
             }
 
             resultSet.close();
@@ -198,7 +200,7 @@ public class StaffDAO {
             Staff staff = null;
 
             if (resultSet.next()) {
-                int staffID = resultSet.getInt("userID");
+                String staffID = resultSet.getString("userID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -217,6 +219,7 @@ public class StaffDAO {
                 } else if ("AdministrationStaff".equals(type)) {
                     staff = new Administration(firstName, lastName, address, phone, email, username, password, employment_type);
                 }
+                staff.setId(staffID);
             }
 
             resultSet.close();

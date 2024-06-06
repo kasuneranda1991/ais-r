@@ -8,7 +8,10 @@ public class Model {
     private String id;
     
     public Model(){
-        this.id = Helper.generateUID();
+//        if (this.id == null) {
+//            System.out.println("id "+ this.id);
+//            this.id = Helper.generateUID();
+//        }
     }
     
     @Override

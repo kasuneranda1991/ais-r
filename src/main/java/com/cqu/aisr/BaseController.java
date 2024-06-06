@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 public class BaseController {
 
     public void updateUser(Label userLbl) {
+        System.out.println("csv "+ AuthService.get().user().getCSV());
         userLbl.setText(AuthService.get().user().getFirstName());
     }
 
