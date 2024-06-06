@@ -122,7 +122,10 @@ public class DbConnectionManager {
                 "status VARCHAR(50) NOT NULL, " +
                 "edu VARCHAR(50) NOT NULL, " +
                 "department VARCHAR(50) NOT NULL, " +
-                "oneTimeToken VARCHAR(150)  NULL " +
+                "oneTimeToken VARCHAR(150)  NULL, " +
+                "workingExperience VARCHAR(100)  NULL, " +    
+                "secondaryDepartments VARCHAR(300)  NULL, " +
+                "other VARCHAR(300)  NULL " +    
                 ")";
 
             try {

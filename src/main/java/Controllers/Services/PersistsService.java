@@ -43,16 +43,37 @@ public class PersistsService {
     }
 
     public ArrayList<User> staffData() {
-        return data.get(STAFF_TABLE);
+        try {
+            StaffDAO staffDAO = new StaffDAO();
+            ArrayList<User> users = staffDAO.listAllStaff();
+            System.out.println("Staff Size: " + users.size());
+            
+            for (User u: users) {
+                System.out.println("email " + u.getEmail());
+            }
+            return staffDAO.listAllStaff();
+//        return data.get(STAFF_TABLE);
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
 
     public ArrayList<User> applicantsData() {
-        return data.get(APPLICANT_TABLE);
+//        return data.get(APPLICANT_TABLE);
+        try {
+            ApplicantDAO applicantDAO = new ApplicantDAO();
+            return applicantDAO.listAllApplicants();
+//        return data.get(STAFF_TABLE);
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return null;
+        }
     }
     
     public Applicant getApplicantByToken(String token) {
         ApplicantDAO applicantDAO = new ApplicantDAO();
-        List<Applicant> allApplicants = null;
+        List<User> allApplicants = null;
         try {
             allApplicants = applicantDAO.listAllApplicants();
         } catch (Exception e) {

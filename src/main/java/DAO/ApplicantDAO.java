@@ -34,7 +34,7 @@ public class ApplicantDAO {
     }
 
     public boolean insertApplicant(User user) {
-        String sql = "INSERT INTO Applicants (firstName, lastName, address, phone, email, username, password, role, branch, interviewDate, createdBy, createdAt, createdBranch, status, edu, department) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Applicants (firstName, lastName, address, phone, email, username, password, role, branch, interviewDate, createdBy, createdAt, createdBranch, status, edu, department, workingExperience, secondaryDepartments, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {
@@ -58,6 +58,9 @@ public class ApplicantDAO {
                 statement.setString(14, applicant.getStatus());
                 statement.setString(15, applicant.getEdu());
                 statement.setString(16, applicant.getDepartment());
+                statement.setString(17, applicant.getWorkingEx());
+                statement.setString(18, applicant.getSecondaryDepartments());
+                statement.setString(19, applicant.getOther());
             }
 
             boolean rowInserted = statement.executeUpdate() > 0;
@@ -69,8 +72,8 @@ public class ApplicantDAO {
         }
     }
 
-    public ArrayList<Applicant> listAllApplicants() throws SQLException {
-        ArrayList<Applicant> listApplicants = new ArrayList<>();
+    public ArrayList<User> listAllApplicants() throws SQLException {
+        ArrayList<User> listApplicants = new ArrayList<>();
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         String sql = "SELECT * FROM Applicants";
@@ -259,7 +262,7 @@ public class ApplicantDAO {
     }
 
     public boolean updateApplicant(Applicant applicant) {
-        String sql = "UPDATE Applicants SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, interviewDate = ?, createdBy = ?, createdAt = ?, createdBranch = ?, status = ?, edu = ?, department = ? WHERE applicantID = ?";
+        String sql = "UPDATE Applicants SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, interviewDate = ?, createdBy = ?, createdAt = ?, createdBranch = ?, status = ?, edu = ?, department = ?, workingExperience = ?, secondaryDepartments = ?, other=?, oneTimeToken = ? WHERE applicantID = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {
@@ -280,6 +283,10 @@ public class ApplicantDAO {
             statement.setString(14, applicant.getStatus());
             statement.setString(15, applicant.getEdu());
             statement.setString(16, applicant.getDepartment());
+            statement.setString(17, applicant.getWorkingEx());
+            statement.setString(18, applicant.getSecondaryDepartments());
+            statement.setString(19, applicant.getOther());
+            statement.setString(20, applicant.getOneTimeToken());
 
             boolean rowUpdated = statement.executeUpdate() > 0;
             statement.close();

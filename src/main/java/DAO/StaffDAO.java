@@ -73,7 +73,7 @@ public class StaffDAO {
         ResultSet resultSet = statement.executeQuery(sql);
         
         while (resultSet.next()) {
-            int staffID = resultSet.getInt("staffID");
+            int staffID = resultSet.getInt("userID");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             String address = resultSet.getString("address");
@@ -157,7 +157,7 @@ public class StaffDAO {
             Staff staff = null;
 
             if (resultSet.next()) {
-                int staffID = resultSet.getInt("staffID");
+                int staffID = resultSet.getInt("userID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -188,7 +188,7 @@ public class StaffDAO {
     }
     
     public User getStaffById(int id) {
-        String sql = "SELECT * FROM Staff WHERE staffID = ?";
+        String sql = "SELECT * FROM Staff WHERE userID = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
         try {
             PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -198,7 +198,7 @@ public class StaffDAO {
             Staff staff = null;
 
             if (resultSet.next()) {
-                int staffID = resultSet.getInt("staffID");
+                int staffID = resultSet.getInt("userID");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String address = resultSet.getString("address");
@@ -229,7 +229,7 @@ public class StaffDAO {
     }
 
     public boolean updateStaff(User user) {
-        String sql = "UPDATE Staff SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, management_lvl = ?, employment_type = ?, type = ? WHERE staffID = ?";
+        String sql = "UPDATE Staff SET firstName = ?, lastName = ?, address = ?, phone = ?, email = ?, username = ?, password = ?, role = ?, branch = ?, management_lvl = ?, employment_type = ?, type = ? WHERE userID = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {
@@ -268,7 +268,7 @@ public class StaffDAO {
     }
 
     public boolean deleteStaff(int id) {
-        String sql = "DELETE FROM Staff WHERE staffID = ?";
+        String sql = "DELETE FROM Staff WHERE userID = ?";
         Connection jdbcConnection = DbConnectionManager.shared().getConnection();
 
         try {

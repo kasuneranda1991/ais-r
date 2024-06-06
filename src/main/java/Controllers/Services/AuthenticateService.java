@@ -23,8 +23,8 @@ public class AuthenticateService {
 
     public static Boolean authenticate(String username, String password) {
         
-        username = "test@gmail.com";
-        password = "test@1234";
+//        username = "test@gmail.com";
+//        password = "test@1234";
  
         Staff stf = StaffService.findByFieldName(CSVConst.EMAIL, username);
         if (stf != null && stf.getPassword().equals(password)) {
