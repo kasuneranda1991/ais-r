@@ -8,6 +8,7 @@ public class NotificationService {
     private static final String DEFAULT_TITLE = "Information";
 
     public static void message(String message) {
+        System.out.println("----------Show notification : "+ message);
         showMessage(DEFAULT_TITLE, message);
     }
 

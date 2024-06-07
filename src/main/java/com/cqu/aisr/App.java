@@ -69,10 +69,10 @@ public class App extends Application {
                 }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        
+
         DbConnectionManager dbManager = DbConnectionManager.shared();
         dbManager.createTablesAndRestoreDataIfNeeded();
-        
+
     }
 
     private void resetTimeline() {
@@ -85,8 +85,14 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+        try {
+            System.out.println("--------------Load fxml resource: " + App.class.getResource(fxml + ".fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+            return fxmlLoader.load();
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            throw e;
+        }
     }
 
     public static void main(String[] args) {

@@ -15,7 +15,7 @@ public class RouteService {
             if (PersistsService.get().applicantsData().size() == 0 && route == Route.APPLICATION) {
                 NotificationService.message("Not Data", "Not application data");
             }
-            current = route;
+            RouteService.current = route;
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -23,13 +23,17 @@ public class RouteService {
 
     public static void redirectToWithMessage(Route route, String message) {
         try {
+            System.out.println("----------Route : " + route.getValue());
+            System.out.println("----------Message : " + message);
             App.setRoot(route.getValue());
-
+            System.out.println("----------Before Notification : ");
             NotificationService.message(message);
-            current = route;
+            System.out.println("----------After Notification : ");
+            RouteService.current = route;
+            System.out.println("----------Current route : " + current);
         } catch (IOException e) {
             System.out.println("EX here");
-            System.out.println(e);
+            System.out.println(e.getStackTrace());
         }
     }
 }
